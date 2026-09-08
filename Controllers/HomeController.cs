@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PopPop.Models;
 using System.Diagnostics;
@@ -6,6 +7,12 @@ namespace PopPop.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
