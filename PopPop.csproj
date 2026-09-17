@@ -66,6 +66,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,6 +74,12 @@
     <Folder Include="Areas\Staff\Views\" />
     <Folder Include="Repositories\Implementations\" />
     <Folder Include="Repositories\Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\tuana\Downloads\bootstrap-admin-template-free\bootstrap-admin-template-free\js\main2.js" Link="wwwroot\js\main2.js" />
+    <None Include="wwwroot\img\.DS_Store" />
+    <None Include="wwwroot\img\organic-food\.DS_Store" />
   </ItemGroup>
 
 </Project>

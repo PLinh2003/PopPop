@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PopPop.Data.Entities;
 using PopPop.Models;
 using System.Diagnostics;
 
@@ -7,10 +9,18 @@ namespace PopPop.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+        private readonly UserManager<User> _userManager;
+        public HomeController(UserManager<User> userManager)
+        {
+            _userManager = userManager;
+        }
+
+        [HttpGet]
+        [Route("home/about")]
         public IActionResult About()
         {
-            return View();
+            var users = _userManager.Users.ToList();
+            return Ok(users);
         }
 
         public IActionResult Index()
