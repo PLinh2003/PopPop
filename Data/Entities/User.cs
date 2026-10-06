@@ -11,4 +11,9 @@ public class User : IdentityUser
     /// Full name of the user
     /// </summary>
     public string? FullName { get; set; }
+
+    /// <summary>
+    /// Avatar path of the user
+    /// </summary>
+    public string? AvatarPath { get; set; }
 }

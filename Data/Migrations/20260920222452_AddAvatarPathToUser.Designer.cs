@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PopPop.Data;
 
@@ -11,9 +12,11 @@ using PopPop.Data;
 namespace PopPop.Data.Migrations
 {
     [DbContext(typeof(PopPopDbContext))]
-    partial class PopPopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260920222452_AddAvatarPathToUser")]
+    partial class AddAvatarPathToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

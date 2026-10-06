@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PopPop.Data.Entities;
-using PopPop.Models;
 
 namespace PopPop.Data
 {

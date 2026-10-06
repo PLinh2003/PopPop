@@ -60,7 +60,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -73,11 +73,9 @@
     <Folder Include="Areas\Staff\Controllers\" />
     <Folder Include="Areas\Staff\Views\" />
     <Folder Include="Repositories\Implementations\" />
-    <Folder Include="Repositories\Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="C:\Users\tuana\Downloads\bootstrap-admin-template-free\bootstrap-admin-template-free\js\main2.js" Link="wwwroot\js\main2.js" />
     <None Include="wwwroot\img\.DS_Store" />
     <None Include="wwwroot\img\organic-food\.DS_Store" />
   </ItemGroup>
