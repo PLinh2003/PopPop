@@ -1,0 +1,29 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/img/fav.ico">
+    <title>@ViewData["Title"] - PôpPôp</title>
+
+    <link rel="stylesheet" href="~/css/identity-style.css">
+    <style>
+        .identity-bg-gradient {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            place-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            padding: 40px 16px;
+            background: radial-gradient( circle at 50% 50%, rgba(250, 80, 2, 0.16) 0%, rgba(250, 80, 2, 0.10) 30%, rgba(250, 80, 2, 0.05) 55%, transparent 80% ), #fff8f4;
+        }
+    </style>
+</head>
+<body>
+    <main class="identity-bg-gradient">
+        @RenderBody()
+    </main>
+    <script src="~/js/identity-snippet.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
