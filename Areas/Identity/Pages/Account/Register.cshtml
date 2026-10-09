@@ -1,7 +1,8 @@
 @page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    Layout = "_IdentityLayout";
+    ViewData["Title"] = "Đăng ký";
 }
 
 <section class="cl-login10" aria-label="Loop account">
@@ -13,33 +14,6 @@
         <p class="cl-login10__tagline">Thế giới cầu lông</p>
     </header>
     <div class="cl-login10__panels">
-        <div class="cl-login10__panel" role="tabpanel" id="cl-login10-panel-login" aria-labelledby="cl-login10-tab-login" tabindex="0">
-            <form id="account" class="cl-login10__form" data-form="login" method="post">
-                <h1 class="cl-login10__title">Đăng nhập</h1>
-                <div class="cl-login10__field" data-field>
-                    <label class="cl-login10__label" for="cl-login10-l-email">Email</label>
-                    <input class="cl-login10__input" id="cl-login10-l-email" name="email" type="email" autocomplete="username" required data-msg="Enter your email." aria-describedby="cl-login10-l-email-err">
-                    <p class="cl-login10__error" id="cl-login10-l-email-err" data-error></p>
-                </div>
-                <div class="cl-login10__field" data-field>
-                    <div class="cl-login10__row">
-                        <label class="cl-login10__label" for="cl-login10-l-pw">Password</label>
-                        <a class="cl-login10__link" href="#">Forgot it?</a>
-                    </div>
-                    <div class="cl-login10__pw">
-                        <input class="cl-login10__input" id="cl-login10-l-pw" name="password" type="password" autocomplete="current-password" required minlength="8" data-msg="Enter your password." aria-describedby="cl-login10-l-pw-err">
-                        <button class="cl-login10__eye" type="button" aria-label="Show password" aria-pressed="false" aria-controls="cl-login10-l-pw" data-pw-toggle>
-                            <svg class="cl-login10__eye-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /></svg>
-                            <svg class="cl-login10__eye-off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.1M6.6 6.6C3.9 8.3 2 12 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2" /></svg>
-                        </button>
-                    </div>
-                    <p class="cl-login10__error" id="cl-login10-l-pw-err" data-error></p>
-                </div>
-                <button class="cl-login10__submit" type="submit">Đăng nhập</button>
-                <p class="cl-login10__swap">New to Loop? <button class="cl-login10__swap-btn" type="button" data-go="signup">Create an account</button></p>
-            </form>
-        </div>
-
         <div class="cl-login10__panel" role="tabpanel" id="cl-login10-panel-signup" aria-labelledby="cl-login10-tab-signup" tabindex="0" hidden>
             <form class="cl-login10__form" data-form="signup" novalidate>
                 <h2 class="cl-login10__title">Start your first streak</h2>

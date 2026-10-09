@@ -1014,7 +1014,7 @@ h1, h2, h3, h4, h5, h6 {
     background: #fff;
     margin: 0px auto 0;
     max-width: 1200px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
@@ -1023,7 +1023,7 @@ h1, h2, h3, h4, h5, h6 {
     background: #fff;
     padding: 0px;
     border: 0px;
-    border-radius: 8px; }
+    border-radius: 0px; }
     @media (max-width: 991px) {
       .header_area .navbar .navbar-collapse {
         margin-top: 30px; }
