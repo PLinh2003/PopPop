@@ -7,7 +7,7 @@
 [![.NET Version](https://img.shields.io/badge/.NET-10-512BD4?logo=.net)](https://dotnet.microsoft.com/)
 ![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen)
 
-[Về dự án](#-về-dự-án) | [Cài đặt](#-cài-đặt) | [Cấu trúc dự án](#-cấu-trúc-dự-án) | [Luồng hoạt động](#-luồng-hoạt-động-các-tầng-nghiệp-vụ) | [Đóng góp](#-đóng-góp) | [Liên hệ](#-liên-hệ) | [Giấy phép](#-giấy-phép)
+[Về dự án](#về-dự-án) | [Cài đặt](#cài-đặt) | [Cấu trúc dự án](#cấu-trúc-dự-án) | [Luồng hoạt động](#luồng-hoạt-động-các-tầng-nghiệp-vụ) | [Đóng góp](#đóng-góp) | [Liên hệ](#liên-hệ) | [Giấy phép](#giấy-phép)
 
 </div>
 
