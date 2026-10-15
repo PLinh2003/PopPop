@@ -19,10 +19,10 @@
 
 ## 🚀 Cài đặt
 
-### Yêu cầu tiên quyết
+### Yêu cầu
 
 - **.NET 10 SDK** - [Tải xuống](https://dotnet.microsoft.com/download/dotnet/10.0)
-- **SQL Server** - [Tải xuống](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)(hoặc `database` khác nhưng phải tự cấu hình)
+- **SQL Server** - [Tải xuống](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (hoặc `database` khác nhưng phải tự cấu hình)
 
 ### Các bước cài đặt
 
@@ -106,20 +106,20 @@ Hoặc nhấn **F5** trong Visual Studio.
 ```
 PopPop/
 ├── Areas/
-│   ├── Admin/                      # Khu vực quản trị
-│   ├── Staff/                      # Khu vực nhân viên
-│   └── Identity/                   # Khu vực Xác thực & Phân quyền
-├── Controllers/                    # Controllers cho các trang chính và khách hàng
-├── Data/                           # Dữ liệu & Cơ sở dữ liệu
-│   ├── Entities/                   # Thực thể cơ sở dữ liệu
-├── Models/                         # DTO request và response
-├── Services/                       # Business Logic
-├── Repositories/                   # Tầng truy vấn vào cơ sở dữ liệu
-├── Views/                          # UI
-├── wwwroot/                        # Tài nguyên tĩnh
-├── Doc/                            # Tài liệu
-├── appsettings.json                # Cấu hình ứng dụng
-├── Program.cs                      # Entry point
+│   ├── Admin/                      # khu vực quản trị
+│   ├── Staff/                      # khu vực nhân viên
+│   └── Identity/                   # khu vực xác thực, phân quyền và quản lý người dùng
+├── Controllers/                    # controllers cho khách hàng
+├── Data/                           # cơ sở dữ liệu
+│   ├── Entities/                   # thực thể
+├── Models/                         # dtos,viewmodels request và response
+├── Services/                       # tầng logic xử lý nghiệp vụ
+├── Repositories/                   # tầng truy vấn cơ sở dữ liệu
+├── Views/                          # giao diện người dùng
+├── wwwroot/                        # tài nguyên tĩnh
+├── Doc/                            # tài liệu
+├── appsettings.json                # cấu hình ứng dụng
+├── Program.cs                      # entry point
 ```
 
 ## 🔄 Luồng hoạt động các tầng nghiệp vụ
@@ -138,20 +138,13 @@ Dự án PopPop sử dụng **N-Tier Architecture** với 5 tầng chính:
 🗄️  SQL Server (Database)
 ```
 
-| Tầng | Vai trò | Công nghệ |
-|------|---------|-----------|
-| 🎨 Presentation | Hiển thị UI, nhận input từ user | Views, Pages |
-| 🎮 Application | Điều phối request, validate dữ liệu | Controllers |
-| 💼 Business Logic | Xử lý logic nghiệp vụ, business rules | Services |
-| 📊 Data Access | CRUD, query database | Repositories |
-| 🗄️ Database | Lưu trữ dữ liệu | SQL Server |
-
-## 👨‍💻 Đóng góp
+## 💻 Đóng góp
 
 Chúng tôi rất hoan nghênh các đóng góp!
 
-1. Fork repository và Pull request
-2. Liên hệ với chung tôi nếu bạn muốn tham gia vào Repo
+**1.** Fork repository và Pull request
+
+**2.** Liên hệ với chúng tôi nếu bạn muốn tham gia vào Repo
 
 ## 📞 Liên hệ
 - **Email:** `linhphuonglinh0321@gmail.com`
@@ -159,9 +152,6 @@ Chúng tôi rất hoan nghênh các đóng góp!
 ## 📄 Giấy phép
 
 Dự án này được cấp phép dưới **License MIT** - xem file [LICENSE](LICENSE) để biết chi tiết.
-## 👏 Cảm ơn
-
-Cảm ơn tất cả những người đã đóng góp vào dự án này!
 
 ---
 
