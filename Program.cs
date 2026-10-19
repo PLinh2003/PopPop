@@ -17,7 +17,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<Role>()
-    .AddEntityFrameworkStores<PopPopDbContext>();
+    .AddEntityFrameworkStores<PopPopDbContext>()
+    .AddErrorDescriber<VietnameseIdentityErrorDescriber>();
 builder.Services.AddControllersWithViews();
 
 // Swagger
