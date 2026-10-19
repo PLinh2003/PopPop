@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PopPop.Data;
 using PopPop.Data.Entities;
+using PopPop.ExternalServices;
 using PopPop.Repositories.Implementations;
 using PopPop.Repositories.Interfaces;
 using PopPop.Services.Implementations;
@@ -39,6 +41,12 @@ builder.Services.AddCors(options =>
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IEmailSender, GmailEmailSender>();
+builder.Services.Configure<AuthMessageSenderOptions>(options =>
+{
+    options.SendGridKey = builder.Configuration["SendGridKey"];
+});
 
 // Register repositories and unit of work
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
