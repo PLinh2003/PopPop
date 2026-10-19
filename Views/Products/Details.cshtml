@@ -1,0 +1,96 @@
+@model PopPop.Models.ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="product_image_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                @if (Model.ImageUrls.Count > 0)
+                {
+                    <img class="img-fluid" src="@Url.Content(Model.ImageUrls[0])" alt="@Model.Name" />
+                    @if (Model.ImageUrls.Count > 1)
+                    {
+                        <div class="row mt-3">
+                            @foreach (var imageUrl in Model.ImageUrls.Skip(1))
+                            {
+                                <div class="col-3 mb-2">
+                                    <img class="img-fluid" src="@Url.Content(imageUrl)" alt="@Model.Name" />
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <img class="img-fluid" src="~/img/product/p1.jpg" alt="@Model.Name" />
+                }
+            </div>
+
+            <div class="col-lg-6 product-details">
+                <h2>@Model.Name</h2>
+                @if (!string.IsNullOrWhiteSpace(Model.BrandName))
+                {
+                    <p><strong>Thương hiệu:</strong> @Model.BrandName</p>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.CategoryName))
+                {
+                    <p><strong>Danh mục:</strong> @Model.CategoryName</p>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    <p>@Model.Description</p>
+                }
+
+                @if (Model.Variants.Count == 0)
+                {
+                    <div class="alert alert-secondary">Sản phẩm chưa có mẫu hoặc kích cỡ.</div>
+                }
+                else
+                {
+                    <form asp-controller="Cart" asp-action="Add" method="post">
+                        <div class="form-group">
+                            <label for="productVariantId">Chọn mẫu / kích cỡ</label>
+                            <select id="productVariantId" name="productVariantId" class="form-control" required>
+                                <option value="" selected disabled>-- Chọn mẫu / kích cỡ --</option>
+                                @foreach (var variant in Model.Variants)
+                                {
+                                    var availabilityText = variant.IsAvailable
+                                        ? $"Còn hàng: {variant.StockQuantity}"
+                                        : variant.StockQuantity > 0 ? "Ngừng kinh doanh" : "Hết hàng";
+                                    <option value="@variant.Id" disabled="@(!variant.IsAvailable)">
+                                        @variant.Label — @variant.Price.ToString("N0") ₫ — @availabilityText
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Số lượng</label>
+                            <input id="quantity" name="quantity" type="number" class="form-control"
+                                   value="1" min="1" required disabled="@(!Model.HasAvailableVariants)" />
+                        </div>
+
+                        @if (Model.HasAvailableVariants && User.Identity?.IsAuthenticated == true)
+                        {
+                            <button type="submit" class="primary-btn">Thêm vào giỏ hàng</button>
+                        }
+                        else if (Model.HasAvailableVariants)
+                        {
+                            <a asp-area="Identity" asp-page="/Account/Login"
+                               asp-route-returnUrl="@Url.Action("Details", "Products", new { id = Model.Id })"
+                               class="primary-btn">Đăng nhập để mua</a>
+                        }
+                        else
+                        {
+                            <button type="button" class="primary-btn" disabled>Hiện đã hết hàng</button>
+                        }
+                    </form>
+                }
+
+                <a asp-controller="Home" asp-action="Index" class="d-block mt-4">Quay lại trang chủ</a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -3,7 +3,7 @@ namespace PopPop.Data.Entities;
 /// <summary>
 /// Brand entity
 /// </summary>
-public class Brand
+public class Brand : IBaseEntity<int>
 {
     public int Id { get; set; }
 

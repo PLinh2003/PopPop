@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Doc\**" />
+    <Content Remove="Doc\**" />
+    <EmbeddedResource Remove="Doc\**" />
+    <None Remove="Doc\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="C:\Users\tuana\.nuget\packages\microsoft.codeanalysis.workspaces.msbuild\4.14.0\contentFiles\any\any\BuildHost-net472\cs\System.CommandLine.resources.dll" />
     <Content Remove="C:\Users\tuana\.nuget\packages\microsoft.codeanalysis.workspaces.msbuild\4.14.0\contentFiles\any\any\BuildHost-net472\de\System.CommandLine.resources.dll" />
     <Content Remove="C:\Users\tuana\.nuget\packages\microsoft.codeanalysis.workspaces.msbuild\4.14.0\contentFiles\any\any\BuildHost-net472\es\System.CommandLine.resources.dll" />
@@ -80,7 +87,6 @@
   <ItemGroup>
     <Folder Include="Areas\Staff\Controllers\" />
     <Folder Include="Areas\Staff\Views\" />
-    <Folder Include="Repositories\Implementations\" />
   </ItemGroup>
 
   <ItemGroup>

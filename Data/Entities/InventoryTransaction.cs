@@ -5,7 +5,7 @@ namespace PopPop.Data.Entities;
 /// <summary>
 /// InventoryTransaction entity - tracks inventory movements
 /// </summary>
-public class InventoryTransaction
+public class InventoryTransaction : IBaseEntity<int>
 {
     public int Id { get; set; }
 

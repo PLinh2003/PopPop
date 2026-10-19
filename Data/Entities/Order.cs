@@ -5,7 +5,7 @@ namespace PopPop.Data.Entities;
 /// <summary>
 /// Order entity
 /// </summary>
-public class Order
+public class Order : IBaseEntity<int>
 {
     public int Id { get; set; }
 

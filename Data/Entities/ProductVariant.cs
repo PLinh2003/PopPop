@@ -3,7 +3,7 @@ namespace PopPop.Data.Entities;
 /// <summary>
 /// ProductVariant entity - represents a specific variant of a product
 /// </summary>
-public class ProductVariant
+public class ProductVariant : IBaseEntity<int>
 {
     public int Id { get; set; }
 
@@ -16,6 +16,8 @@ public class ProductVariant
     /// SKU (Stock Keeping Unit) - must be unique
     /// </summary>
     public required string SKU { get; set; }
+
+    public string? VariantLabel { get; set; }
 
     /// <summary>
     /// Variant price

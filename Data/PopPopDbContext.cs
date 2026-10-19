@@ -98,6 +98,8 @@ namespace PopPop.Data
                 entity.Property(e => e.SKU)
                     .IsRequired()
                     .HasMaxLength(100);
+                entity.Property(e => e.VariantLabel)
+                    .HasMaxLength(100);
                 entity.HasIndex(e => e.SKU)
                     .IsUnique();
 

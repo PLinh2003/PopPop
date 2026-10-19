@@ -5,7 +5,7 @@ namespace PopPop.Data.Entities;
 /// <summary>
 /// Custom User extending IdentityUser
 /// </summary>
-public class User : IdentityUser
+public class User : IdentityUser, IBaseEntity<string>
 {
     /// <summary>
     /// Full name of the user

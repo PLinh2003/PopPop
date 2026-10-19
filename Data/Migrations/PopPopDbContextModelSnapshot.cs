@@ -609,6 +609,10 @@ namespace PopPop.Data.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<string>("VariantLabel")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
@@ -681,7 +685,7 @@ namespace PopPop.Data.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "a1e69c29-c529-48c5-8fa9-0f1aae658cbf",
+                            ConcurrencyStamp = "2c6aa404-81a8-4acd-8a07-cb5c693c7785",
                             Description = "Administrator with full system access",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -689,7 +693,7 @@ namespace PopPop.Data.Migrations
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "5fec85c3-fc44-411d-ae46-6d2603fd4990",
+                            ConcurrencyStamp = "2f111a3b-cc45-4109-a947-dd8f5afb6dad",
                             Description = "Staff member for shop operations",
                             Name = "Staff",
                             NormalizedName = "STAFF"
@@ -697,7 +701,7 @@ namespace PopPop.Data.Migrations
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "1fdf3824-9b1c-4cc1-818f-8e4463b91cd3",
+                            ConcurrencyStamp = "bc16f136-469e-443e-9dad-6f33d5e7a326",
                             Description = "Regular customer",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
@@ -779,16 +783,16 @@ namespace PopPop.Data.Migrations
                         {
                             Id = "admin-001",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ebaa3632-24cf-4a69-b55e-76ad6bac039e",
+                            ConcurrencyStamp = "8a6f1d22-38c7-4e72-8a95-6ce5c4bc935f",
                             Email = "admin@poppop.com",
                             EmailConfirmed = true,
                             FullName = "Admin PôpPôp",
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@POPPOP.COM",
                             NormalizedUserName = "ADMIN@POPPOP.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN9ibIjPnWJ4oDB50ElTSMl+B5MaRZ0duTY3q49mYvEkHhMI97705Ntdb0EulTNTMw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAIUG7Ki67vsQYPgMbzZJ47oitL6bkFjmqI5+xFVDJT7mr9k9zvM1eZ0HcaLRmzGaA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f28db10c-fb49-4fb4-92e1-c3dc10f10d8f",
+                            SecurityStamp = "ade20d89-0238-43d9-83ff-a1b388be8a7a",
                             TwoFactorEnabled = false,
                             UserName = "admin@poppop.com"
                         });
