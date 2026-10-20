@@ -8,7 +8,7 @@
 <hr />
 <p>Tài khoản được bảo vệ bằng ứng dụng xác thực. Hãy nhập mã xác thực bên dưới.</p>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12">
         <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
             <input asp-for="RememberMe" type="hidden" />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>

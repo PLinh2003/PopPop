@@ -77,8 +77,8 @@ public class EnableAuthenticatorModel : PageModel
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        [Required]
-        [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Mã xác minh không được để trống.")]
+        [StringLength(7, ErrorMessage = "Mã xác minh phải có từ {2} đến {1} ký tự.", MinimumLength = 6)]
         [DataType(DataType.Text)]
         [Display(Name = "Verification Code")]
         public string Code { get; set; } = default!;
@@ -119,7 +119,7 @@ public class EnableAuthenticatorModel : PageModel
 
         if (!is2faTokenValid)
         {
-            ModelState.AddModelError("Input.Code", "Verification code is invalid.");
+            ModelState.AddModelError("Input.Code", "Mã xác minh không hợp lệ.");
             await LoadSharedKeyAndQrCodeUriAsync(user);
             return Page();
         }

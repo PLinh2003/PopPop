@@ -91,7 +91,7 @@ body {
 }
 
     .identity-account-links p:first-child {
-        margin-top: 0.9rem;
+        margin-top: 1.5rem;
     }
 
     .identity-account-links p:last-child {
@@ -257,13 +257,13 @@ body {
 .identity-page a:not(.btn):not(.nav-link) {
     color: #d95f00;
     font-weight: 650;
-    text-decoration-thickness: 1px;
-    text-underline-offset: .18em;
+    text-decoration: none;
 }
 
     .identity-page .btn-link:hover,
     .identity-page a:not(.btn):not(.nav-link):hover {
         color: #a94700;
+        text-decoration: none;
     }
 
 .identity-page .btn:focus-visible,
