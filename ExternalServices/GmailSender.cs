@@ -1,8 +1,7 @@
-﻿
+﻿using MimeKit;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using MimeKit;
 
 namespace PopPop.ExternalServices
 {
@@ -49,7 +48,7 @@ namespace PopPop.ExternalServices
 
             mail.Body = new BodyBuilder
             {
-                HtmlBody = htmlMessage
+                HtmlBody = EmailTemplate.CreateHtml(subject, htmlMessage)
             }.ToMessageBody();
 
             using var client = new SmtpClient();

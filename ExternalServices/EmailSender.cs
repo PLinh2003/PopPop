@@ -35,7 +35,7 @@ namespace PopPop.ExternalServices
                 From = new EmailAddress("Joe@contoso.com", "Password Recovery"),
                 Subject = subject,
                 PlainTextContent = message,
-                HtmlContent = message
+                HtmlContent = EmailTemplate.CreateHtml(subject, message)
             };
             msg.AddTo(new EmailAddress(toEmail));
 

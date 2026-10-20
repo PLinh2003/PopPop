@@ -42,12 +42,12 @@ builder.Services.AddCors(options =>
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.Configure<AuthMessageSenderOptions>(options =>
+//{
+//    options.SendGridKey = builder.Configuration["SendGridKey"];
+//});
 //builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddTransient<IEmailSender, GmailEmailSender>();
-builder.Services.Configure<AuthMessageSenderOptions>(options =>
-{
-    options.SendGridKey = builder.Configuration["SendGridKey"];
-});
 
 // Register repositories and unit of work
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));

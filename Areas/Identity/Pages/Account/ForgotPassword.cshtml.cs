@@ -72,8 +72,8 @@ public class ForgotPasswordModel : PageModel
 
             await _emailSender.SendEmailAsync(
                 Input.Email,
-                "Reset Password",
-                $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Đặt lại mật khẩu PôpPôp",
+                $"Chúng tôi nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn. Nhấn nút bên dưới để tạo mật khẩu mới.<p style='margin:24px 0 0;'><a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display:inline-block;padding:12px 22px;background-color:#2563eb;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:700;'>Đặt lại mật khẩu</a></p>");
 
             return RedirectToPage("./ForgotPasswordConfirmation");
         }
