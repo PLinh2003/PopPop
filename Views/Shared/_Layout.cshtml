@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="~/css/ion.rangeSlider.skinFlat.css" />
 	<link rel="stylesheet" href="~/css/magnific-popup.css">
 
-	@await RenderSectionAsync("Styles", required: true)
+	@await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body>
@@ -54,6 +54,6 @@
 	@* <script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script> *@
 	@* <script src="~/js/gmaps.min.js"></script> *@
 	
-	@await RenderSectionAsync("Scripts", required: true)
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

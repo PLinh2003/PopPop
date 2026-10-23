@@ -1,0 +1,84 @@
+@model PopPop.Models.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Xác nhận đặt hàng";
+}
+
+<section class="checkout_area section_gap">
+    <div class="container">
+        <h2>Xác nhận đặt hàng</h2>
+
+        <form asp-action="Checkout" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-lg-7">
+                    <h4>Thông tin nhận hàng</h4>
+                    <div class="form-group">
+                        <label asp-for="RecipientName"></label>
+                        <input asp-for="RecipientName" class="form-control" />
+                        <span asp-validation-for="RecipientName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RecipientPhone"></label>
+                        <input asp-for="RecipientPhone" class="form-control" />
+                        <span asp-validation-for="RecipientPhone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShippingAddress"></label>
+                        <textarea asp-for="ShippingAddress" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Note"></label>
+                        <textarea asp-for="Note" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Note" class="text-danger"></span>
+                    </div>
+                    <p>Đơn hàng sẽ được tạo ở trạng thái chờ xác nhận. Thanh toán trực tuyến chưa được tích hợp.</p>
+                </div>
+
+                <div class="col-lg-5">
+                    <h4>Chi tiết đơn hàng</h4>
+                    @if (Model.Items.Count == 0)
+                    {
+                        <p class="text-danger">Giỏ hàng đang trống hoặc không còn sản phẩm khả dụng.</p>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th>SL</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Items)
+                                    {
+                                        <tr>
+                                            <td>@item.ProductName <small>(@item.SKU)</small><br />@item.UnitPrice.ToString("N0") ₫</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@item.LineTotal.ToString("N0") ₫</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between"><span>Tạm tính</span><span>@Model.Subtotal.ToString("N0") ₫</span></div>
+                        <div class="d-flex justify-content-between"><span>Phí giao hàng</span><span>@(Model.ShippingFee == 0 ? "Miễn phí" : $"{Model.ShippingFee:N0} ₫")</span></div>
+                        <hr />
+                        <div class="d-flex justify-content-between"><strong>Tổng cộng</strong><strong>@Model.TotalAmount.ToString("N0") ₫</strong></div>
+                        <button type="submit" class="primary-btn mt-3">Đặt hàng</button>
+                    }
+                    <a asp-controller="Cart" asp-action="Index" class="d-block mt-3">Quay lại giỏ hàng</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,6 +1,12 @@
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PopPop.Data;
 using PopPop.Data.Entities;
+using PopPop.ExternalServices;
+using PopPop.Repositories.Implementations;
+using PopPop.Repositories.Interfaces;
+using PopPop.Services.Implementations;
+using PopPop.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,16 +23,43 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<Role>()
-    .AddEntityFrameworkStores<PopPopDbContext>();
+    .AddEntityFrameworkStores<PopPopDbContext>()
+    .AddErrorDescriber<VietnameseIdentityErrorDescriber>();
 builder.Services.AddControllersWithViews();
+
+// CORS configuration
+var corsAllowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend", policy =>
+    {
+        policy.WithOrigins(corsAllowedOrigins)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.Configure<AuthMessageSenderOptions>(options =>
+//{
+//    options.SendGridKey = builder.Configuration["SendGridKey"];
+//});
+//builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IEmailSender, GmailEmailSender>();
 
-// Register repositories
+// Register repositories and unit of work
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 // Register services
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
 
@@ -47,6 +80,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors("Frontend");
 
 app.UseAuthentication();
 app.UseAuthorization();

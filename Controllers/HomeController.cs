@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PopPop.Data.Entities;
 using PopPop.Models;
+using PopPop.Services.Interfaces;
 using System.Diagnostics;
 
 namespace PopPop.Controllers
@@ -10,9 +11,12 @@ namespace PopPop.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<User> _userManager;
-        public HomeController(UserManager<User> userManager)
+        private readonly IProductService _productService;
+
+        public HomeController(UserManager<User> userManager, IProductService productService)
         {
             _userManager = userManager;
+            _productService = productService;
         }
 
         [HttpGet]
@@ -23,9 +27,10 @@ namespace PopPop.Controllers
             return Ok(users);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            return View();
+            var latestProducts = await _productService.GetLatestAvailableAsync(8, cancellationToken);
+            return View(latestProducts);
         }
 
         public IActionResult Privacy()

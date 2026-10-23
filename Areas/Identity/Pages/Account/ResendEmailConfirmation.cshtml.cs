@@ -45,8 +45,8 @@ public class ResendEmailConfirmationModel : PageModel
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Địa chỉ email không được để trống.")]
+        [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ.")]
         public string Email { get; set; } = default!;
     }
 
@@ -78,8 +78,8 @@ public class ResendEmailConfirmationModel : PageModel
             protocol: Request.Scheme)!;
         await _emailSender.SendEmailAsync(
             Input.Email,
-            "Confirm your email",
-            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            "Xác nhận địa chỉ email của bạn",
+            $"Vui lòng xác nhận địa chỉ email để hoàn tất thiết lập tài khoản PôpPôp.<p style='margin:24px 0 0;'><a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display:inline-block;padding:12px 22px;background-color:#2563eb;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:700;'>Xác nhận email</a></p>");
 
         ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
         return Page();

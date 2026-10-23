@@ -6,126 +6,63 @@
     ViewData["Title"] = "Đăng nhập";
 }
 
-<section class="cl-login10">
-    <header class="cl-login10__head">
-        <img src="~/img/logo.png" alt="Logo">
-    </header>
-
-    <div class="cl-login10__panel">
-        <form id="account" method="post" class="cl-login10__form" data-form="login">
-            <h1 class="cl-login10__title">Đăng nhập</h1>
-
-            <div class="cl-login10__field" data-field>
-                <label asp-for="Input.Email" class="cl-login10__label"
-                       for="cl-login10-l-email">
-                    Email
-                </label>
-
-                <input asp-for="Input.Email"
-                       class="cl-login10__input"
-                       id="cl-login10-l-email"
-                       type="email"
-                       autocomplete="username"
-                       required
-                       data-msg="Vui lòng nhập email.">
-
-                <p class="cl-login10__error"
-                   id="cl-login10-l-email-err"
-                   data-error></p>
-            </div>
-
-            <div class="cl-login10__field" data-field>
-                <div class="cl-login10__row">
-                    <label asp-for="Input.Password"
-                           class="cl-login10__label"
-                           for="cl-login10-l-pw">
-                        Mật khẩu
+<div class="row">
+    <div class="col-12">
+        <section>
+            <form id="account" method="post">
+                <h1>@ViewData["Title"]</h1>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="ten@email.com" />
+                    <label asp-for="Input.Email" class="form-label">Địa chỉ email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Nhập mật khẩu" />
+                    <label asp-for="Input.Password" class="form-label">Mật khẩu</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="mb-3 text-end">
+                    <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu?</a>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        Ghi nhớ đăng nhập
                     </label>
-
-                    <a asp-page="./ForgotPassword"
-                       class="cl-login10__link">
-                        Quên mật khẩu?
-                    </a>
                 </div>
-
-                <div class="cl-login10__pw">
-                    <input asp-for="Input.Password"
-                           class="cl-login10__input"
-                           id="cl-login10-l-pw"
-                           type="password"
-                           autocomplete="current-password"
-                           required
-                           minlength="8"
-                           data-msg="Vui lòng nhập mật khẩu.">
-
-                    <button class="cl-login10__eye"
-                            type="button"
-                            data-pw-toggle>
-                        <svg class="cl-login10__eye-on"
-                             viewBox="0 0 24 24"
-                             width="20"
-                             height="20"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.8"
-                             stroke-linecap="round"
-                             stroke-linejoin="round"
-                             aria-hidden="true">
-                            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-
-                        <svg class="cl-login10__eye-off"
-                             viewBox="0 0 24 24"
-                             width="20"
-                             height="20"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.8"
-                             stroke-linecap="round"
-                             stroke-linejoin="round"
-                             aria-hidden="true">
-                            <path d="M3 3l18 18M10.6 5.1A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.1M6.6 6.6C3.9 8.3 2 12 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2" />
-                        </svg>
-                    </button>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Đăng nhập</button>
                 </div>
-
-                <p class="cl-login10__error"
-                   id="cl-login10-l-pw-err"
-                   data-error></p>
-            </div>
-
-            <button class="cl-login10__submit" type="submit">
-                Đăng nhập
-            </button>
-
-            <p class="cl-login10__swap">
-                Bạn chưa có tài khoản?
-                <a asp-page="./Register" class="cl-login10__link">
-                    Tạo tài khoản
-                </a>
-            </p>
-        </form>
+                <div class="identity-account-links">
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Tạo tài khoản mới.</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Gửi lại email xác nhận.</a>
+                    </p>
+                </div>
+            </form>
+        </section>
     </div>
-
-    <div class="cl-login10__done" data-success tabindex="-1" hidden>
-        <span class="cl-login10__streak">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span>
-        </span>
-
-        <h2 class="cl-login10__title" data-done-title></h2>
-        <p class="cl-login10__sub" data-done-text></p>
-
-        <button class="cl-login10__swap-btn" type="button" data-reset>
-            Quay lại
-        </button>
-    </div>
-
-    <div class="cl-login10__vh"
-         role="status"
-         data-live></div>
-</section>
+    @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+    {
+        <div class="col-12">
+            <section class="identity-provider-section">
+                <h2>Hoặc tiếp tục với</h2>
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="identity-provider-list">
+                    <div class="identity-provider-buttons">
+                        @foreach (var provider in Model.ExternalLogins!)
+                        {
+                            <button type="submit" class="btn btn-outline-secondary identity-provider-button" name="provider" value="@provider.Name" title="Tiếp tục với @provider.DisplayName">@provider.DisplayName</button>
+                        }
+                    </div>
+                </form>
+            </section>
+        </div>
+    }
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

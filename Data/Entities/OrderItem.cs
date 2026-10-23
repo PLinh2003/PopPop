@@ -3,7 +3,7 @@ namespace PopPop.Data.Entities;
 /// <summary>
 /// OrderItem entity - represents a line item in an order
 /// </summary>
-public class OrderItem
+public class OrderItem : IBaseEntity<int>
 {
     public int Id { get; set; }
 

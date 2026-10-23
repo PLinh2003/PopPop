@@ -53,7 +53,7 @@ public class LoginWithRecoveryCodeModel : PageModel
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [BindProperty]
-        [Required]
+        [Required(ErrorMessage = "Mã khôi phục không được để trống.")]
         [DataType(DataType.Text)]
         [Display(Name = "Recovery Code")]
         public string RecoveryCode { get; set; } = default!;
@@ -105,7 +105,7 @@ public class LoginWithRecoveryCodeModel : PageModel
         else
         {
             _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
-            ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
+            ModelState.AddModelError(string.Empty, "Mã khôi phục không hợp lệ.");
             return Page();
         }
     }

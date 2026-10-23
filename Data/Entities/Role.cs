@@ -5,7 +5,7 @@ namespace PopPop.Data.Entities;
 /// <summary>
 /// Custom Role extending IdentityRole
 /// </summary>
-public class Role : IdentityRole
+public class Role : IdentityRole, IBaseEntity<string>
 {
     /// <summary>
     /// Description of the role
