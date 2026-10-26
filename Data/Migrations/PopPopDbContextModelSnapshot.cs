@@ -17,7 +17,7 @@ namespace PopPop.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.9")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -177,28 +177,361 @@ namespace PopPop.Data.Migrations
                         {
                             Id = 1,
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Thương hiệu cầu lông hàng đầu từ Nhật Bản",
+                            Description = "Thương hiệu Thương hiệu 01 cho thể thao cầu lông",
                             IsActive = true,
-                            Name = "Yonex",
+                            Name = "Thương hiệu 01",
                             UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Thương hiệu cầu lông từ Đài Loan",
+                            CreatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 02 cho thể thao cầu lông",
                             IsActive = true,
-                            Name = "Victor",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Thương hiệu 02",
+                            UpdatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Thương hiệu cầu lông từ Trung Quốc",
+                            CreatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 03 cho thể thao cầu lông",
                             IsActive = true,
-                            Name = "Li-Ning",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Thương hiệu 03",
+                            UpdatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 04 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 04",
+                            UpdatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 05 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 05",
+                            UpdatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 06 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 06",
+                            UpdatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 07 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 07",
+                            UpdatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 08 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 08",
+                            UpdatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 09 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 09",
+                            UpdatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 10 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 10",
+                            UpdatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 11 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 11",
+                            UpdatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 12 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 12",
+                            UpdatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 13 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 13",
+                            UpdatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 14 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 14",
+                            UpdatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 15 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 15",
+                            UpdatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 16 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 16",
+                            UpdatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 17 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 17",
+                            UpdatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CreatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 18 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 18",
+                            UpdatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CreatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 19 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 19",
+                            UpdatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CreatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 20 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 20",
+                            UpdatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CreatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 21 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 21",
+                            UpdatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CreatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 22 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 22",
+                            UpdatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CreatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 23 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 23",
+                            UpdatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CreatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 24 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 24",
+                            UpdatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CreatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 25 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 25",
+                            UpdatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CreatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 26 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 26",
+                            UpdatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CreatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 27 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 27",
+                            UpdatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CreatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 28 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 28",
+                            UpdatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CreatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 29 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 29",
+                            UpdatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CreatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 30 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 30",
+                            UpdatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CreatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 31 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 31",
+                            UpdatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CreatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 32 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 32",
+                            UpdatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CreatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 33 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 33",
+                            UpdatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CreatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 34 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 34",
+                            UpdatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CreatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 35 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 35",
+                            UpdatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CreatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 36 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 36",
+                            UpdatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            CreatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 37 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 37",
+                            UpdatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            CreatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 38 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 38",
+                            UpdatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            CreatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 39 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 39",
+                            UpdatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            CreatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Thương hiệu Thương hiệu 40 cho thể thao cầu lông",
+                            IsActive = true,
+                            Name = "Thương hiệu 40",
+                            UpdatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -298,46 +631,361 @@ namespace PopPop.Data.Migrations
                         {
                             Id = 1,
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Các loại vợt cầu lông",
+                            Description = "Danh mục Danh mục cầu lông 01",
                             IsActive = true,
-                            Name = "Vợt cầu lông",
+                            Name = "Danh mục cầu lông 01",
                             UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Giày chơi cầu lông",
+                            CreatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 02",
                             IsActive = true,
-                            Name = "Giày cầu lông",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Danh mục cầu lông 02",
+                            UpdatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Trang phục chơi cầu lông",
+                            CreatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 03",
                             IsActive = true,
-                            Name = "Quần áo cầu lông",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Danh mục cầu lông 03",
+                            UpdatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Các phụ kiện liên quan đến cầu lông",
+                            CreatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 04",
                             IsActive = true,
-                            Name = "Phụ kiện cầu lông",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Danh mục cầu lông 04",
+                            UpdatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Cầu và các vật liệu liên quan",
+                            CreatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 05",
                             IsActive = true,
-                            Name = "Cầu cầu lông",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Danh mục cầu lông 05",
+                            UpdatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 06",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 06",
+                            UpdatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 07",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 07",
+                            UpdatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 08",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 08",
+                            UpdatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 09",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 09",
+                            UpdatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 10",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 10",
+                            UpdatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 11",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 11",
+                            UpdatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 12",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 12",
+                            UpdatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 13",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 13",
+                            UpdatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 14",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 14",
+                            UpdatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 15",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 15",
+                            UpdatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 16",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 16",
+                            UpdatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 17",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 17",
+                            UpdatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CreatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 18",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 18",
+                            UpdatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CreatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 19",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 19",
+                            UpdatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CreatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 20",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 20",
+                            UpdatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CreatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 21",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 21",
+                            UpdatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CreatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 22",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 22",
+                            UpdatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CreatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 23",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 23",
+                            UpdatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CreatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 24",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 24",
+                            UpdatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CreatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 25",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 25",
+                            UpdatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CreatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 26",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 26",
+                            UpdatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CreatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 27",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 27",
+                            UpdatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CreatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 28",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 28",
+                            UpdatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CreatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 29",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 29",
+                            UpdatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CreatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 30",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 30",
+                            UpdatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CreatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 31",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 31",
+                            UpdatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CreatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 32",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 32",
+                            UpdatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CreatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 33",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 33",
+                            UpdatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CreatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 34",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 34",
+                            UpdatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CreatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 35",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 35",
+                            UpdatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CreatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 36",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 36",
+                            UpdatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            CreatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 37",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 37",
+                            UpdatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            CreatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 38",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 38",
+                            UpdatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            CreatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 39",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 39",
+                            UpdatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            CreatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Danh mục Danh mục cầu lông 40",
+                            IsActive = true,
+                            Name = "Danh mục cầu lông 40",
+                            UpdatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -522,33 +1170,660 @@ namespace PopPop.Data.Migrations
                             Id = 1,
                             BrandId = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Vợt cầu lông cao cấp",
+                            CreatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 1 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
-                            Name = "Vợt Yonex Astrox",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Vợt Yonex Astrox 99 1",
+                            UpdatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 2,
                             BrandId = 2,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Giày cầu lông bền bỉ",
+                            CreatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 2 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
-                            Name = "Giày Victor A830",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Vợt Yonex Nanoflare 800 2",
+                            UpdatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 3,
                             BrandId = 3,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Áo thể thao cầu lông",
+                            CreatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 3 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
-                            Name = "Áo Li-Ning",
-                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Name = "Vợt Victor Brave Sword 12 3",
+                            UpdatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BrandId = 4,
+                            CategoryId = 4,
+                            CreatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 4 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt Li-Ning Turbo 900 4",
+                            UpdatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BrandId = 5,
+                            CategoryId = 5,
+                            CreatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 5 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày Yonex Power Cushion 5",
+                            UpdatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BrandId = 6,
+                            CategoryId = 6,
+                            CreatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 6 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày Victor A830 6",
+                            UpdatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BrandId = 7,
+                            CategoryId = 7,
+                            CreatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 7 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày Li-Ning Sprint 7",
+                            UpdatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BrandId = 8,
+                            CategoryId = 8,
+                            CreatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 8 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày Mizuno Wave Rider 8",
+                            UpdatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BrandId = 9,
+                            CategoryId = 9,
+                            CreatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 9 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo Yonex Training 9",
+                            UpdatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BrandId = 10,
+                            CategoryId = 10,
+                            CreatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 10 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo Victor Sport 10",
+                            UpdatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BrandId = 11,
+                            CategoryId = 11,
+                            CreatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 11 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo Li-Ning Pro 11",
+                            UpdatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BrandId = 12,
+                            CategoryId = 12,
+                            CreatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 12 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo Mizuno Active 12",
+                            UpdatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 13 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Túi đựng vợt Yonex 13",
+                            UpdatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            CreatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 14 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Túi đựng vợt Victor 14",
+                            UpdatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BrandId = 3,
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 15 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Lưới cầu lông Li-Ning 15",
+                            UpdatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            BrandId = 4,
+                            CategoryId = 4,
+                            CreatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 16 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Bóng cầu lông Yonex 16",
+                            UpdatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            BrandId = 5,
+                            CategoryId = 5,
+                            CreatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 17 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Băng quấn cổ tay 17",
+                            UpdatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            BrandId = 6,
+                            CategoryId = 6,
+                            CreatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 18 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Dây căng vợt 3U 18",
+                            UpdatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            BrandId = 7,
+                            CategoryId = 7,
+                            CreatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 19 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Dây căng vợt 4U 19",
+                            UpdatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            BrandId = 8,
+                            CategoryId = 8,
+                            CreatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 20 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Balo thể thao Pro 20",
+                            UpdatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            BrandId = 9,
+                            CategoryId = 9,
+                            CreatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 21 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Cầu lông chuyên nghiệp 21",
+                            UpdatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            BrandId = 10,
+                            CategoryId = 10,
+                            CreatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 22 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt Head Graphene 360 22",
+                            UpdatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            BrandId = 11,
+                            CategoryId = 11,
+                            CreatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 23 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt Babolat X100 23",
+                            UpdatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            BrandId = 12,
+                            CategoryId = 12,
+                            CreatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 24 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt Apacs Z-Force 24",
+                            UpdatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 25 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày Head Sprint 25",
+                            UpdatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            CreatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 26 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày Adidas Court 26",
+                            UpdatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            BrandId = 3,
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 27 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày Nike Zoom 27",
+                            UpdatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            BrandId = 4,
+                            CategoryId = 4,
+                            CreatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 28 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo Nike Court 28",
+                            UpdatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            BrandId = 5,
+                            CategoryId = 5,
+                            CreatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 29 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo Puma Energy 29",
+                            UpdatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            BrandId = 6,
+                            CategoryId = 6,
+                            CreatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 30 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Túi vợt Head 30",
+                            UpdatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            BrandId = 7,
+                            CategoryId = 7,
+                            CreatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 31 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Lưới đánh bóng 31",
+                            UpdatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            BrandId = 8,
+                            CategoryId = 8,
+                            CreatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 32 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Bóng cầu lông premium 32",
+                            UpdatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            BrandId = 9,
+                            CategoryId = 9,
+                            CreatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 33 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Dụng cụ bảo vệ vợt 33",
+                            UpdatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            BrandId = 10,
+                            CategoryId = 10,
+                            CreatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 34 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Bọc cán vợt 34",
+                            UpdatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            BrandId = 11,
+                            CategoryId = 11,
+                            CreatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 35 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt đi kèm dây căng 35",
+                            UpdatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            BrandId = 12,
+                            CategoryId = 12,
+                            CreatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 36 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt cho người mới 36",
+                            UpdatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 37 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt cho người chuyên nghiệp 37",
+                            UpdatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            CreatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 38 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày đệm chống chấn 38",
+                            UpdatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            BrandId = 3,
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 39 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo khoác thời trang 39",
+                            UpdatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            BrandId = 4,
+                            CategoryId = 4,
+                            CreatedAt = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 40 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo chạy bộ thể thao 40",
+                            UpdatedAt = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 41,
+                            BrandId = 5,
+                            CategoryId = 5,
+                            CreatedAt = new DateTime(2024, 2, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 41 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt thể thao đa năng 41",
+                            UpdatedAt = new DateTime(2024, 2, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 42,
+                            BrandId = 6,
+                            CategoryId = 6,
+                            CreatedAt = new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 42 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày chạy bộ cầu lông 42",
+                            UpdatedAt = new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 43,
+                            BrandId = 7,
+                            CategoryId = 7,
+                            CreatedAt = new DateTime(2024, 2, 13, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 43 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Balo di chuyển thể thao 43",
+                            UpdatedAt = new DateTime(2024, 2, 13, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 44,
+                            BrandId = 8,
+                            CategoryId = 8,
+                            CreatedAt = new DateTime(2024, 2, 14, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 44 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Bọc bảo vệ vợt 44",
+                            UpdatedAt = new DateTime(2024, 2, 14, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 45,
+                            BrandId = 9,
+                            CategoryId = 9,
+                            CreatedAt = new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 45 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Lưới thi đấu tiêu chuẩn 45",
+                            UpdatedAt = new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 46,
+                            BrandId = 10,
+                            CategoryId = 10,
+                            CreatedAt = new DateTime(2024, 2, 16, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 46 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Bóng chất lượng cao 46",
+                            UpdatedAt = new DateTime(2024, 2, 16, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 47,
+                            BrandId = 11,
+                            CategoryId = 11,
+                            CreatedAt = new DateTime(2024, 2, 17, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 47 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt niềm tin 47",
+                            UpdatedAt = new DateTime(2024, 2, 17, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 48,
+                            BrandId = 12,
+                            CategoryId = 12,
+                            CreatedAt = new DateTime(2024, 2, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 48 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt kết hợp công nghệ 48",
+                            UpdatedAt = new DateTime(2024, 2, 18, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 49,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 2, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 49 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày nhẹ bám sân 49",
+                            UpdatedAt = new DateTime(2024, 2, 19, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 50,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            CreatedAt = new DateTime(2024, 2, 20, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 50 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo chống nắng 50",
+                            UpdatedAt = new DateTime(2024, 2, 20, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 51,
+                            BrandId = 3,
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2024, 2, 21, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 51 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Băng quấn cổ tay chuyên dụng 51",
+                            UpdatedAt = new DateTime(2024, 2, 21, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 52,
+                            BrandId = 4,
+                            CategoryId = 4,
+                            CreatedAt = new DateTime(2024, 2, 22, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 52 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Dây căng vợt tối ưu 52",
+                            UpdatedAt = new DateTime(2024, 2, 22, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 53,
+                            BrandId = 5,
+                            CategoryId = 5,
+                            CreatedAt = new DateTime(2024, 2, 23, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 53 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Túi chứa phụ kiện 53",
+                            UpdatedAt = new DateTime(2024, 2, 23, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 54,
+                            BrandId = 6,
+                            CategoryId = 6,
+                            CreatedAt = new DateTime(2024, 2, 24, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 54 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt săn điểm cao 54",
+                            UpdatedAt = new DateTime(2024, 2, 24, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 55,
+                            BrandId = 7,
+                            CategoryId = 7,
+                            CreatedAt = new DateTime(2024, 2, 25, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 55 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt đấm mạnh 55",
+                            UpdatedAt = new DateTime(2024, 2, 25, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 56,
+                            BrandId = 8,
+                            CategoryId = 8,
+                            CreatedAt = new DateTime(2024, 2, 26, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 56 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt khóa gió 56",
+                            UpdatedAt = new DateTime(2024, 2, 26, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 57,
+                            BrandId = 9,
+                            CategoryId = 9,
+                            CreatedAt = new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 57 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Giày cải thiện phản xạ 57",
+                            UpdatedAt = new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 58,
+                            BrandId = 10,
+                            CategoryId = 10,
+                            CreatedAt = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 58 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Áo thể thao mùa hè 58",
+                            UpdatedAt = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 59,
+                            BrandId = 11,
+                            CategoryId = 11,
+                            CreatedAt = new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 59 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Balo cho vận động viên 59",
+                            UpdatedAt = new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 60,
+                            BrandId = 12,
+                            CategoryId = 12,
+                            CreatedAt = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Sản phẩm 60 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                            IsActive = true,
+                            Name = "Vợt Yonex Astrox 99 60",
+                            UpdatedAt = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -579,6 +1854,968 @@ namespace PopPop.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 1,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 1,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 2,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 2,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 3,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 3,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 4,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 4,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = true,
+                            ProductId = 5,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = false,
+                            ProductId = 5,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = true,
+                            ProductId = 6,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = false,
+                            ProductId = 6,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = true,
+                            ProductId = 7,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = false,
+                            ProductId = 7,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = true,
+                            ProductId = 8,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = false,
+                            ProductId = 8,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 9,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 9,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 10,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 10,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 11,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 11,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 12,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 12,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = true,
+                            ProductId = 13,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = false,
+                            ProductId = 13,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 27,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = true,
+                            ProductId = 14,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = false,
+                            ProductId = 14,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 29,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = true,
+                            ProductId = 15,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = false,
+                            ProductId = 15,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 31,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = true,
+                            ProductId = 16,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 32,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = false,
+                            ProductId = 16,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 33,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 17,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 34,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 17,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 35,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 18,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 36,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 18,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 37,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 19,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 38,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 19,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 39,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 20,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 40,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 20,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 41,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = true,
+                            ProductId = 21,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 42,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = false,
+                            ProductId = 21,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 43,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = true,
+                            ProductId = 22,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 44,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = false,
+                            ProductId = 22,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 45,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = true,
+                            ProductId = 23,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 46,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = false,
+                            ProductId = 23,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 47,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = true,
+                            ProductId = 24,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 48,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = false,
+                            ProductId = 24,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 49,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 25,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 50,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 25,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 51,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 26,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 52,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 26,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 53,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 27,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 54,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 27,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 55,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 28,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 56,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 28,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 57,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = true,
+                            ProductId = 29,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 58,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = false,
+                            ProductId = 29,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 59,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = true,
+                            ProductId = 30,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 60,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = false,
+                            ProductId = 30,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 61,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = true,
+                            ProductId = 31,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 62,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = false,
+                            ProductId = 31,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 63,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = true,
+                            ProductId = 32,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 64,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = false,
+                            ProductId = 32,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 65,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 33,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 66,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 33,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 67,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 34,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 68,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 34,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 69,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 35,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 70,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 35,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 71,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 36,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 72,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 36,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 73,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = true,
+                            ProductId = 37,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 74,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = false,
+                            ProductId = 37,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 75,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = true,
+                            ProductId = 38,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 76,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = false,
+                            ProductId = 38,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 77,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = true,
+                            ProductId = 39,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 78,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = false,
+                            ProductId = 39,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 79,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = true,
+                            ProductId = 40,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 80,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = false,
+                            ProductId = 40,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 81,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 41,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 82,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 41,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 83,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 42,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 84,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 42,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 85,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 43,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 86,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 43,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 87,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 44,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 88,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 44,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 89,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = true,
+                            ProductId = 45,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 90,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = false,
+                            ProductId = 45,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 91,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = true,
+                            ProductId = 46,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 92,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = false,
+                            ProductId = 46,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 93,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = true,
+                            ProductId = 47,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 94,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = false,
+                            ProductId = 47,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 95,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = true,
+                            ProductId = 48,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 96,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = false,
+                            ProductId = 48,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 97,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 49,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 98,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 49,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 99,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 50,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 100,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 50,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 101,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 51,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 102,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 51,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 103,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 52,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 104,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 52,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 105,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = true,
+                            ProductId = 53,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 106,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = false,
+                            ProductId = 53,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 107,
+                            ImageUrl = "/img/product/p6.jpg",
+                            IsPrimary = true,
+                            ProductId = 54,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 108,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = false,
+                            ProductId = 54,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 109,
+                            ImageUrl = "/img/product/p7.jpg",
+                            IsPrimary = true,
+                            ProductId = 55,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 110,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = false,
+                            ProductId = 55,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 111,
+                            ImageUrl = "/img/product/p8.jpg",
+                            IsPrimary = true,
+                            ProductId = 56,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 112,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = false,
+                            ProductId = 56,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 113,
+                            ImageUrl = "/img/product/p1.jpg",
+                            IsPrimary = true,
+                            ProductId = 57,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 114,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = false,
+                            ProductId = 57,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 115,
+                            ImageUrl = "/img/product/p2.jpg",
+                            IsPrimary = true,
+                            ProductId = 58,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 116,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = false,
+                            ProductId = 58,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 117,
+                            ImageUrl = "/img/product/p3.jpg",
+                            IsPrimary = true,
+                            ProductId = 59,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 118,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = false,
+                            ProductId = 59,
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 119,
+                            ImageUrl = "/img/product/p4.jpg",
+                            IsPrimary = true,
+                            ProductId = 60,
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 120,
+                            ImageUrl = "/img/product/p5.jpg",
+                            IsPrimary = false,
+                            ProductId = 60,
+                            SortOrder = 2
+                        });
                 });
 
             modelBuilder.Entity("PopPop.Data.Entities.ProductVariant", b =>
@@ -627,28 +2864,1201 @@ namespace PopPop.Data.Migrations
                         {
                             Id = 1,
                             IsActive = true,
-                            Price = 2500000m,
+                            Price = 535000m,
                             ProductId = 1,
-                            SKU = "YONEX-ASTROX-001",
-                            StockQuantity = 10
+                            SKU = "POP001-1",
+                            StockQuantity = 17,
+                            VariantLabel = "Màu Đen"
                         },
                         new
                         {
                             Id = 2,
                             IsActive = true,
-                            Price = 1200000m,
-                            ProductId = 2,
-                            SKU = "VICTOR-A830-001",
-                            StockQuantity = 15
+                            Price = 685000m,
+                            ProductId = 1,
+                            SKU = "POP001-2",
+                            StockQuantity = 18,
+                            VariantLabel = "Màu Trắng"
                         },
                         new
                         {
                             Id = 3,
                             IsActive = true,
-                            Price = 350000m,
+                            Price = 670000m,
+                            ProductId = 2,
+                            SKU = "POP002-1",
+                            StockQuantity = 18,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsActive = true,
+                            Price = 820000m,
+                            ProductId = 2,
+                            SKU = "POP002-2",
+                            StockQuantity = 19,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsActive = true,
+                            Price = 805000m,
                             ProductId = 3,
-                            SKU = "LINING-AO-001",
-                            StockQuantity = 20
+                            SKU = "POP003-1",
+                            StockQuantity = 19,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsActive = true,
+                            Price = 955000m,
+                            ProductId = 3,
+                            SKU = "POP003-2",
+                            StockQuantity = 20,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsActive = true,
+                            Price = 940000m,
+                            ProductId = 4,
+                            SKU = "POP004-1",
+                            StockQuantity = 20,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsActive = true,
+                            Price = 1090000m,
+                            ProductId = 4,
+                            SKU = "POP004-2",
+                            StockQuantity = 21,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsActive = true,
+                            Price = 1075000m,
+                            ProductId = 5,
+                            SKU = "POP005-1",
+                            StockQuantity = 21,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsActive = true,
+                            Price = 1225000m,
+                            ProductId = 5,
+                            SKU = "POP005-2",
+                            StockQuantity = 22,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsActive = true,
+                            Price = 1210000m,
+                            ProductId = 6,
+                            SKU = "POP006-1",
+                            StockQuantity = 22,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            IsActive = true,
+                            Price = 1360000m,
+                            ProductId = 6,
+                            SKU = "POP006-2",
+                            StockQuantity = 23,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            IsActive = true,
+                            Price = 1345000m,
+                            ProductId = 7,
+                            SKU = "POP007-1",
+                            StockQuantity = 23,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            IsActive = true,
+                            Price = 1495000m,
+                            ProductId = 7,
+                            SKU = "POP007-2",
+                            StockQuantity = 24,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            IsActive = true,
+                            Price = 1480000m,
+                            ProductId = 8,
+                            SKU = "POP008-1",
+                            StockQuantity = 24,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            IsActive = true,
+                            Price = 1630000m,
+                            ProductId = 8,
+                            SKU = "POP008-2",
+                            StockQuantity = 25,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            IsActive = true,
+                            Price = 1615000m,
+                            ProductId = 9,
+                            SKU = "POP009-1",
+                            StockQuantity = 25,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            IsActive = true,
+                            Price = 1765000m,
+                            ProductId = 9,
+                            SKU = "POP009-2",
+                            StockQuantity = 26,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            IsActive = true,
+                            Price = 1750000m,
+                            ProductId = 10,
+                            SKU = "POP010-1",
+                            StockQuantity = 26,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            IsActive = true,
+                            Price = 1900000m,
+                            ProductId = 10,
+                            SKU = "POP010-2",
+                            StockQuantity = 27,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            IsActive = true,
+                            Price = 1885000m,
+                            ProductId = 11,
+                            SKU = "POP011-1",
+                            StockQuantity = 27,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            IsActive = true,
+                            Price = 2035000m,
+                            ProductId = 11,
+                            SKU = "POP011-2",
+                            StockQuantity = 28,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            IsActive = true,
+                            Price = 2020000m,
+                            ProductId = 12,
+                            SKU = "POP012-1",
+                            StockQuantity = 28,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            IsActive = true,
+                            Price = 2170000m,
+                            ProductId = 12,
+                            SKU = "POP012-2",
+                            StockQuantity = 29,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            IsActive = true,
+                            Price = 2155000m,
+                            ProductId = 13,
+                            SKU = "POP013-1",
+                            StockQuantity = 29,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            IsActive = true,
+                            Price = 2305000m,
+                            ProductId = 13,
+                            SKU = "POP013-2",
+                            StockQuantity = 30,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            IsActive = true,
+                            Price = 2290000m,
+                            ProductId = 14,
+                            SKU = "POP014-1",
+                            StockQuantity = 30,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            IsActive = true,
+                            Price = 2440000m,
+                            ProductId = 14,
+                            SKU = "POP014-2",
+                            StockQuantity = 31,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            IsActive = true,
+                            Price = 2425000m,
+                            ProductId = 15,
+                            SKU = "POP015-1",
+                            StockQuantity = 31,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            IsActive = true,
+                            Price = 2575000m,
+                            ProductId = 15,
+                            SKU = "POP015-2",
+                            StockQuantity = 32,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            IsActive = true,
+                            Price = 2560000m,
+                            ProductId = 16,
+                            SKU = "POP016-1",
+                            StockQuantity = 32,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            IsActive = true,
+                            Price = 2710000m,
+                            ProductId = 16,
+                            SKU = "POP016-2",
+                            StockQuantity = 33,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            IsActive = true,
+                            Price = 2695000m,
+                            ProductId = 17,
+                            SKU = "POP017-1",
+                            StockQuantity = 33,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            IsActive = true,
+                            Price = 2845000m,
+                            ProductId = 17,
+                            SKU = "POP017-2",
+                            StockQuantity = 34,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            IsActive = true,
+                            Price = 2830000m,
+                            ProductId = 18,
+                            SKU = "POP018-1",
+                            StockQuantity = 34,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            IsActive = true,
+                            Price = 2980000m,
+                            ProductId = 18,
+                            SKU = "POP018-2",
+                            StockQuantity = 35,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            IsActive = true,
+                            Price = 2965000m,
+                            ProductId = 19,
+                            SKU = "POP019-1",
+                            StockQuantity = 35,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            IsActive = true,
+                            Price = 3115000m,
+                            ProductId = 19,
+                            SKU = "POP019-2",
+                            StockQuantity = 36,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            IsActive = true,
+                            Price = 3100000m,
+                            ProductId = 20,
+                            SKU = "POP020-1",
+                            StockQuantity = 36,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            IsActive = true,
+                            Price = 3250000m,
+                            ProductId = 20,
+                            SKU = "POP020-2",
+                            StockQuantity = 37,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            IsActive = true,
+                            Price = 3235000m,
+                            ProductId = 21,
+                            SKU = "POP021-1",
+                            StockQuantity = 37,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            IsActive = true,
+                            Price = 3385000m,
+                            ProductId = 21,
+                            SKU = "POP021-2",
+                            StockQuantity = 38,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            IsActive = true,
+                            Price = 3370000m,
+                            ProductId = 22,
+                            SKU = "POP022-1",
+                            StockQuantity = 38,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            IsActive = true,
+                            Price = 3520000m,
+                            ProductId = 22,
+                            SKU = "POP022-2",
+                            StockQuantity = 39,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            IsActive = true,
+                            Price = 3505000m,
+                            ProductId = 23,
+                            SKU = "POP023-1",
+                            StockQuantity = 39,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            IsActive = true,
+                            Price = 3655000m,
+                            ProductId = 23,
+                            SKU = "POP023-2",
+                            StockQuantity = 40,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 47,
+                            IsActive = true,
+                            Price = 3640000m,
+                            ProductId = 24,
+                            SKU = "POP024-1",
+                            StockQuantity = 40,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            IsActive = true,
+                            Price = 3790000m,
+                            ProductId = 24,
+                            SKU = "POP024-2",
+                            StockQuantity = 41,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            IsActive = true,
+                            Price = 3775000m,
+                            ProductId = 25,
+                            SKU = "POP025-1",
+                            StockQuantity = 41,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            IsActive = true,
+                            Price = 3925000m,
+                            ProductId = 25,
+                            SKU = "POP025-2",
+                            StockQuantity = 42,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 51,
+                            IsActive = true,
+                            Price = 3910000m,
+                            ProductId = 26,
+                            SKU = "POP026-1",
+                            StockQuantity = 42,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 52,
+                            IsActive = true,
+                            Price = 4060000m,
+                            ProductId = 26,
+                            SKU = "POP026-2",
+                            StockQuantity = 43,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 53,
+                            IsActive = true,
+                            Price = 4045000m,
+                            ProductId = 27,
+                            SKU = "POP027-1",
+                            StockQuantity = 43,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 54,
+                            IsActive = true,
+                            Price = 4195000m,
+                            ProductId = 27,
+                            SKU = "POP027-2",
+                            StockQuantity = 44,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 55,
+                            IsActive = true,
+                            Price = 4180000m,
+                            ProductId = 28,
+                            SKU = "POP028-1",
+                            StockQuantity = 44,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 56,
+                            IsActive = true,
+                            Price = 4330000m,
+                            ProductId = 28,
+                            SKU = "POP028-2",
+                            StockQuantity = 15,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 57,
+                            IsActive = true,
+                            Price = 4315000m,
+                            ProductId = 29,
+                            SKU = "POP029-1",
+                            StockQuantity = 15,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 58,
+                            IsActive = true,
+                            Price = 4465000m,
+                            ProductId = 29,
+                            SKU = "POP029-2",
+                            StockQuantity = 16,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 59,
+                            IsActive = true,
+                            Price = 4450000m,
+                            ProductId = 30,
+                            SKU = "POP030-1",
+                            StockQuantity = 16,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 60,
+                            IsActive = true,
+                            Price = 4600000m,
+                            ProductId = 30,
+                            SKU = "POP030-2",
+                            StockQuantity = 17,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 61,
+                            IsActive = true,
+                            Price = 4585000m,
+                            ProductId = 31,
+                            SKU = "POP031-1",
+                            StockQuantity = 17,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 62,
+                            IsActive = true,
+                            Price = 4735000m,
+                            ProductId = 31,
+                            SKU = "POP031-2",
+                            StockQuantity = 18,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 63,
+                            IsActive = true,
+                            Price = 4720000m,
+                            ProductId = 32,
+                            SKU = "POP032-1",
+                            StockQuantity = 18,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 64,
+                            IsActive = true,
+                            Price = 4870000m,
+                            ProductId = 32,
+                            SKU = "POP032-2",
+                            StockQuantity = 19,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 65,
+                            IsActive = true,
+                            Price = 4855000m,
+                            ProductId = 33,
+                            SKU = "POP033-1",
+                            StockQuantity = 19,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 66,
+                            IsActive = true,
+                            Price = 5005000m,
+                            ProductId = 33,
+                            SKU = "POP033-2",
+                            StockQuantity = 20,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 67,
+                            IsActive = true,
+                            Price = 4990000m,
+                            ProductId = 34,
+                            SKU = "POP034-1",
+                            StockQuantity = 20,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 68,
+                            IsActive = true,
+                            Price = 5140000m,
+                            ProductId = 34,
+                            SKU = "POP034-2",
+                            StockQuantity = 21,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 69,
+                            IsActive = true,
+                            Price = 5125000m,
+                            ProductId = 35,
+                            SKU = "POP035-1",
+                            StockQuantity = 21,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 70,
+                            IsActive = true,
+                            Price = 5275000m,
+                            ProductId = 35,
+                            SKU = "POP035-2",
+                            StockQuantity = 22,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 71,
+                            IsActive = true,
+                            Price = 5260000m,
+                            ProductId = 36,
+                            SKU = "POP036-1",
+                            StockQuantity = 22,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 72,
+                            IsActive = true,
+                            Price = 5410000m,
+                            ProductId = 36,
+                            SKU = "POP036-2",
+                            StockQuantity = 23,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 73,
+                            IsActive = true,
+                            Price = 5395000m,
+                            ProductId = 37,
+                            SKU = "POP037-1",
+                            StockQuantity = 23,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 74,
+                            IsActive = true,
+                            Price = 5545000m,
+                            ProductId = 37,
+                            SKU = "POP037-2",
+                            StockQuantity = 24,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 75,
+                            IsActive = true,
+                            Price = 530000m,
+                            ProductId = 38,
+                            SKU = "POP038-1",
+                            StockQuantity = 24,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 76,
+                            IsActive = true,
+                            Price = 680000m,
+                            ProductId = 38,
+                            SKU = "POP038-2",
+                            StockQuantity = 25,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 77,
+                            IsActive = true,
+                            Price = 665000m,
+                            ProductId = 39,
+                            SKU = "POP039-1",
+                            StockQuantity = 25,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 78,
+                            IsActive = true,
+                            Price = 815000m,
+                            ProductId = 39,
+                            SKU = "POP039-2",
+                            StockQuantity = 26,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 79,
+                            IsActive = true,
+                            Price = 800000m,
+                            ProductId = 40,
+                            SKU = "POP040-1",
+                            StockQuantity = 26,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 80,
+                            IsActive = true,
+                            Price = 950000m,
+                            ProductId = 40,
+                            SKU = "POP040-2",
+                            StockQuantity = 27,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 81,
+                            IsActive = true,
+                            Price = 935000m,
+                            ProductId = 41,
+                            SKU = "POP041-1",
+                            StockQuantity = 27,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 82,
+                            IsActive = true,
+                            Price = 1085000m,
+                            ProductId = 41,
+                            SKU = "POP041-2",
+                            StockQuantity = 28,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 83,
+                            IsActive = true,
+                            Price = 1070000m,
+                            ProductId = 42,
+                            SKU = "POP042-1",
+                            StockQuantity = 28,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 84,
+                            IsActive = true,
+                            Price = 1220000m,
+                            ProductId = 42,
+                            SKU = "POP042-2",
+                            StockQuantity = 29,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 85,
+                            IsActive = true,
+                            Price = 1205000m,
+                            ProductId = 43,
+                            SKU = "POP043-1",
+                            StockQuantity = 29,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 86,
+                            IsActive = true,
+                            Price = 1355000m,
+                            ProductId = 43,
+                            SKU = "POP043-2",
+                            StockQuantity = 30,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 87,
+                            IsActive = true,
+                            Price = 1340000m,
+                            ProductId = 44,
+                            SKU = "POP044-1",
+                            StockQuantity = 30,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 88,
+                            IsActive = true,
+                            Price = 1490000m,
+                            ProductId = 44,
+                            SKU = "POP044-2",
+                            StockQuantity = 31,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 89,
+                            IsActive = true,
+                            Price = 1475000m,
+                            ProductId = 45,
+                            SKU = "POP045-1",
+                            StockQuantity = 31,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 90,
+                            IsActive = true,
+                            Price = 1625000m,
+                            ProductId = 45,
+                            SKU = "POP045-2",
+                            StockQuantity = 32,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 91,
+                            IsActive = true,
+                            Price = 1610000m,
+                            ProductId = 46,
+                            SKU = "POP046-1",
+                            StockQuantity = 32,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 92,
+                            IsActive = true,
+                            Price = 1760000m,
+                            ProductId = 46,
+                            SKU = "POP046-2",
+                            StockQuantity = 33,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 93,
+                            IsActive = true,
+                            Price = 1745000m,
+                            ProductId = 47,
+                            SKU = "POP047-1",
+                            StockQuantity = 33,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 94,
+                            IsActive = true,
+                            Price = 1895000m,
+                            ProductId = 47,
+                            SKU = "POP047-2",
+                            StockQuantity = 34,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 95,
+                            IsActive = true,
+                            Price = 1880000m,
+                            ProductId = 48,
+                            SKU = "POP048-1",
+                            StockQuantity = 34,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 96,
+                            IsActive = true,
+                            Price = 2030000m,
+                            ProductId = 48,
+                            SKU = "POP048-2",
+                            StockQuantity = 35,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 97,
+                            IsActive = true,
+                            Price = 2015000m,
+                            ProductId = 49,
+                            SKU = "POP049-1",
+                            StockQuantity = 35,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 98,
+                            IsActive = true,
+                            Price = 2165000m,
+                            ProductId = 49,
+                            SKU = "POP049-2",
+                            StockQuantity = 36,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            IsActive = true,
+                            Price = 2150000m,
+                            ProductId = 50,
+                            SKU = "POP050-1",
+                            StockQuantity = 36,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 100,
+                            IsActive = true,
+                            Price = 2300000m,
+                            ProductId = 50,
+                            SKU = "POP050-2",
+                            StockQuantity = 37,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 101,
+                            IsActive = true,
+                            Price = 2285000m,
+                            ProductId = 51,
+                            SKU = "POP051-1",
+                            StockQuantity = 37,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 102,
+                            IsActive = true,
+                            Price = 2435000m,
+                            ProductId = 51,
+                            SKU = "POP051-2",
+                            StockQuantity = 38,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 103,
+                            IsActive = true,
+                            Price = 2420000m,
+                            ProductId = 52,
+                            SKU = "POP052-1",
+                            StockQuantity = 38,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 104,
+                            IsActive = true,
+                            Price = 2570000m,
+                            ProductId = 52,
+                            SKU = "POP052-2",
+                            StockQuantity = 39,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 105,
+                            IsActive = true,
+                            Price = 2555000m,
+                            ProductId = 53,
+                            SKU = "POP053-1",
+                            StockQuantity = 39,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 106,
+                            IsActive = true,
+                            Price = 2705000m,
+                            ProductId = 53,
+                            SKU = "POP053-2",
+                            StockQuantity = 40,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 107,
+                            IsActive = true,
+                            Price = 2690000m,
+                            ProductId = 54,
+                            SKU = "POP054-1",
+                            StockQuantity = 40,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 108,
+                            IsActive = true,
+                            Price = 2840000m,
+                            ProductId = 54,
+                            SKU = "POP054-2",
+                            StockQuantity = 41,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 109,
+                            IsActive = true,
+                            Price = 2825000m,
+                            ProductId = 55,
+                            SKU = "POP055-1",
+                            StockQuantity = 41,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 110,
+                            IsActive = true,
+                            Price = 2975000m,
+                            ProductId = 55,
+                            SKU = "POP055-2",
+                            StockQuantity = 42,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 111,
+                            IsActive = true,
+                            Price = 2960000m,
+                            ProductId = 56,
+                            SKU = "POP056-1",
+                            StockQuantity = 42,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 112,
+                            IsActive = true,
+                            Price = 3110000m,
+                            ProductId = 56,
+                            SKU = "POP056-2",
+                            StockQuantity = 43,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 113,
+                            IsActive = true,
+                            Price = 3095000m,
+                            ProductId = 57,
+                            SKU = "POP057-1",
+                            StockQuantity = 43,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 114,
+                            IsActive = true,
+                            Price = 3245000m,
+                            ProductId = 57,
+                            SKU = "POP057-2",
+                            StockQuantity = 44,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 115,
+                            IsActive = true,
+                            Price = 3230000m,
+                            ProductId = 58,
+                            SKU = "POP058-1",
+                            StockQuantity = 44,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 116,
+                            IsActive = true,
+                            Price = 3380000m,
+                            ProductId = 58,
+                            SKU = "POP058-2",
+                            StockQuantity = 15,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 117,
+                            IsActive = true,
+                            Price = 3365000m,
+                            ProductId = 59,
+                            SKU = "POP059-1",
+                            StockQuantity = 15,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 118,
+                            IsActive = true,
+                            Price = 3515000m,
+                            ProductId = 59,
+                            SKU = "POP059-2",
+                            StockQuantity = 16,
+                            VariantLabel = "Màu Trắng"
+                        },
+                        new
+                        {
+                            Id = 119,
+                            IsActive = true,
+                            Price = 3500000m,
+                            ProductId = 60,
+                            SKU = "POP060-1",
+                            StockQuantity = 16,
+                            VariantLabel = "Màu Đen"
+                        },
+                        new
+                        {
+                            Id = 120,
+                            IsActive = true,
+                            Price = 3650000m,
+                            ProductId = 60,
+                            SKU = "POP060-2",
+                            StockQuantity = 17,
+                            VariantLabel = "Màu Trắng"
                         });
                 });
 
@@ -685,7 +4095,7 @@ namespace PopPop.Data.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "2c6aa404-81a8-4acd-8a07-cb5c693c7785",
+                            ConcurrencyStamp = "fbcad7b2-f545-4c63-8337-f7adacba6d58",
                             Description = "Administrator with full system access",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -693,7 +4103,7 @@ namespace PopPop.Data.Migrations
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "2f111a3b-cc45-4109-a947-dd8f5afb6dad",
+                            ConcurrencyStamp = "481a46f1-206a-4e75-bed6-893a0569336f",
                             Description = "Staff member for shop operations",
                             Name = "Staff",
                             NormalizedName = "STAFF"
@@ -701,7 +4111,7 @@ namespace PopPop.Data.Migrations
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "bc16f136-469e-443e-9dad-6f33d5e7a326",
+                            ConcurrencyStamp = "ce2b0c57-c43d-45a5-8fa4-9fd44e0e1b9b",
                             Description = "Regular customer",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
@@ -783,16 +4193,16 @@ namespace PopPop.Data.Migrations
                         {
                             Id = "admin-001",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8a6f1d22-38c7-4e72-8a95-6ce5c4bc935f",
+                            ConcurrencyStamp = "5336cfb7-e6b0-46a0-944a-8b862c73bc55",
                             Email = "admin@poppop.com",
                             EmailConfirmed = true,
                             FullName = "Admin PôpPôp",
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@POPPOP.COM",
                             NormalizedUserName = "ADMIN@POPPOP.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAIUG7Ki67vsQYPgMbzZJ47oitL6bkFjmqI5+xFVDJT7mr9k9zvM1eZ0HcaLRmzGaA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOgDAa2IObWSVYVqlqcszoIHA5N2mQj3W6QRnKPnI7Hn28z5UkPjLktIhZRW4q3tBA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ade20d89-0238-43d9-83ff-a1b388be8a7a",
+                            SecurityStamp = "e43821f8-8664-47f1-a77b-a2bda06ff0a6",
                             TwoFactorEnabled = false,
                             UserName = "admin@poppop.com"
                         });

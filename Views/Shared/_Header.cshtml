@@ -49,20 +49,21 @@
                         <li class="nav-item"><a asp-controller="Cart" asp-action="Index" class="cart" aria-label="Giỏ hàng"><span class="ti-bag"></span></a></li>
                         <partial name="_LoginPartial" /> 
                         <li class="nav-item">
-                            <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                            <button class="search" type="button" aria-label="Tìm kiếm sản phẩm"><span class="lnr lnr-magnifier" id="search"></span></button>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-    <div class="search_input" id="search_input_box">
-        <div class="container">
-            <form class="d-flex justify-content-between">
-                <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                <button type="submit" class="btn"></button>
-                <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-            </form>
+    <div class="search_input" id="search_input_box" aria-live="polite">
+        <div class="container search-panel">
+            <div class="search-form">
+                <input type="text" class="form-control" id="search_input" placeholder="Tìm sản phẩm bạn muốn..." autocomplete="off">
+                <button type="button" class="btn btn-link search-clear" id="clear_search" aria-label="Xóa tìm kiếm">×</button>
+                <span class="lnr lnr-cross" id="close_search" title="Đóng tìm kiếm" role="button" tabindex="0"></span>
+            </div>
+            <div id="search_results" class="search-results" hidden></div>
         </div>
     </div>
 </header>

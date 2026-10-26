@@ -37,6 +37,35 @@ public sealed class ProductRepository : Repository<Product, int>, IProductReposi
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<IReadOnlyList<Product>> SearchAsync(
+        string keyword,
+        int count = 6,
+        CancellationToken cancellationToken = default)
+    {
+        if (count <= 0 || string.IsNullOrWhiteSpace(keyword))
+        {
+            return [];
+        }
+
+        var normalizedKeyword = keyword.Trim();
+
+        return await DbSet
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Where(product => product.IsActive &&
+                product.Name.Contains(normalizedKeyword) &&
+                product.ProductVariants.Any(variant => variant.IsActive && variant.StockQuantity > 0))
+            .OrderBy(product => product.Name)
+            .ThenByDescending(product => product.CreatedAt)
+            .Take(count)
+            .Include(product => product.ProductImages
+                .OrderByDescending(image => image.IsPrimary)
+                .ThenBy(image => image.SortOrder))
+            .Include(product => product.ProductVariants
+                .Where(variant => variant.IsActive && variant.StockQuantity > 0))
+            .ToListAsync(cancellationToken);
+    }
+
     public Task<ProductVariant?> GetAvailableVariantAsync(
         int variantId,
         CancellationToken cancellationToken = default)

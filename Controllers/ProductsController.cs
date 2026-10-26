@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PopPop.Models;
 using PopPop.Services.Interfaces;
 
 namespace PopPop.Controllers;
@@ -20,4 +21,16 @@ public class ProductsController : Controller
         var product = await _productService.GetDetailsAsync(id, cancellationToken);
         return product is null ? NotFound() : View(product);
     }
-}
+
+    [HttpGet]
+    public async Task<IActionResult> Search(string q, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(q))
+        {
+            return PartialView("_SearchResults", Array.Empty<ProductCardViewModel>());
+        }
+
+        var results = await _productService.SearchAsync(q, 6, cancellationToken);
+        return PartialView("_SearchResults", results);
+    }
+} 

@@ -20,22 +20,16 @@ namespace PopPop.Services.Implementations
             CancellationToken cancellationToken = default)
         {
             var products = await _productRepository.GetLatestAvailableAsync(count, cancellationToken);
+            return MapToProductCards(products);
+        }
 
-            return products.Select(product =>
-            {
-                var variant = product.ProductVariants
-                    .OrderBy(item => item.Price)
-                    .ThenBy(item => item.Id)
-                    .First();
-
-                return new ProductCardViewModel
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    ImageUrl = product.ProductImages.FirstOrDefault()?.ImageUrl,
-                    Price = variant.Price
-                };
-            }).ToList();
+        public async Task<IReadOnlyList<ProductCardViewModel>> SearchAsync(
+            string keyword,
+            int count = 6,
+            CancellationToken cancellationToken = default)
+        {
+            var products = await _productRepository.SearchAsync(keyword, count, cancellationToken);
+            return MapToProductCards(products);
         }
 
         public async Task<ProductDetailsViewModel?> GetDetailsAsync(
@@ -67,5 +61,24 @@ namespace PopPop.Services.Implementations
                 }).ToList()
             };
         }
+
+        private static IReadOnlyList<ProductCardViewModel> MapToProductCards(IEnumerable<Product> products)
+        {
+            return products.Select(product =>
+            {
+                var variant = product.ProductVariants
+                    .OrderBy(item => item.Price)
+                    .ThenBy(item => item.Id)
+                    .FirstOrDefault();
+
+                return new ProductCardViewModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    ImageUrl = product.ProductImages.FirstOrDefault()?.ImageUrl,
+                    Price = variant?.Price ?? 0m
+                };
+            }).ToList();
+        }
     }
-}
+} 

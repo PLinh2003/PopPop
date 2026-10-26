@@ -261,6 +261,7 @@ namespace PopPop.Data
             SeedBrands(modelBuilder);
             SeedProducts(modelBuilder);
             SeedProductVariants(modelBuilder);
+            SeedProductImages(modelBuilder);
             SeedAdmin(modelBuilder);
 
             #endregion
@@ -304,56 +305,21 @@ namespace PopPop.Data
         /// </summary>
         private static void SeedCategories(ModelBuilder modelBuilder)
         {
-            var categories = new List<Category>
-            {
-                new Category
-                {
-                    Id = 1,
-                    Name = "Vợt cầu lông",
-                    Description = "Các loại vợt cầu lông",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Category
-                {
-                    Id = 2,
-                    Name = "Giày cầu lông",
-                    Description = "Giày chơi cầu lông",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Category
-                {
-                    Id = 3,
-                    Name = "Quần áo cầu lông",
-                    Description = "Trang phục chơi cầu lông",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Category
-                {
-                    Id = 4,
-                    Name = "Phụ kiện cầu lông",
-                    Description = "Các phụ kiện liên quan đến cầu lông",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Category
-                {
-                    Id = 5,
-                    Name = "Cầu cầu lông",
-                    Description = "Cầu và các vật liệu liên quan",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                }
-            };
+            var categories = Enumerable.Range(1, 40)
+                .Select(index => $"Danh mục cầu lông {index:00}")
+                .ToArray();
 
-            modelBuilder.Entity<Category>().HasData(categories);
+            var data = categories.Select((name, index) => new Category
+            {
+                Id = index + 1,
+                Name = name,
+                Description = $"Danh mục {name}",
+                IsActive = true,
+                CreatedAt = _seedDateTime.AddDays(index),
+                UpdatedAt = _seedDateTime.AddDays(index)
+            }).ToList();
+
+            modelBuilder.Entity<Category>().HasData(data);
         }
 
         /// <summary>
@@ -361,38 +327,21 @@ namespace PopPop.Data
         /// </summary>
         private static void SeedBrands(ModelBuilder modelBuilder)
         {
-            var brands = new List<Brand>
-            {
-                new Brand
-                {
-                    Id = 1,
-                    Name = "Yonex",
-                    Description = "Thương hiệu cầu lông hàng đầu từ Nhật Bản",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Brand
-                {
-                    Id = 2,
-                    Name = "Victor",
-                    Description = "Thương hiệu cầu lông từ Đài Loan",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Brand
-                {
-                    Id = 3,
-                    Name = "Li-Ning",
-                    Description = "Thương hiệu cầu lông từ Trung Quốc",
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                }
-            };
+            var brands = Enumerable.Range(1, 40)
+                .Select(index => $"Thương hiệu {index:00}")
+                .ToArray();
 
-            modelBuilder.Entity<Brand>().HasData(brands);
+            var data = brands.Select((name, index) => new Brand
+            {
+                Id = index + 1,
+                Name = name,
+                Description = $"Thương hiệu {name} cho thể thao cầu lông",
+                IsActive = true,
+                CreatedAt = _seedDateTime.AddDays(index),
+                UpdatedAt = _seedDateTime.AddDays(index)
+            }).ToList();
+
+            modelBuilder.Entity<Brand>().HasData(data);
         }
 
         /// <summary>
@@ -400,42 +349,88 @@ namespace PopPop.Data
         /// </summary>
         private static void SeedProducts(ModelBuilder modelBuilder)
         {
-            var products = new List<Product>
+            var productNames = new[]
             {
-                new Product
-                {
-                    Id = 1,
-                    Name = "Vợt Yonex Astrox",
-                    Description = "Vợt cầu lông cao cấp",
-                    CategoryId = 1,
-                    BrandId = 1,
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Product
-                {
-                    Id = 2,
-                    Name = "Giày Victor A830",
-                    Description = "Giày cầu lông bền bỉ",
-                    CategoryId = 2,
-                    BrandId = 2,
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                },
-                new Product
-                {
-                    Id = 3,
-                    Name = "Áo Li-Ning",
-                    Description = "Áo thể thao cầu lông",
-                    CategoryId = 3,
-                    BrandId = 3,
-                    IsActive = true,
-                    CreatedAt = _seedDateTime,
-                    UpdatedAt = _seedDateTime
-                }
+                "Vợt Yonex Astrox 99",
+                "Vợt Yonex Nanoflare 800",
+                "Vợt Victor Brave Sword 12",
+                "Vợt Li-Ning Turbo 900",
+                "Giày Yonex Power Cushion",
+                "Giày Victor A830",
+                "Giày Li-Ning Sprint",
+                "Giày Mizuno Wave Rider",
+                "Áo Yonex Training",
+                "Áo Victor Sport",
+                "Áo Li-Ning Pro",
+                "Áo Mizuno Active",
+                "Túi đựng vợt Yonex",
+                "Túi đựng vợt Victor",
+                "Lưới cầu lông Li-Ning",
+                "Bóng cầu lông Yonex",
+                "Băng quấn cổ tay",
+                "Dây căng vợt 3U",
+                "Dây căng vợt 4U",
+                "Balo thể thao Pro",
+                "Cầu lông chuyên nghiệp",
+                "Vợt Head Graphene 360",
+                "Vợt Babolat X100",
+                "Vợt Apacs Z-Force",
+                "Giày Head Sprint",
+                "Giày Adidas Court",
+                "Giày Nike Zoom",
+                "Áo Nike Court",
+                "Áo Puma Energy",
+                "Túi vợt Head",
+                "Lưới đánh bóng",
+                "Bóng cầu lông premium",
+                "Dụng cụ bảo vệ vợt",
+                "Bọc cán vợt",
+                "Vợt đi kèm dây căng",
+                "Vợt cho người mới",
+                "Vợt cho người chuyên nghiệp",
+                "Giày đệm chống chấn",
+                "Áo khoác thời trang",
+                "Áo chạy bộ thể thao",
+                "Vợt thể thao đa năng",
+                "Giày chạy bộ cầu lông",
+                "Balo di chuyển thể thao",
+                "Bọc bảo vệ vợt",
+                "Lưới thi đấu tiêu chuẩn",
+                "Bóng chất lượng cao",
+                "Vợt niềm tin",
+                "Vợt kết hợp công nghệ",
+                "Giày nhẹ bám sân",
+                "Áo chống nắng",
+                "Băng quấn cổ tay chuyên dụng",
+                "Dây căng vợt tối ưu",
+                "Túi chứa phụ kiện",
+                "Vợt săn điểm cao",
+                "Vợt đấm mạnh",
+                "Vợt khóa gió",
+                "Giày cải thiện phản xạ",
+                "Áo thể thao mùa hè",
+                "Balo cho vận động viên"
             };
+
+            var products = new List<Product>();
+            for (var i = 1; i <= 60; i++)
+            {
+                var productName = productNames[(i - 1) % productNames.Length];
+                var categoryId = ((i - 1) % 12) + 1;
+                var brandId = ((i - 1) % 12) + 1;
+
+                products.Add(new Product
+                {
+                    Id = i,
+                    Name = $"{productName} {i}",
+                    Description = $"Sản phẩm {i} dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
+                    CategoryId = categoryId,
+                    BrandId = brandId,
+                    IsActive = true,
+                    CreatedAt = _seedDateTime.AddDays(i),
+                    UpdatedAt = _seedDateTime.AddDays(i)
+                });
+            }
 
             modelBuilder.Entity<Product>().HasData(products);
         }
@@ -445,39 +440,59 @@ namespace PopPop.Data
         /// </summary>
         private static void SeedProductVariants(ModelBuilder modelBuilder)
         {
-            var variants = new List<ProductVariant>
+            var variants = new List<ProductVariant>();
+            var variantId = 1;
+
+            for (var productId = 1; productId <= 60; productId++)
             {
-                new ProductVariant
+                var basePrice = 250000 + (productId * 135000) % 5000000;
+
+                for (var index = 1; index <= 2; index++)
                 {
-                    Id = 1,
-                    ProductId = 1,
-                    SKU = "YONEX-ASTROX-001",
-                    Price = 2500000,
-                    StockQuantity = 10,
-                    IsActive = true
-                },
-                new ProductVariant
-                {
-                    Id = 2,
-                    ProductId = 2,
-                    SKU = "VICTOR-A830-001",
-                    Price = 1200000,
-                    StockQuantity = 15,
-                    IsActive = true
-                },
-                new ProductVariant
-                {
-                    Id = 3,
-                    ProductId = 3,
-                    SKU = "LINING-AO-001",
-                    Price = 350000,
-                    StockQuantity = 20,
-                    IsActive = true
+                    variants.Add(new ProductVariant
+                    {
+                        Id = variantId++,
+                        ProductId = productId,
+                        SKU = $"POP{productId:000}-{index}",
+                        VariantLabel = index == 1 ? "Màu Đen" : "Màu Trắng",
+                        Price = basePrice + (index * 150000),
+                        StockQuantity = 15 + ((productId + index) % 30),
+                        IsActive = true
+                    });
                 }
-            };
+            }
 
             modelBuilder.Entity<ProductVariant>().HasData(variants);
         }
+
+        /// <summary>
+        /// Seed product images
+        /// </summary>
+        private static void SeedProductImages(ModelBuilder modelBuilder)
+        {
+            var images = new List<ProductImage>();
+            var imageId = 1;
+
+            for (var productId = 1; productId <= 60; productId++)
+            {
+                var primaryImage = ((productId - 1) % 8) + 1;
+
+                for (var index = 1; index <= 2; index++)
+                {
+                    images.Add(new ProductImage
+                    {
+                        Id = imageId++,
+                        ProductId = productId,
+                        ImageUrl = $"/img/product/p{((productId + index - 2) % 8) + 1}.jpg",
+                        IsPrimary = index == 1,
+                        SortOrder = index
+                    });
+                }
+            }
+
+            modelBuilder.Entity<ProductImage>().HasData(images);
+        }
+
 
         /// <summary>
         /// Seed admin user
