@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PopPop.Data;
 using PopPop.Data.Entities;
-using PopPop.ExternalServices;
+using PopPop.ExternalServices.Email;
 using PopPop.Repositories.Implementations;
 using PopPop.Repositories.Interfaces;
 using PopPop.Services.Implementations;

@@ -3,7 +3,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
-namespace PopPop.ExternalServices
+namespace PopPop.ExternalServices.Email
 {
     public sealed class GmailEmailSender : IEmailSender
     {

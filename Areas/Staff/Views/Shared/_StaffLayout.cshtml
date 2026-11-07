@@ -1,0 +1,45 @@
+@{
+    var title = ViewData["Title"] as string ?? "Vận hành đơn hàng";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@title - PôpPôp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
+</head>
+<body>
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <a class="admin-brand" asp-area="Staff" asp-controller="Orders" asp-action="Index">PôpPôp <span>KHU VỰC NHÂN VIÊN</span></a>
+            <div class="admin-user"><i class="fa fa-user-circle"></i><div><strong>@(User.Identity?.Name ?? "Tài khoản")</strong><small>Nhân viên cửa hàng</small></div></div>
+            <nav class="admin-nav" aria-label="Điều hướng nhân viên">
+                <a asp-area="Staff" asp-controller="Orders" asp-action="Index"><i class="fa fa-shopping-bag"></i>Đơn hàng cần xử lý</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-external-link"></i>Xem cửa hàng</a>
+            </nav>
+            <form class="admin-logout" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                <button type="submit"><i class="fa fa-sign-out"></i>Đăng xuất</button>
+            </form>
+        </aside>
+        <main class="admin-main">
+            <header class="admin-topbar"><div><span class="admin-eyebrow">KHU VỰC NHÂN VIÊN</span><h1>@title</h1></div><span class="admin-topbar-user"><i class="fa fa-user-circle"></i> @(User.Identity?.Name ?? "Tài khoản")</span></header>
+            <section class="admin-content">
+                @if (TempData["SuccessMessage"] is string successMessage)
+                {
+                    <div class="alert alert-success" role="alert">@successMessage</div>
+                }
+                @if (TempData["ErrorMessage"] is string errorMessage)
+                {
+                    <div class="alert alert-danger" role="alert">@errorMessage</div>
+                }
+                @RenderBody()
+            </section>
+        </main>
+    </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

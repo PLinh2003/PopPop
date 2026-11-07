@@ -106,7 +106,7 @@ public class SetPasswordModel : PageModel
         }
 
         await _signInManager.RefreshSignInAsync(user);
-        StatusMessage = "Your password has been set.";
+        StatusMessage = "Đã tạo mật khẩu.";
 
         return RedirectToPage();
     }

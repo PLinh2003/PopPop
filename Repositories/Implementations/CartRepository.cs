@@ -12,9 +12,9 @@ public sealed class CartRepository : Repository<Cart, int>, ICartRepository
     {
     }
 
-    public Task<Cart?> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default)
+    public async Task<Cart?> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default)
     {
-        return DbSet
+        return await DbSet
             .Include(cart => cart.CartItems)
                 .ThenInclude(item => item.ProductVariant)
                     .ThenInclude(variant => variant!.Product)

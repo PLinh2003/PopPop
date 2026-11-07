@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace PopPop.ExternalServices
+namespace PopPop.ExternalServices.Email
 {
     internal static class EmailTemplate
     {

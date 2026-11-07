@@ -1,0 +1,31 @@
+@model PopPop.Models.CreateStaffAccountViewModel
+@{
+    ViewData["Title"] = "Tạo tài khoản nhân viên";
+}
+<div class="admin-page-heading">
+    <div><h2>Tạo tài khoản nhân viên</h2><p>Hệ thống sẽ gửi email để nhân viên tự thiết lập mật khẩu.</p></div>
+    <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="StaffAccounts" asp-action="Index"><i class="fa fa-arrow-left me-1"></i>Danh sách tài khoản</a>
+</div>
+<div class="admin-detail-card" style="max-width:680px">
+    <form asp-area="Admin" asp-controller="StaffAccounts" asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label"></label>
+            <input asp-for="FullName" class="form-control" autocomplete="name" maxlength="256" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" autocomplete="email" type="email" maxlength="256" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="alert alert-info">Tài khoản có quyền xử lý đơn hàng. Nhân viên cần tạo mật khẩu từ email mời trước khi đăng nhập.</div>
+        <div class="admin-actions">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane me-2"></i>Tạo và gửi lời mời</button>
+            <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="StaffAccounts" asp-action="Index">Hủy</a>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

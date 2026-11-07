@@ -128,11 +128,11 @@ public class EmailModel : PageModel
                 "Xác nhận địa chỉ email mới",
                 $"Bạn vừa yêu cầu thay đổi địa chỉ email cho tài khoản PôpPôp. Vui lòng xác nhận địa chỉ email mới để hoàn tất thay đổi.<p style='margin:24px 0 0;'><a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display:inline-block;padding:12px 22px;background-color:#2563eb;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:700;'>Xác nhận email mới</a></p>");
 
-            StatusMessage = "Confirmation link to change email sent. Please check your email.";
+            StatusMessage = "Đã gửi liên kết xác nhận email mới. Vui lòng kiểm tra hộp thư.";
             return RedirectToPage();
         }
 
-        StatusMessage = "Your email is unchanged.";
+        StatusMessage = "Email không thay đổi.";
         return RedirectToPage();
     }
 
@@ -164,7 +164,7 @@ public class EmailModel : PageModel
             "Xác nhận địa chỉ email của bạn",
             $"Vui lòng xác nhận địa chỉ email để hoàn tất thiết lập tài khoản PôpPôp.<p style='margin:24px 0 0;'><a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display:inline-block;padding:12px 22px;background-color:#2563eb;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:700;'>Xác nhận email</a></p>");
 
-        StatusMessage = "Verification email sent. Please check your email.";
+        StatusMessage = "Đã gửi email xác minh. Vui lòng kiểm tra hộp thư.";
         return RedirectToPage();
     }
 }

@@ -1,0 +1,25 @@
+@model PopPop.Models.StaffAccountListViewModel
+@{
+    ViewData["Title"] = "Tài khoản nhân viên";
+}
+<div class="admin-page-heading">
+    <div><h2>Tài khoản nhân viên</h2><p>Quản lý tài khoản có quyền xử lý đơn hàng.</p></div>
+    <a class="btn btn-primary" asp-area="Admin" asp-controller="StaffAccounts" asp-action="Create"><i class="fa fa-user-plus me-2"></i>Tạo tài khoản nhân viên</a>
+</div>
+<div class="admin-panel">
+    <div class="admin-panel-header"><h3>@Model.Accounts.Count tài khoản</h3></div>
+    @if (Model.Accounts.Count == 0)
+    {
+        <div class="admin-empty">Chưa có tài khoản nhân viên. Tạo tài khoản mới để gửi lời mời đặt mật khẩu.</div>
+    }
+    else
+    {
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Họ và tên</th><th>Email</th><th>Trạng thái</th></tr></thead><tbody>
+        @foreach (var account in Model.Accounts)
+        {
+            <tr><td>@account.FullName</td><td>@account.Email</td><td><span class="admin-status @(account.HasPassword ? "status-completed" : "status-pending")">@(account.HasPassword ? "Đã kích hoạt" : "Chờ đặt mật khẩu")</span></td></tr>
+        }
+        </tbody></table></div>
+    }
+</div>
+<div class="admin-detail-card mt-3"><strong>Lưu ý bảo mật</strong><p class="admin-stat-note mb-0">Nhân viên tự đặt mật khẩu qua liên kết gửi đến email. Quản trị viên không đặt hoặc xem được mật khẩu.</p></div>

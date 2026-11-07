@@ -66,7 +66,6 @@
 
   <ItemGroup>
     <None Remove=".gitattributes" />
-    <None Remove=".gitignore" />
     <None Remove="LICENSE" />
     <None Remove="README.md" />
   </ItemGroup>
@@ -88,11 +87,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Staff\Controllers\" />
-    <Folder Include="Areas\Staff\Views\" />
+    <Folder Include="ExternalServices\Pay\" />
+    <Folder Include="template-html\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\img\.DS_Store" />
     <None Include="wwwroot\img\organic-food\.DS_Store" />

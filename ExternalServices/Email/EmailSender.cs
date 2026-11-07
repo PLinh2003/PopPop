@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace PopPop.ExternalServices
+namespace PopPop.ExternalServices.Email
 {
     public class EmailSender : IEmailSender
     {

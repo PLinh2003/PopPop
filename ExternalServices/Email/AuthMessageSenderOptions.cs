@@ -1,4 +1,4 @@
-﻿namespace PopPop.ExternalServices
+﻿namespace PopPop.ExternalServices.Email
 {
     public class AuthMessageSenderOptions
     {

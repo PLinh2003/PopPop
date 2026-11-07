@@ -128,7 +128,7 @@ public class EnableAuthenticatorModel : PageModel
         var userId = await _userManager.GetUserIdAsync(user);
         _logger.LogInformation("User with ID '{UserId}' has enabled 2FA with an authenticator app.", userId);
 
-        StatusMessage = "Your authenticator app has been verified.";
+        StatusMessage = "Ứng dụng xác thực đã được xác minh.";
 
         if (await _userManager.CountRecoveryCodesAsync(user) == 0)
         {

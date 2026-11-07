@@ -106,13 +106,13 @@ public class IndexModel : PageModel
             var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
             if (!setPhoneResult.Succeeded)
             {
-                StatusMessage = "Unexpected error when trying to set phone number.";
+                StatusMessage = "Lỗi: Không thể cập nhật số điện thoại. Vui lòng thử lại.";
                 return RedirectToPage();
             }
         }
 
         await _signInManager.RefreshSignInAsync(user);
-        StatusMessage = "Your profile has been updated";
+        StatusMessage = "Đã cập nhật hồ sơ.";
         return RedirectToPage();
     }
 }

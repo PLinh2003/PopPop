@@ -82,7 +82,7 @@ public class TwoFactorAuthenticationModel : PageModel
         }
 
         await _signInManager.ForgetTwoFactorClientAsync();
-        StatusMessage = "The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code.";
+        StatusMessage = "Đã bỏ ghi nhớ trình duyệt. Lần đăng nhập sau, bạn sẽ cần nhập mã xác thực.";
         return RedirectToPage();
     }
 }

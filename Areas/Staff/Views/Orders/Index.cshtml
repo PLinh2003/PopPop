@@ -1,0 +1,54 @@
+@model PopPop.Models.OrderManagementListViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = "Đơn hàng cần xử lý";
+    string StatusClass(OrderStatus status) => status switch
+    {
+        OrderStatus.Pending => "status-pending",
+        OrderStatus.Confirmed => "status-confirmed",
+        OrderStatus.Processing => "status-processing",
+        OrderStatus.Shipping => "status-shipping",
+        OrderStatus.Completed => "status-completed",
+        OrderStatus.Cancelled => "status-cancelled",
+        _ => string.Empty
+    };
+    string StatusText(OrderStatus status) => status switch
+    {
+        OrderStatus.Pending => "Chờ xác nhận",
+        OrderStatus.Confirmed => "Đã xác nhận",
+        OrderStatus.Processing => "Đang xử lý",
+        OrderStatus.Shipping => "Đang giao",
+        OrderStatus.Completed => "Hoàn tất",
+        OrderStatus.Cancelled => "Đã hủy",
+        _ => "Không xác định"
+    };
+}
+<div class="admin-page-heading"><div><h2>Danh sách đơn hàng</h2><p>Xem thông tin và cập nhật trạng thái đơn theo quy trình xử lý.</p></div></div>
+<form class="admin-toolbar" method="get">
+    <input class="form-control" type="search" name="search" value="@Model.Search" placeholder="Mã đơn, tên, email hoặc số điện thoại" aria-label="Tìm đơn hàng" />
+    <select class="form-select" name="status" aria-label="Lọc theo trạng thái">
+        <option value="">Tất cả trạng thái</option>
+        @foreach (var status in Enum.GetValues<OrderStatus>())
+        {
+            <option value="@status" selected="@(Model.Status == status)">@StatusText(status)</option>
+        }
+    </select>
+    <button class="btn btn-primary" type="submit"><i class="fa fa-search me-1"></i>Tìm kiếm</button>
+    <a class="btn btn-outline-secondary" asp-area="Staff" asp-controller="Orders" asp-action="Index">Xóa lọc</a>
+</form>
+<div class="admin-panel">
+    <div class="admin-panel-header"><h3>@Model.Orders.Count đơn hàng</h3></div>
+    @if (Model.Orders.Count == 0)
+    {
+        <div class="admin-empty">Không tìm thấy đơn hàng phù hợp.</div>
+    }
+    else
+    {
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Điện thoại</th><th>Ngày đặt</th><th>Trạng thái</th><th>Tổng tiền</th><th></th></tr></thead><tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr><td><a class="admin-link" asp-area="Staff" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">@order.OrderCode</a></td><td>@order.CustomerName</td><td>@order.CustomerPhone</td><td>@order.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td><span class="admin-status @StatusClass(order.Status)">@order.StatusText</span></td><td>@order.TotalAmount.ToString("N0") ₫</td><td><a class="btn btn-sm btn-outline-primary" asp-area="Staff" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">Xử lý</a></td></tr>
+        }
+        </tbody></table></div>
+    }
+</div>

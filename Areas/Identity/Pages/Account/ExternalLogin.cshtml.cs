@@ -101,13 +101,13 @@ public class ExternalLoginModel : PageModel
         returnUrl = returnUrl ?? Url.Content("~/");
         if (remoteError != null)
         {
-            ErrorMessage = $"Error from external provider: {remoteError}";
+            ErrorMessage = $"Lỗi từ nhà cung cấp đăng nhập: {remoteError}";
             return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
         }
         var info = await _signInManager.GetExternalLoginInfoAsync();
         if (info == null)
         {
-            ErrorMessage = "Error loading external login information.";
+            ErrorMessage = "Không thể tải thông tin đăng nhập liên kết. Vui lòng thử lại.";
             return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
         }
 
@@ -145,7 +145,7 @@ public class ExternalLoginModel : PageModel
         var info = await _signInManager.GetExternalLoginInfoAsync();
         if (info == null)
         {
-            ErrorMessage = "Error loading external login information during confirmation.";
+            ErrorMessage = "Không thể xác nhận thông tin đăng nhập liên kết. Vui lòng thử lại.";
             return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
         }
 

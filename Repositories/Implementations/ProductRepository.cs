@@ -66,11 +66,11 @@ public sealed class ProductRepository : Repository<Product, int>, IProductReposi
             .ToListAsync(cancellationToken);
     }
 
-    public Task<ProductVariant?> GetAvailableVariantAsync(
+    public async Task<ProductVariant?> GetAvailableVariantAsync(
         int variantId,
         CancellationToken cancellationToken = default)
     {
-        return Context.Set<ProductVariant>()
+        return await Context.Set<ProductVariant>()
             .AsNoTracking()
             .FirstOrDefaultAsync(variant =>
                 variant.Id == variantId &&
@@ -81,9 +81,9 @@ public sealed class ProductRepository : Repository<Product, int>, IProductReposi
                 cancellationToken);
     }
 
-    public Task<Product?> GetActiveDetailsAsync(int productId, CancellationToken cancellationToken = default)
+    public async Task<Product?> GetActiveDetailsAsync(int productId, CancellationToken cancellationToken = default)
     {
-        return DbSet
+        return await DbSet
             .AsNoTracking()
             .AsSplitQuery()
             .Where(product => product.Id == productId && product.IsActive)
