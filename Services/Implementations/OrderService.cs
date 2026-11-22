@@ -140,7 +140,7 @@ public sealed class OrderService : IOrderService
         return new CheckoutOrderResult(order.Id, paymentUrl);
     }
 
-    public async Task<VnPayIpnResponse> ProcessVnPayIpnAsync(
+    public async Task<VnPayIpnResponse> ProcessVnPayPaymentAsync(
         IReadOnlyDictionary<string, string> parameters,
         CancellationToken cancellationToken = default)
     {
@@ -170,14 +170,14 @@ public sealed class OrderService : IOrderService
                 return new VnPayIpnResponse("01", "Order not found");
             }
 
-            if (order.PaymentStatus == PaymentStatus.Paid)
-            {
-                return new VnPayIpnResponse("02", "Order already confirmed");
-            }
-
             if (amountInMinorUnits != checked((long)(order.TotalAmount * 100m)))
             {
                 return new VnPayIpnResponse("04", "Invalid amount");
+            }
+
+            if (order.PaymentStatus == PaymentStatus.Paid)
+            {
+                return new VnPayIpnResponse("02", "Order already confirmed");
             }
 
             if (order.Status == OrderStatus.Cancelled

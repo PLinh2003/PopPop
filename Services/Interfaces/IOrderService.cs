@@ -7,7 +7,7 @@ public interface IOrderService
 {
     bool IsVnPayConfigured { get; }
     Task<CheckoutOrderResult> PlaceOrderAsync(string userId, CheckoutViewModel checkout, PaymentMethod paymentMethod, string clientIpAddress, string? callbackBaseUrl, CancellationToken cancellationToken = default);
-    Task<VnPayIpnResponse> ProcessVnPayIpnAsync(IReadOnlyDictionary<string, string> parameters, CancellationToken cancellationToken = default);
+    Task<VnPayIpnResponse> ProcessVnPayPaymentAsync(IReadOnlyDictionary<string, string> parameters, CancellationToken cancellationToken = default);
     Task ExpirePendingVnPayOrdersAsync(CancellationToken cancellationToken = default);
     Task<CustomerOrdersViewModel> GetOrdersForUserAsync(string userId, CancellationToken cancellationToken = default);
     Task<OrderDetailsViewModel?> GetDetailsForUserAsync(int orderId, string userId, CancellationToken cancellationToken = default);

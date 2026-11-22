@@ -17,13 +17,16 @@ dotnet user-secrets set "Payment:VnPay:HashSecret" "<SANDBOX_HASH_SECRET>" --pro
 
 The app derives the browser return URL as `/Orders/VnPayReturn` from the HTTPS host used to open checkout. `CallbackBaseUrl` is an optional User Secrets override for deployments where the public origin cannot be inferred correctly.
 
-VNPay must be able to reach the application. For local testing, run the app and expose its HTTP port through a public HTTPS tunnel, for example:
+For local testing, no public tunnel, port forwarding, or IPN URL registration is needed. Trust the local HTTPS development certificate and run the HTTPS profile:
 
 ```powershell
-ngrok http http://localhost:5263
+dotnet dev-certs https --trust
+dotnet run --launch-profile https
 ```
 
-Open the site through the tunnel's HTTPS host (not `localhost`) and configure the Sandbox merchant IPN URL as `https://<your-public-https-host>/Orders/VnPayIpn`. If the tunnel URL changes, update the IPN URL in the merchant portal. For a deployed site, use its public HTTPS domain instead.
+Open the site at `https://localhost:7253` (or the HTTPS URL shown by Visual Studio), then checkout through the VNPay Sandbox page. VNPay redirects the browser back to localhost; in Development, the app verifies the signed return and checks the order reference, amount, and transaction status to update the order. The Sandbox payment page still opens in the browser, but the app does not need to be reachable from the public internet.
+
+For a deployed site, use its public HTTPS domain and configure the Sandbox merchant IPN URL as `https://<your-public-https-host>/Orders/VnPayIpn`. Production order status is confirmed by the authenticated IPN, not by the browser return.
 
 The Sandbox payment URL defaults to `https://sandbox.vnpayment.vn/paymentv2/vpcpay.html`. Override `Payment:VnPay:PaymentUrl` through User Secrets only if VNPay provides a different Sandbox URL.
 
@@ -35,6 +38,6 @@ dotnet ef database update --project .\PopPop.csproj
 
 ## 4. Run and test
 
-Start the app, open it through its public HTTPS URL, and use the test cards and instructions shown in the VNPay Sandbox portal; do not use real card data. ASP.NET Core accepts forwarded host/protocol headers only from its default trusted proxies; if the deployment uses a different reverse proxy, configure that proxy as trusted before relying on forwarded headers.
+Use only the test cards and instructions shown in the VNPay Sandbox portal; do not use real card data. For deployments behind a reverse proxy, configure that proxy as trusted before relying on forwarded host/protocol headers.
 
-A browser return is only a display result. The order is marked paid only after the app verifies VNPay's signed IPN and checks the order reference, amount, and transaction status. Pending VNPay orders expire after 15 minutes; failed or expired orders release reserved stock and restore their items to the customer's cart.
+Local Development processes a valid signed browser return because VNPay cannot send IPN notifications to localhost. Outside Development, browser returns are display-only and IPN remains authoritative. Pending VNPay orders expire after 15 minutes; failed or expired orders release reserved stock and restore their items to the customer's cart.
