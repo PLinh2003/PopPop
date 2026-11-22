@@ -1,0 +1,39 @@
+@model PopPop.Models.OrderManagementDetailsViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = $"Đơn hàng {Model.OrderCode}";
+    string StatusClass(OrderStatus status) => status switch
+    {
+        OrderStatus.Pending => "status-pending",
+        OrderStatus.Confirmed => "status-confirmed",
+        OrderStatus.Processing => "status-processing",
+        OrderStatus.Shipping => "status-shipping",
+        OrderStatus.Completed => "status-completed",
+        OrderStatus.Cancelled => "status-cancelled",
+        _ => string.Empty
+    };
+    string StatusText(OrderStatus status) => status switch
+    {
+        OrderStatus.Confirmed => "Đã xác nhận",
+        OrderStatus.Processing => "Đang xử lý",
+        OrderStatus.Shipping => "Đang giao",
+        OrderStatus.Completed => "Đã giao thành công",
+        OrderStatus.Cancelled => "Hủy đơn và hoàn kho",
+        _ => "Chờ xác nhận"
+    };
+}
+<div class="admin-page-heading"><div><h2>Đơn hàng @Model.OrderCode</h2><p>Đặt lúc @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</p></div><a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Orders" asp-action="Index"><i class="fa fa-arrow-left me-1"></i>Quay lại</a></div>
+<div class="admin-order-grid mb-4">
+    <section class="admin-detail-card"><h3>Thông tin đơn hàng</h3><div class="admin-detail-row"><span>Trạng thái</span><span class="admin-status @StatusClass(Model.Status)">@Model.StatusText</span></div><div class="admin-detail-row"><span>Thanh toán</span><strong>@(Model.PaymentMethod == PaymentMethod.VnPay ? "VNPay" : "COD") — @(Model.PaymentStatus switch { PaymentStatus.Pending => "Đang chờ", PaymentStatus.Paid => "Đã thanh toán", PaymentStatus.Failed => "Thất bại", _ => "Chưa thanh toán" })</strong></div>@if (Model.PaidAt.HasValue){<div class="admin-detail-row"><span>Thanh toán lúc</span><span>@Model.PaidAt.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</span></div>}<div class="admin-detail-row"><span>Mã đơn</span><strong>@Model.OrderCode</strong></div><div class="admin-detail-row"><span>Khách hàng</span><strong>@Model.CustomerName</strong></div><div class="admin-detail-row"><span>Email tài khoản</span><span>@Model.CustomerEmail</span></div></section>
+    <section class="admin-detail-card"><h3>Thông tin giao hàng</h3><div class="admin-detail-row"><span>Người nhận</span><strong>@Model.RecipientName</strong></div><div class="admin-detail-row"><span>Điện thoại</span><strong>@Model.RecipientPhone</strong></div><div class="admin-detail-row"><span>Địa chỉ</span><strong>@Model.ShippingAddress</strong></div><div class="admin-detail-row"><span>Ghi chú</span><span>@(string.IsNullOrWhiteSpace(Model.Note) ? "Không có" : Model.Note)</span></div></section>
+</div>
+<div class="admin-panel mb-4"><div class="admin-panel-header"><h3>Sản phẩm trong đơn</h3></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Sản phẩm</th><th>Mã SKU</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th></tr></thead><tbody>
+@foreach (var item in Model.Items)
+{
+    <tr><td>@item.ProductName</td><td>@item.SKU</td><td>@item.UnitPrice.ToString("N0") ₫</td><td>@item.Quantity</td><td>@item.LineTotal.ToString("N0") ₫</td></tr>
+}
+</tbody><tfoot><tr><td colspan="4" class="text-end">Phí vận chuyển</td><td>@Model.ShippingFee.ToString("N0") ₫</td></tr><tr><th colspan="4" class="text-end">Tổng cộng</th><th>@Model.TotalAmount.ToString("N0") ₫</th></tr></tfoot></table></div></div>
+@if (Model.AvailableStatuses.Count > 0)
+{
+    <section class="admin-detail-card"><h3>Cập nhật trạng thái</h3><p class="admin-stat-note">Chuyển đơn theo đúng quy trình vận hành. Hủy đơn sẽ tự động hoàn lại tồn kho.</p><form asp-area="Admin" asp-controller="Orders" asp-action="UpdateStatus" method="post" class="admin-actions"><input type="hidden" name="id" value="@Model.Id" /><select class="form-select" name="nextStatus" required style="max-width:260px"><option value="">Chọn trạng thái tiếp theo</option>@foreach (var status in Model.AvailableStatuses){<option value="@status">@StatusText(status)</option>}</select><button class="btn btn-primary" type="submit">Lưu trạng thái</button></form></section>
+}

@@ -1,0 +1,183 @@
+@model ProductCatalogViewModel
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Sản phẩm";
+    var startPage = Math.Max(1, Model.PageNumber - 2);
+    var endPage = Math.Min(Model.TotalPages, startPage + 4);
+    startPage = Math.Max(1, endPage - 4);
+    var firstProductNumber = Model.TotalCount == 0 ? 0 : (Model.PageNumber - 1) * Model.PageSize + 1;
+    var lastProductNumber = Math.Min(Model.PageNumber * Model.PageSize, Model.TotalCount);
+    var sliderMax = Math.Max(Model.PriceRangeMax, 1000m);
+    var sliderMinValue = Math.Clamp(Model.MinPrice ?? 0m, 0m, sliderMax);
+    var sliderMaxValue = Math.Clamp(Model.MaxPrice ?? sliderMax, 0m, sliderMax);
+    if (sliderMinValue > sliderMaxValue)
+    {
+        sliderMinValue = sliderMaxValue;
+    }
+}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Sản phẩm</h1>
+                <nav class="d-flex align-items-center" aria-label="Breadcrumb">
+                    <a asp-controller="Home" asp-action="Index">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a asp-controller="Products" asp-action="Index">Danh mục sản phẩm</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container section_gap">
+    <div class="row">
+        <aside class="col-xl-3 col-lg-4 col-md-5">
+            <div class="sidebar-categories">
+                <div class="head">Danh mục sản phẩm</div>
+                <ul class="main-categories">
+                    <li class="main-nav-list">
+                        <a asp-controller="Products" asp-action="Index" asp-route-q="@Model.Search"
+                           asp-route-minPrice="@Model.MinPrice" asp-route-maxPrice="@Model.MaxPrice"
+                           asp-route-sort="@Model.SortBy">Tất cả sản phẩm</a>
+                    </li>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li class="main-nav-list">
+                            <a asp-controller="Products" asp-action="Index" asp-route-categoryId="@category.Id"
+                               asp-route-q="@Model.Search" asp-route-minPrice="@Model.MinPrice"
+                               asp-route-maxPrice="@Model.MaxPrice" asp-route-sort="@Model.SortBy"
+                               aria-current="@(Model.CategoryId == category.Id ? "page" : null)">@category.Name</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="sidebar-filter mt-50">
+                <div class="top-filter-head">Bộ lọc sản phẩm</div>
+                <div class="common-filter">
+                    <div class="head">Từ khóa và khoảng giá</div>
+                    <form asp-controller="Products" asp-action="Index" method="get" class="px-3 pb-3">
+                        <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+                        <input type="hidden" name="sort" value="@Model.SortBy" />
+                        <input type="hidden" id="minPrice" name="minPrice" value="@Model.MinPrice" />
+                        <input type="hidden" id="maxPrice" name="maxPrice" value="@Model.MaxPrice" />
+                        <label for="q">Tên sản phẩm</label>
+                        <input id="q" name="q" value="@Model.Search" class="form-control mb-3" placeholder="Tìm sản phẩm" />
+                        <div class="head px-0">Khoảng giá (₫)</div>
+                        <div class="price-range-area">
+                            <div id="price-range"
+                                 data-range-min="0"
+                                 data-range-max="@sliderMax.ToString(CultureInfo.InvariantCulture)"
+                                 data-start-min="@sliderMinValue.ToString(CultureInfo.InvariantCulture)"
+                                 data-start-max="@sliderMaxValue.ToString(CultureInfo.InvariantCulture)"
+                                 data-step="1000"></div>
+                            <div class="value-wrapper d-flex align-items-center mt-3">
+                                <span class="price mr-1">Giá:</span>
+                                <span id="lower-value" aria-live="polite"></span>
+                                <span class="to mx-2">đến</span>
+                                <span id="upper-value" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="primary-btn mt-3">Áp dụng lọc</button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+
+        <main class="col-xl-9 col-lg-8 col-md-7">
+            <form asp-controller="Products" asp-action="Index" method="get" class="filter-bar d-flex flex-wrap align-items-center">
+                <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+                <input type="hidden" name="q" value="@Model.Search" />
+                <input type="hidden" name="minPrice" value="@Model.MinPrice" />
+                <input type="hidden" name="maxPrice" value="@Model.MaxPrice" />
+                <div class="sorting mr-auto">Hiển thị @firstProductNumber–@lastProductNumber / @Model.TotalCount sản phẩm</div>
+                <div class="sorting d-flex align-items-center">
+                    <label for="sort" class="mr-2 mb-0">Sắp xếp:</label>
+                    <select id="sort" name="sort" class="form-control">
+                        <option value="newest" selected="@(Model.SortBy == "newest" ? "selected" : null)">Mới nhất</option>
+                        <option value="price-asc" selected="@(Model.SortBy == "price-asc" ? "selected" : null)">Giá tăng dần</option>
+                        <option value="price-desc" selected="@(Model.SortBy == "price-desc" ? "selected" : null)">Giá giảm dần</option>
+                        <option value="name" selected="@(Model.SortBy == "name" ? "selected" : null)">Tên A–Z</option>
+                    </select>
+                </div>
+                <button type="submit" class="primary-btn ml-3">Sắp xếp</button>
+            </form>
+
+            <section class="lattest-product-area pb-40 category-list">
+                <div class="row">
+                    @if (Model.Products.Count == 0)
+                    {
+                        <div class="col-12 text-center py-5">
+                            <h4>Không tìm thấy sản phẩm phù hợp</h4>
+                            <p>Hãy thử thay đổi danh mục hoặc khoảng giá.</p>
+                            <a asp-controller="Products" asp-action="Index" class="primary-btn">Xem tất cả sản phẩm</a>
+                        </div>
+                    }
+                    else
+                    {
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-product">
+                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                                        <img class="img-fluid"
+                                             src="@Url.Content(string.IsNullOrWhiteSpace(product.ImageUrl) ? "~/img/product/p1.jpg" : product.ImageUrl)"
+                                             alt="@product.Name" />
+                                    </a>
+                                    <div class="product-details">
+                                        <h6>@product.Name</h6>
+                                        <div class="price"><h6>@product.Price.ToString("N0") ₫</h6></div>
+                                        <div class="prd-bottom">
+                                            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="social-info">
+                                                <span class="lnr lnr-move"></span>
+                                                <p class="hover-text">Xem chi tiết</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </section>
+
+            @if (Model.TotalPages > 1)
+            {
+                <div class="filter-bar d-flex flex-wrap align-items-center">
+                    <div class="sorting mr-auto">Trang @Model.PageNumber / @Model.TotalPages</div>
+                    <div class="pagination">
+                        @if (Model.HasPreviousPage)
+                        {
+                            <a asp-controller="Products" asp-action="Index" asp-route-page="@(Model.PageNumber - 1)"
+                               asp-route-categoryId="@Model.CategoryId" asp-route-q="@Model.Search"
+                               asp-route-minPrice="@Model.MinPrice" asp-route-maxPrice="@Model.MaxPrice"
+                               asp-route-sort="@Model.SortBy" class="prev-arrow" aria-label="Trang trước">
+                                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                            </a>
+                        }
+                        @for (var pageNumberItem = startPage; pageNumberItem <= endPage; pageNumberItem++)
+                        {
+                            <a asp-controller="Products" asp-action="Index" asp-route-page="@pageNumberItem"
+                               asp-route-categoryId="@Model.CategoryId" asp-route-q="@Model.Search"
+                               asp-route-minPrice="@Model.MinPrice" asp-route-maxPrice="@Model.MaxPrice"
+                               asp-route-sort="@Model.SortBy" class="@(pageNumberItem == Model.PageNumber ? "active" : "")">
+                                @pageNumberItem
+                            </a>
+                        }
+                        @if (Model.HasNextPage)
+                        {
+                            <a asp-controller="Products" asp-action="Index" asp-route-page="@(Model.PageNumber + 1)"
+                               asp-route-categoryId="@Model.CategoryId" asp-route-q="@Model.Search"
+                               asp-route-minPrice="@Model.MinPrice" asp-route-maxPrice="@Model.MaxPrice"
+                               asp-route-sort="@Model.SortBy" class="next-arrow" aria-label="Trang sau">
+                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
+        </main>
+    </div>
+</div>

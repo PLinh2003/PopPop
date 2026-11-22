@@ -62,7 +62,7 @@ public class Disable2faModel : PageModel
         }
 
         _logger.LogInformation("User with ID '{UserId}' has disabled 2fa.", _userManager.GetUserId(User));
-        StatusMessage = "2fa has been disabled. You can reenable 2fa when you setup an authenticator app";
+        StatusMessage = "Đã tắt xác thực hai bước. Bạn có thể bật lại bất cứ lúc nào.";
         return RedirectToPage("./TwoFactorAuthentication");
     }
 }

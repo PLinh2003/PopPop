@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="~/css/support-chat.css" asp-append-version="true" />
+<div id="support-chat-widget" class="support-chat" data-hub-url="@Url.Content("~/hubs/support-chat")">
+    <button id="support-chat-toggle" class="support-chat-toggle" type="button" aria-expanded="false" aria-controls="support-chat-panel">
+        <i class="fa fa-comments"></i><span>Chat với shop</span>
+    </button>
+    <section id="support-chat-panel" class="support-chat-panel" aria-label="Trò chuyện với cửa hàng" hidden>
+        <header class="support-chat-header"><div><strong>Hỗ trợ PôpPôp</strong><small>Chúng tôi sẵn sàng giúp bạn</small></div><button id="support-chat-close" type="button" aria-label="Đóng chat">×</button></header>
+        <div id="support-chat-status" class="support-chat-status" role="status">Đang kết nối...</div>
+        <div id="support-chat-messages" class="support-chat-messages" aria-live="polite"></div>
+        <form id="support-chat-form" class="support-chat-form">
+            <label class="visually-hidden" for="support-chat-input">Tin nhắn</label>
+            <input id="support-chat-input" maxlength="2000" autocomplete="off" placeholder="Nhập tin nhắn..." required />
+            <button type="submit" aria-label="Gửi tin nhắn"><i class="fa fa-paper-plane"></i></button>
+        </form>
+    </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@10.0.0/dist/browser/signalr.min.js" crossorigin="anonymous"></script>
+<script src="~/js/support-chat.js" asp-append-version="true"></script>

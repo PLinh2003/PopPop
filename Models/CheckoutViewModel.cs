@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using PopPop.Data.Entities.Enums;
 
 namespace PopPop.Models;
 
@@ -23,6 +24,10 @@ public sealed class CheckoutViewModel
     [StringLength(1000)]
     [Display(Name = "Ghi chú")]
     public string? Note { get; set; }
+
+    public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.CashOnDelivery;
+
+    public bool IsVnPayConfigured { get; set; }
 
     public IReadOnlyList<CartLineViewModel> Items { get; set; } = [];
     public decimal Subtotal => Items.Sum(item => item.LineTotal);

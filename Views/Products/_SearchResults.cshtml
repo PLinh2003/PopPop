@@ -1,0 +1,18 @@
+@model IReadOnlyList<PopPop.Models.ProductCardViewModel>
+
+@if (Model is null || Model.Count == 0)
+{
+    <div class="search-empty">Không tìm thấy sản phẩm nào.</div>
+    return;
+}
+
+@foreach (var product in Model)
+{
+    <a class="search-result-item" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+        <img class="search-result-thumb" src="@(string.IsNullOrWhiteSpace(product.ImageUrl) ? "/img/product/card.jpg" : product.ImageUrl)" alt="@product.Name" />
+        <span class="search-result-meta">
+            <span class="search-result-name">@product.Name</span>
+            <span class="search-result-price">@product.Price.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span>
+        </span>
+    </a>
+}

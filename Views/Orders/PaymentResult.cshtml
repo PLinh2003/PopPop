@@ -1,0 +1,21 @@
+@model PopPop.Models.VnPayReturnViewModel
+
+@{
+    ViewData["Title"] = "Kết quả thanh toán";
+}
+
+<section class="section_gap">
+    <div class="container">
+        <h2>Kết quả thanh toán VNPay</h2>
+        <div class="alert @(Model.IsSignatureValid ? (Model.IsTransactionSuccessful ? "alert-info" : "alert-warning") : "alert-danger")" role="status">
+            @Model.Message
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.OrderReference))
+        {
+            <p>Mã giao dịch: <strong>@Model.OrderReference</strong></p>
+        }
+        <p class="text-muted">Trạng thái thanh toán cuối cùng được cập nhật từ thông báo IPN đã xác thực, không chỉ từ trang chuyển hướng này.</p>
+        <a asp-controller="Orders" asp-action="Index" class="primary-btn">Đơn hàng của tôi</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary ms-2">Tiếp tục mua sắm</a>
+    </div>
+</section>

@@ -4,6 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 appsettings.json
 appsettings.development.json
+template-html/
 # User-specific files
 *.rsuser
 *.suo

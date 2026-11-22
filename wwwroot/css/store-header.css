@@ -1,0 +1,209 @@
+.store-header {
+    background: #fff;
+    left: auto;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+}
+
+.store-header .main_menu .main_box {
+    max-width: none;
+    padding: 3px 0;
+}
+
+.store-header .navbar .container {
+    max-width: 1200px;
+    min-height: 54px;
+}
+
+.store-header .navbar-brand {
+    margin-right: 20px;
+    padding: 0;
+}
+
+.store-header .navbar-brand img {
+    height: auto;
+    max-height: 34px;
+    width: auto;
+}
+
+.store-header .navbar-collapse {
+    flex: 1;
+    justify-content: space-between;
+}
+
+.store-header .navbar .store-header__links {
+    align-items: center;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+.store-header .navbar .store-header__links .nav-item {
+    margin: 0;
+}
+
+.store-header .navbar .store-header__links .nav-link {
+    color: #222;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    padding: 12px 0;
+    transition: color .2s ease;
+}
+
+.store-header .navbar .store-header__links .nav-link:hover,
+.store-header .navbar .store-header__links .nav-link:focus {
+    color: #ff6a00;
+}
+
+.store-header .navbar .store-header__actions {
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    margin: 0;
+}
+
+.store-header .navbar .store-header__actions .nav-item {
+    margin: 0;
+}
+
+.store-header .navbar .store-header__actions .store-header__icon {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: #222;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 19px;
+    height: 36px;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+    width: 36px;
+}
+
+.store-header .navbar .store-header__actions .store-header__icon:hover,
+.store-header .navbar .store-header__actions .store-header__icon:focus {
+    color: #ff6a00;
+    outline: none;
+}
+
+.store-header .navbar .store-header__actions .store-header__icon span {
+    color: inherit;
+    line-height: 1;
+}
+
+.store-header .navbar .store-header__actions .store-header__avatar {
+    border-radius: 50%;
+    font-size: 25px;
+}
+
+.store-header .navbar .store-header__actions .store-header__avatar::after {
+    display: none;
+}
+
+.store-header .navbar .store-header__actions .store-header__avatar img {
+    border-radius: 50%;
+    height: 30px;
+    object-fit: cover;
+    width: 30px;
+}
+
+.store-header__account-menu {
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .14);
+    margin-top: 10px;
+    min-width: 230px;
+    padding: 8px;
+}
+
+.store-header__account-menu .dropdown-item {
+    border-radius: 8px;
+    color: #333;
+    font-size: 14px;
+    padding: 10px 12px;
+    text-transform: none;
+    white-space: normal;
+}
+
+.store-header__account-menu .dropdown-item:hover,
+.store-header__account-menu .dropdown-item:focus {
+    background: #fff3eb;
+    color: #e85d04;
+}
+
+.store-header__account-menu .dropdown-item i {
+    color: #ff6a00;
+    margin-right: 8px;
+    width: 16px;
+}
+
+.store-header__account-menu form {
+    margin: 0;
+}
+
+.store-header__account-name {
+    border-bottom: 1px solid #eee;
+    color: #222;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    overflow: hidden;
+    padding: 10px 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.store-header__badge {
+    align-items: center;
+    background: #e53935;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    color: #fff;
+    display: inline-flex;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    height: 18px;
+    justify-content: center;
+    line-height: 1;
+    min-width: 18px;
+    padding: 0 4px;
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: auto;
+}
+
+@media (max-width: 991px) {
+    .store-header .navbar .navbar-collapse {
+        background: #fff;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, .08);
+        margin-top: 4px;
+        padding: 8px 12px 12px;
+    }
+
+    .store-header .navbar .store-header__links {
+        align-items: stretch;
+        gap: 0;
+        margin: 0;
+    }
+
+    .store-header .navbar .store-header__links .nav-link {
+        border-bottom: 1px solid #f1f1f1;
+        display: block;
+        padding: 9px 0;
+    }
+
+    .store-header .navbar .store-header__actions {
+        border-top: 1px solid #f1f1f1;
+        gap: 10px;
+        justify-content: flex-start;
+        margin-top: 8px;
+        padding-top: 8px;
+    }
+}

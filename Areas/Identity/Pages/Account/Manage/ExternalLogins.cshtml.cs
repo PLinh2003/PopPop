@@ -88,12 +88,12 @@ public class ExternalLoginsModel : PageModel
         var result = await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
         if (!result.Succeeded)
         {
-            StatusMessage = "The external login was not removed.";
+            StatusMessage = "Lỗi: Không thể gỡ liên kết đăng nhập.";
             return RedirectToPage();
         }
 
         await _signInManager.RefreshSignInAsync(user);
-        StatusMessage = "The external login was removed.";
+        StatusMessage = "Đã gỡ liên kết đăng nhập.";
         return RedirectToPage();
     }
 
@@ -126,14 +126,14 @@ public class ExternalLoginsModel : PageModel
         var result = await _userManager.AddLoginAsync(user, info);
         if (!result.Succeeded)
         {
-            StatusMessage = "The external login was not added. External logins can only be associated with one account.";
+            StatusMessage = "Lỗi: Tài khoản đăng nhập này đã được liên kết với tài khoản khác.";
             return RedirectToPage();
         }
 
         // Clear the existing external cookie to ensure a clean login process
         await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-        StatusMessage = "The external login was added.";
+        StatusMessage = "Đã liên kết tài khoản đăng nhập.";
         return RedirectToPage();
     }
 }

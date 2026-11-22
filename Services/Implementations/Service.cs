@@ -16,14 +16,14 @@ public abstract class Service<TEntity, TKey> : IService<TEntity, TKey>
         _unitOfWork = unitOfWork;
     }
 
-    public Task<TEntity?> GetByIdAsync(TKey id, CancellationToken cancellationToken = default)
+    public async Task<TEntity?> GetByIdAsync(TKey id, CancellationToken cancellationToken = default)
     {
-        return _repository.GetByIdAsync(id, cancellationToken);
+        return await _repository.GetByIdAsync(id, cancellationToken);
     }
 
-    public Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return _repository.GetAllAsync(cancellationToken);
+        return await _repository.GetAllAsync(cancellationToken);
     }
 
     public async Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)

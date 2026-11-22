@@ -1,1 +1,116 @@
-﻿
+﻿@model PopPop.Models.AdminDashboardViewModel
+@using PopPop.Data.Entities.Enums
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Tổng quan";
+    string StatusClass(OrderStatus status) => status switch
+    {
+        OrderStatus.Pending => "status-pending",
+        OrderStatus.Confirmed => "status-confirmed",
+        OrderStatus.Processing => "status-processing",
+        OrderStatus.Shipping => "status-shipping",
+        OrderStatus.Completed => "status-completed",
+        OrderStatus.Cancelled => "status-cancelled",
+        _ => string.Empty
+    };
+}
+<div class="admin-page-heading">
+    <div><h2>Chào mừng trở lại</h2><p>Tình hình hoạt động cửa hàng trong tháng này.</p></div>
+    <a class="btn btn-primary" asp-area="Admin" asp-controller="Orders" asp-action="Index"><i class="fa fa-list me-2"></i>Quản lý đơn hàng</a>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3"><div class="admin-stat-card"><span class="admin-stat-icon"><i class="fa fa-shopping-bag"></i></span><div class="admin-stat-label">Tổng đơn hàng</div><div class="admin-stat-value">@Model.TotalOrders</div><div class="admin-stat-note">Tất cả đơn đã ghi nhận</div></div></div>
+    <div class="col-6 col-xl-3"><div class="admin-stat-card"><span class="admin-stat-icon"><i class="fa fa-clock-o"></i></span><div class="admin-stat-label">Chờ xác nhận</div><div class="admin-stat-value">@Model.PendingOrders</div><div class="admin-stat-note">Cần kiểm tra và xác nhận</div></div></div>
+    <div class="col-6 col-xl-3"><div class="admin-stat-card"><span class="admin-stat-icon"><i class="fa fa-truck"></i></span><div class="admin-stat-label">Đang xử lý / giao</div><div class="admin-stat-value">@(Model.ProcessingOrders + Model.ShippingOrders)</div><div class="admin-stat-note">@Model.ProcessingOrders đang xử lý · @Model.ShippingOrders đang giao</div></div></div>
+    <div class="col-6 col-xl-3"><div class="admin-stat-card"><span class="admin-stat-icon"><i class="fa fa-line-chart"></i></span><div class="admin-stat-label">Doanh thu tháng</div><div class="admin-stat-value" style="font-size:22px">@Model.MonthlyRevenue.ToString("N0") ₫</div><div class="admin-stat-note">Tính từ đơn đã hoàn tất</div></div></div>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-lg-6">
+        <section class="admin-chart-card">
+            <h3>Số đơn hàng trong 7 ngày gần nhất</h3>
+            <div class="admin-chart-container"><canvas id="daily-orders-chart" aria-label="Biểu đồ số đơn hàng theo ngày"></canvas></div>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="admin-chart-card">
+            <h3>Doanh thu đơn hoàn tất trong 7 ngày</h3>
+            <div class="admin-chart-container"><canvas id="daily-revenue-chart" aria-label="Biểu đồ doanh thu theo ngày"></canvas></div>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="admin-chart-card">
+            <h3>Phân bố trạng thái đơn hàng</h3>
+            <div class="admin-chart-container"><canvas id="order-status-chart" aria-label="Biểu đồ phân bố trạng thái đơn hàng"></canvas></div>
+        </section>
+    </div>
+</div>
+<div class="admin-panel">
+    <div class="admin-panel-header"><h3>Đơn hàng mới nhất</h3><a class="admin-link" asp-area="Admin" asp-controller="Orders" asp-action="Index">Xem tất cả <i class="fa fa-arrow-right ms-1"></i></a></div>
+    @if (Model.RecentOrders.Count == 0)
+    {
+        <div class="admin-empty">Chưa có đơn hàng nào.</div>
+    }
+    else
+    {
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th><th>Trạng thái</th><th>Tổng tiền</th><th></th></tr></thead>
+                <tbody>
+                    @foreach (var order in Model.RecentOrders)
+                    {
+                        <tr><td><a class="admin-link" asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">@order.OrderCode</a></td><td>@order.CustomerName</td><td>@order.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td><span class="admin-status @StatusClass(order.Status)">@order.StatusText</span></td><td>@order.TotalAmount.ToString("N0") ₫</td><td><a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">Chi tiết</a></td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+<div class="admin-stat-note mt-3">Đơn hoàn tất: @Model.CompletedOrders</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const labels = @Html.Raw(JsonSerializer.Serialize(Model.DailyChartLabels));
+            const orderCounts = @Html.Raw(JsonSerializer.Serialize(Model.DailyOrderCounts));
+            const dailyRevenue = @Html.Raw(JsonSerializer.Serialize(Model.DailyCompletedRevenue));
+            const statusValues = @Html.Raw(JsonSerializer.Serialize(Model.StatusChartValues));
+            const statusLabels = ["Chờ xác nhận", "Đã xác nhận", "Đang xử lý", "Đang giao", "Hoàn tất", "Đã hủy"];
+
+            new Chart(document.getElementById("daily-orders-chart"), {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [{ label: "Số đơn", data: orderCounts, borderColor: "#3977e8", backgroundColor: "rgba(57,119,232,.12)", pointBackgroundColor: "#3977e8", borderWidth: 2, fill: true, tension: .3 }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                }
+            });
+
+            new Chart(document.getElementById("daily-revenue-chart"), {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{ label: "Doanh thu (₫)", data: dailyRevenue, backgroundColor: "rgba(33,131,74,.72)", borderColor: "#21834a", borderWidth: 1 }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, ticks: { callback: function (value) { return Number(value).toLocaleString("vi-VN") + " ₫"; } } } },
+                    plugins: { tooltip: { callbacks: { label: function (context) { return Number(context.parsed.y).toLocaleString("vi-VN") + " ₫"; } } } }
+                }
+            });
+
+            new Chart(document.getElementById("order-status-chart"), {
+                type: "doughnut",
+                data: {
+                    labels: statusLabels,
+                    datasets: [{ data: statusValues, backgroundColor: ["#f0ad3d", "#3977e8", "#6aa8ff", "#8c62c7", "#38a169", "#dc5c5c"], borderWidth: 2, borderColor: "#fff" }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
+            });
+        });
+    </script>
+}

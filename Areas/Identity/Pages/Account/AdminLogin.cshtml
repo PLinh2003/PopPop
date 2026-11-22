@@ -1,0 +1,44 @@
+@page "/admin/login"
+@model AdminLoginModel
+
+@{
+    Layout = "_IdentityLayout";
+    ViewData["Title"] = "Đăng nhập quản trị";
+}
+
+<div class="row">
+    <div class="col-12">
+        <section>
+            <form method="post">
+                <h1>@ViewData["Title"]</h1>
+                <p>Đăng nhập dành cho nhân viên và quản trị viên.</p>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="ten@email.com" />
+                    <label asp-for="Input.Email" class="form-label">Địa chỉ email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Nhập mật khẩu" />
+                    <label asp-for="Input.Password" class="form-label">Mật khẩu</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        Ghi nhớ đăng nhập
+                    </label>
+                </div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Đăng nhập quản trị</button>
+                <div class="identity-account-links">
+                    <p><a href="/login">Đăng nhập dành cho khách hàng</a></p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

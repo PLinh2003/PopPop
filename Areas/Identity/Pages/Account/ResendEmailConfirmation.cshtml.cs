@@ -64,7 +64,7 @@ public class ResendEmailConfirmationModel : PageModel
         var user = await _userManager.FindByEmailAsync(Input.Email);
         if (user == null)
         {
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(string.Empty, "Đã gửi email xác nhận. Vui lòng kiểm tra hộp thư.");
             return Page();
         }
 
@@ -81,7 +81,7 @@ public class ResendEmailConfirmationModel : PageModel
             "Xác nhận địa chỉ email của bạn",
             $"Vui lòng xác nhận địa chỉ email để hoàn tất thiết lập tài khoản PôpPôp.<p style='margin:24px 0 0;'><a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display:inline-block;padding:12px 22px;background-color:#2563eb;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:700;'>Xác nhận email</a></p>");
 
-        ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+        ModelState.AddModelError(string.Empty, "Đã gửi email xác nhận. Vui lòng kiểm tra hộp thư.");
         return Page();
     }
 }

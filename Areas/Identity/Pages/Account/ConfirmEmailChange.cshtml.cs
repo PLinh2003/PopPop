@@ -47,7 +47,7 @@ public class ConfirmEmailChangeModel : PageModel
         var result = await _userManager.ChangeEmailAsync(user, email, code);
         if (!result.Succeeded)
         {
-            StatusMessage = "Error changing email.";
+            StatusMessage = "Lỗi: Không thể thay đổi email. Vui lòng thử lại.";
             return Page();
         }
 
@@ -56,12 +56,12 @@ public class ConfirmEmailChangeModel : PageModel
         var setUserNameResult = await _userManager.SetUserNameAsync(user, email);
         if (!setUserNameResult.Succeeded)
         {
-            StatusMessage = "Error changing user name.";
+            StatusMessage = "Lỗi: Không thể cập nhật tên đăng nhập. Vui lòng thử lại.";
             return Page();
         }
 
         await _signInManager.RefreshSignInAsync(user);
-        StatusMessage = "Thank you for confirming your email change.";
+        StatusMessage = "Email mới đã được xác nhận.";
         return Page();
     }
 }

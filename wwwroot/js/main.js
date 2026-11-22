@@ -249,36 +249,53 @@ $(document).ready(function(){
 
     $(function(){
 
-        if(document.getElementById("price-range")){
-        
-        var nonLinearSlider = document.getElementById('price-range');
-        
-        noUiSlider.create(nonLinearSlider, {
-            connect: true,
-            behaviour: 'tap',
-            start: [ 500, 4000 ],
-            range: {
-                // Starting at 500, step the value by 500,
-                // until 4000 is reached. From there, step by 1000.
-                'min': [ 0 ],
-                '10%': [ 500, 500 ],
-                '50%': [ 4000, 1000 ],
-                'max': [ 10000 ]
+        var nonLinearSlider = document.getElementById("price-range");
+        if (nonLinearSlider && window.noUiSlider) {
+            var rangeMin = Number(nonLinearSlider.dataset.rangeMin) || 0;
+            var step = Number(nonLinearSlider.dataset.step) || 1000;
+            var rangeMax = Number(nonLinearSlider.dataset.rangeMax) || step;
+            rangeMax = Math.max(rangeMax, rangeMin + step);
+
+            var startMin = Number(nonLinearSlider.dataset.startMin);
+            var startMax = Number(nonLinearSlider.dataset.startMax);
+            startMin = Number.isFinite(startMin) ? Math.min(Math.max(startMin, rangeMin), rangeMax) : rangeMin;
+            startMax = Number.isFinite(startMax) ? Math.min(Math.max(startMax, rangeMin), rangeMax) : rangeMax;
+            if (startMin > startMax) {
+                var previousStartMin = startMin;
+                startMin = startMax;
+                startMax = previousStartMin;
             }
-        });
 
+            noUiSlider.create(nonLinearSlider, {
+                connect: true,
+                behaviour: "tap",
+                step: step,
+                start: [startMin, startMax],
+                range: {
+                    min: rangeMin,
+                    max: rangeMax
+                }
+            });
 
-        var nodes = [
-            document.getElementById('lower-value'), // 0
-            document.getElementById('upper-value')  // 1
-        ];
+            var valueNodes = [
+                document.getElementById("lower-value"),
+                document.getElementById("upper-value")
+            ];
+            var priceInputs = [
+                document.getElementById("minPrice"),
+                document.getElementById("maxPrice")
+            ];
+            var priceFormatter = new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 0 });
 
-        // Display the slider value and how far the handle moved
-        // from the left edge of the slider.
-        nonLinearSlider.noUiSlider.on('update', function ( values, handle, unencoded, isTap, positions ) {
-            nodes[handle].innerHTML = values[handle];
-        });
-
+            nonLinearSlider.noUiSlider.on("update", function (values, handle) {
+                var value = Math.round(Number(values[handle]));
+                if (valueNodes[handle]) {
+                    valueNodes[handle].textContent = priceFormatter.format(value) + " ₫";
+                }
+                if (priceInputs[handle]) {
+                    priceInputs[handle].value = value;
+                }
+            });
         }
 
     });
