@@ -16,6 +16,27 @@ public class ProductsController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Index(
+        int page = 1,
+        int? categoryId = null,
+        string? q = null,
+        decimal? minPrice = null,
+        decimal? maxPrice = null,
+        string? sort = null,
+        CancellationToken cancellationToken = default)
+    {
+        var model = await _productService.GetCatalogAsync(
+            page,
+            categoryId,
+            q,
+            minPrice,
+            maxPrice,
+            sort,
+            cancellationToken);
+        return View(model);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Details(int id, CancellationToken cancellationToken)
     {
         var product = await _productService.GetDetailsAsync(id, cancellationToken);

@@ -1,0 +1,61 @@
+@model PopPop.Models.CustomerOrdersViewModel
+@using PopPop.Data.Entities.Enums
+
+@{
+    ViewData["Title"] = "Đơn hàng của tôi";
+    string StatusClass(OrderStatus status) => status switch
+    {
+        OrderStatus.Pending => "bg-warning text-dark",
+        OrderStatus.Confirmed => "bg-info text-dark",
+        OrderStatus.Processing => "bg-primary",
+        OrderStatus.Shipping => "bg-primary",
+        OrderStatus.Completed => "bg-success",
+        OrderStatus.Cancelled => "bg-danger",
+        _ => "bg-secondary"
+    };
+}
+
+<section class="section_gap">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+            <div>
+                <h2>Đơn hàng của tôi</h2>
+                <p class="text-muted mb-0">Theo dõi xác nhận, chuẩn bị và giao hàng.</p>
+            </div>
+            <a asp-controller="Home" asp-action="Index" class="primary-btn">Tiếp tục mua sắm</a>
+        </div>
+
+        @if (Model.Orders.Count == 0)
+        {
+            <div class="alert alert-info">Bạn chưa có đơn hàng nào.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td><strong>@order.OrderCode</strong></td>
+                                <td>@order.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                                <td><span class="badge @StatusClass(order.Status)">@order.StatusText</span></td>
+                                <td>@order.TotalAmount.ToString("N0") ₫</td>
+                                <td><a asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-outline-primary">Theo dõi đơn</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</section>

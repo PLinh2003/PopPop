@@ -6,7 +6,11 @@ public sealed class OrderDetailsViewModel
 {
     public required string OrderCode { get; init; }
     public OrderStatus Status { get; init; }
+    public PaymentMethod PaymentMethod { get; init; }
+    public PaymentStatus PaymentStatus { get; init; }
+    public DateTime? PaidAt { get; init; }
     public DateTime CreatedAt { get; init; }
+    public DateTime UpdatedAt { get; init; }
     public required string RecipientName { get; init; }
     public required string RecipientPhone { get; init; }
     public required string ShippingAddress { get; init; }

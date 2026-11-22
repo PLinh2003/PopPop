@@ -15,6 +15,10 @@
     <partial name="_HeaderPartial" />
     @RenderBody()
     <partial name="_FooterPartial" />
+    @if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Admin") && !User.IsInRole("Staff"))
+    {
+        <partial name="_SupportChatWidget" />
+    }
     <partial name="_MainScriptPartial" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>

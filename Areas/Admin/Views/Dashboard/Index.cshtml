@@ -52,12 +52,17 @@
     }
     else
     {
-        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th><th>Trạng thái</th><th>Tổng tiền</th><th></th></tr></thead><tbody>
-        @foreach (var order in Model.RecentOrders)
-        {
-            <tr><td><a class="admin-link" asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">@order.OrderCode</a></td><td>@order.CustomerName</td><td>@order.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td><span class="admin-status @StatusClass(order.Status)">@order.StatusText</span></td><td>@order.TotalAmount.ToString("N0") ₫</td><td><a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">Chi tiết</a></td></tr>
-        }
-        </tbody></table></div>
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th><th>Trạng thái</th><th>Tổng tiền</th><th></th></tr></thead>
+                <tbody>
+                    @foreach (var order in Model.RecentOrders)
+                    {
+                        <tr><td><a class="admin-link" asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">@order.OrderCode</a></td><td>@order.CustomerName</td><td>@order.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td><span class="admin-status @StatusClass(order.Status)">@order.StatusText</span></td><td>@order.TotalAmount.ToString("N0") ₫</td><td><a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">Chi tiết</a></td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 </div>
 <div class="admin-stat-note mt-3">Đơn hoàn tất: @Model.CompletedOrders</div>

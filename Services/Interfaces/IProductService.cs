@@ -12,6 +12,14 @@ namespace PopPop.Services.Interfaces
                 string keyword,
                 int count = 6,
                 CancellationToken cancellationToken = default);
+            Task<ProductCatalogViewModel> GetCatalogAsync(
+                int pageNumber,
+                int? categoryId,
+                string? search,
+                decimal? minPrice,
+                decimal? maxPrice,
+                string? sortBy,
+                CancellationToken cancellationToken = default);
             Task<ProductDetailsViewModel?> GetDetailsAsync(int productId, CancellationToken cancellationToken = default);
         }
     }

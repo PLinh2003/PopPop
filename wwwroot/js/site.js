@@ -5,6 +5,22 @@
     const searchButton = document.getElementById('search');
     const closeSearch = document.getElementById('close_search');
     const clearSearch = document.getElementById('clear_search');
+    const chatHistoryLink = document.getElementById('customer-chat-history-link');
+    const notificationsButton = document.getElementById('store-notifications');
+
+    const openSupportChat = () => {
+        const chatToggle = document.getElementById('support-chat-toggle');
+        if (chatToggle?.getAttribute('aria-expanded') !== 'true') {
+            chatToggle?.click();
+        }
+    };
+
+    chatHistoryLink?.addEventListener('click', (event) => {
+        event.preventDefault();
+        openSupportChat();
+    });
+
+    notificationsButton?.addEventListener('click', openSupportChat);
 
     if (!searchBox || !searchInput || !searchResults || !searchButton || !closeSearch || !clearSearch) {
         return;

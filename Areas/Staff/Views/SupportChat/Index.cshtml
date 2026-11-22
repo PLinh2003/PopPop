@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Tin nhắn khách hàng";
+}
+<link rel="stylesheet" href="~/css/support-chat.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/shop-chat-inbox.css" asp-append-version="true" />
+<div class="shop-chat-inbox" id="shop-chat-inbox" data-hub-url="@Url.Content("~/hubs/support-chat")">
+    <aside class="shop-chat-conversations">
+        <div class="shop-chat-list-heading"><h2>Hộp thư hỗ trợ</h2><button id="shop-chat-refresh" type="button" title="Tải lại"><i class="fa fa-refresh"></i></button></div>
+        <div id="shop-chat-list" role="list" aria-label="Các cuộc trò chuyện"></div>
+    </aside>
+    <section class="shop-chat-thread">
+        <div id="shop-chat-empty" class="shop-chat-empty">Chọn một cuộc trò chuyện để xem tin nhắn.</div>
+        <div id="shop-chat-active" hidden>
+            <header id="shop-chat-customer" class="shop-chat-customer"></header>
+            <div id="shop-chat-messages" class="support-chat-messages" aria-live="polite"></div>
+            <form id="shop-chat-form" class="support-chat-form">
+                <label class="visually-hidden" for="shop-chat-input">Tin nhắn trả lời</label>
+                <input id="shop-chat-input" maxlength="2000" autocomplete="off" placeholder="Trả lời khách hàng..." required />
+                <button type="submit" aria-label="Gửi tin nhắn"><i class="fa fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </section>
+</div>
+<div id="shop-chat-status" class="text-muted mt-2" role="status">Đang kết nối...</div>
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@10.0.0/dist/browser/signalr.min.js" crossorigin="anonymous"></script>
+<script src="~/js/shop-chat-inbox.js" asp-append-version="true"></script>

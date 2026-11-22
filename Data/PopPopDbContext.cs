@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PopPop.Data.Entities;
+using PopPop.Data.Entities.Enums;
 
 namespace PopPop.Data
 {
@@ -27,6 +28,8 @@ namespace PopPop.Data
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<OrderItem> OrderItems { get; set; } = null!;
         public DbSet<InventoryTransaction> InventoryTransactions { get; set; } = null!;
+        public DbSet<ChatConversation> ChatConversations { get; set; } = null!;
+        public DbSet<ChatMessage> ChatMessages { get; set; } = null!;
 
         #endregion
 
@@ -188,6 +191,19 @@ namespace PopPop.Data
                 entity.HasIndex(e => e.OrderCode)
                     .IsUnique();
 
+                entity.Property(e => e.PaymentMethod)
+                    .HasDefaultValue(PaymentMethod.CashOnDelivery)
+                    .HasSentinel((PaymentMethod)0);
+                entity.Property(e => e.PaymentStatus)
+                    .HasDefaultValue(PaymentStatus.Unpaid)
+                    .HasSentinel((PaymentStatus)0);
+                entity.Property(e => e.VnpayTransactionNo)
+                    .HasMaxLength(50);
+                entity.Property(e => e.VnpayBankCode)
+                    .HasMaxLength(50);
+                entity.Property(e => e.VnpayResponseCode)
+                    .HasMaxLength(10);
+
                 entity.Property(e => e.TotalAmount)
                     .HasPrecision(18, 2);
                 entity.Property(e => e.ShippingFee)
@@ -254,6 +270,34 @@ namespace PopPop.Data
 
             #endregion
 
+            modelBuilder.Entity<ChatConversation>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.CustomerUserId).IsRequired();
+                entity.HasIndex(e => e.CustomerUserId).IsUnique();
+                entity.HasIndex(e => e.UpdatedAtUtc);
+                entity.HasOne(e => e.Customer)
+                    .WithMany()
+                    .HasForeignKey(e => e.CustomerUserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<ChatMessage>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.SenderUserId).IsRequired();
+                entity.Property(e => e.Content).IsRequired().HasMaxLength(2000);
+                entity.HasIndex(e => new { e.ConversationId, e.SentAtUtc });
+                entity.HasOne(e => e.Conversation)
+                    .WithMany(e => e.Messages)
+                    .HasForeignKey(e => e.ConversationId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.Sender)
+                    .WithMany()
+                    .HasForeignKey(e => e.SenderUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
             #region Seed Data
 
             SeedRoles(modelBuilder);
@@ -277,6 +321,7 @@ namespace PopPop.Data
                 new Role
                 {
                     Id = "1",
+                    ConcurrencyStamp = "fbcad7b2-f545-4c63-8337-f7adacba6d58",
                     Name = "Admin",
                     NormalizedName = "ADMIN",
                     Description = "Administrator with full system access"
@@ -284,6 +329,7 @@ namespace PopPop.Data
                 new Role
                 {
                     Id = "2",
+                    ConcurrencyStamp = "481a46f1-206a-4e75-bed6-893a0569336f",
                     Name = "Staff",
                     NormalizedName = "STAFF",
                     Description = "Staff member for shop operations"
@@ -291,6 +337,7 @@ namespace PopPop.Data
                 new Role
                 {
                     Id = "3",
+                    ConcurrencyStamp = "ce2b0c57-c43d-45a5-8fa4-9fd44e0e1b9b",
                     Name = "Customer",
                     NormalizedName = "CUSTOMER",
                     Description = "Regular customer"
@@ -502,21 +549,20 @@ namespace PopPop.Data
             var adminUser = new User
             {
                 Id = "admin-001",
+                ConcurrencyStamp = "5336cfb7-e6b0-46a0-944a-8b862c73bc55",
                 UserName = "admin@poppop.com",
                 NormalizedUserName = "ADMIN@POPPOP.COM",
                 Email = "admin@poppop.com",
                 NormalizedEmail = "ADMIN@POPPOP.COM",
                 FullName = "Admin PôpPôp",
                 EmailConfirmed = true,
+                SecurityStamp = "e43821f8-8664-47f1-a77b-a2bda06ff0a6",
                 PhoneNumberConfirmed = false,
                 TwoFactorEnabled = false,
                 LockoutEnabled = true,
-                AccessFailedCount = 0
+                AccessFailedCount = 0,
+                PasswordHash = "AQAAAAIAAYagAAAAEOgDAa2IObWSVYVqlqcszoIHA5N2mQj3W6QRnKPnI7Hn28z5UkPjLktIhZRW4q3tBA=="
             };
-
-            // Hash password: "Admin@123"
-            var passwordHasher = new PasswordHasher<User>();
-            adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin@123");
 
             modelBuilder.Entity<User>().HasData(adminUser);
 

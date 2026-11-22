@@ -3,23 +3,62 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
+@{
+    var unreadChatCount = ViewData["UnreadChatCount"] is int count ? count : 0;
+}
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Quản lý tài khoản">Chào @User.Identity?.Name</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="nav-link btn btn-link text-dark">Đăng xuất</button>
-        </form>
+    var currentUser = await UserManager.GetUserAsync(User);
+    <li class="nav-item dropdown store-header__account">
+        <button class="store-header__icon store-header__avatar dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" aria-label="Menu tài khoản, @unreadChatCount tin nhắn chưa đọc">
+            @if (!string.IsNullOrWhiteSpace(currentUser?.AvatarPath))
+            {
+                <img src="@Url.Content(currentUser.AvatarPath)" alt="Ảnh đại diện">
+            }
+            else
+            {
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+            }
+            @if (unreadChatCount > 0)
+            {
+                <span class="store-header__badge" aria-hidden="true">@(unreadChatCount > 99 ? "99+" : unreadChatCount.ToString())</span>
+            }
+        </button>
+        <div class="dropdown-menu dropdown-menu-right store-header__account-menu">
+            <div class="store-header__account-name">@(currentUser?.FullName ?? currentUser?.UserName ?? "Tài khoản")</div>
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">
+                <i class="fa fa-user-o" aria-hidden="true"></i> Quản lý thông tin
+            </a>
+            @if (!User.IsInRole("Admin") && !User.IsInRole("Staff"))
+            {
+                <a class="dropdown-item" href="#support-chat-widget" id="customer-chat-history-link">
+                    <i class="fa fa-comments-o" aria-hidden="true"></i> Lịch sử trò chuyện
+                </a>
+            }
+            <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
+                <i class="fa fa-list-alt" aria-hidden="true"></i> Quản lý đơn hàng
+            </a>
+            <div class="dropdown-divider"></div>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="dropdown-item">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+                </button>
+            </form>
+        </div>
     </li>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+    <li class="nav-item dropdown store-header__account">
+        <button class="store-header__icon store-header__avatar dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" aria-label="Tài khoản">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right store-header__account-menu">
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Tạo tài khoản</a>
+        </div>
     </li>
 }

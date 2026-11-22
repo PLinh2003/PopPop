@@ -1,56 +1,69 @@
-﻿<header class="header_area sticky-header">
+@using System.Security.Claims
+@using PopPop.Services.Interfaces
+@inject IHeaderBadgeService HeaderBadgeService
+
+@{
+    var cartQuantity = 0;
+    var unreadChatCount = 0;
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+    if (!string.IsNullOrEmpty(currentUserId) && !User.IsInRole("Admin") && !User.IsInRole("Staff"))
+    {
+        var counts = await HeaderBadgeService.GetCountsAsync(currentUserId, Context.RequestAborted);
+        cartQuantity = counts.CartQuantity;
+        unreadChatCount = counts.UnreadChatCount;
+    }
+
+    ViewData["UnreadChatCount"] = unreadChatCount;
+}
+
+<header class="header_area store-header">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light main_box">
             <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand logo_h"><img src="~/img/logo.png" alt=""></a>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand logo_h" aria-label="PôpPôp - Trang chủ">
+                    <img src="~/img/logo.png" alt="PôpPôp">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Mở menu">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Sản phẩm</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="category.html">Danh mục sản phẩm</a></li>
-                                <li class="nav-item"><a class="nav-link" href="single-product.html">Chi tiết sản phẩm</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-controller="Orders" asp-action="Checkout">Thanh toán</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-controller="Cart" asp-action="Index">Giỏ hàng</a></li>
-                                <li class="nav-item"><a class="nav-link" href="confirmation.html">Xác nhận đơn hàng</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Cửa hàng</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="blog.html">Tin tức</a></li>
-                                <li class="nav-item"><a class="nav-link" href="single-blog.html">Chi tiết bài viết</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Tài khoản</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="login.html">Đăng nhập</a></li>
-                                <li class="nav-item"><a class="nav-link" href="tracking.html">Theo dõi đơn hàng</a></li>
-                                <li class="nav-item"><a class="nav-link" href="elements.html">Tiện ích</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Giới thiệu</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Liên hệ</a></li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav store-header__links">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Products" asp-action="Index">Sản phẩm</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="shop">Cửa hàng</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="contact">Liên hệ</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item"><a asp-controller="Cart" asp-action="Index" class="cart" aria-label="Giỏ hàng"><span class="ti-bag"></span></a></li>
-                        <partial name="_LoginPartial" />
+                    <ul class="navbar-nav store-header__actions">
                         <li class="nav-item">
-                            <button class="search" type="button" aria-label="Tìm kiếm sản phẩm"><span class="lnr lnr-magnifier" id="search"></span></button>
+                            <button class="store-header__icon search" type="button" aria-label="Tìm kiếm sản phẩm">
+                                <span class="lnr lnr-magnifier" id="search"></span>
+                            </button>
                         </li>
+                        <li class="nav-item">
+                            <button class="store-header__icon store-header__notification" id="store-notifications" type="button"
+                                    aria-label="Thông báo hỗ trợ" title="Thông báo">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                                @if (unreadChatCount > 0)
+                                {
+                                    <span class="store-header__badge" aria-hidden="true">@(unreadChatCount > 99 ? "99+" : unreadChatCount.ToString())</span>
+                                }
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Cart" asp-action="Index" class="store-header__icon store-header__cart"
+                               aria-label="Giỏ hàng, @cartQuantity sản phẩm">
+                                <span class="ti-bag" aria-hidden="true"></span>
+                                @if (cartQuantity > 0)
+                                {
+                                    <span class="store-header__badge" aria-hidden="true">@(cartQuantity > 99 ? "99+" : cartQuantity.ToString())</span>
+                                }
+                            </a>
+                        </li>
+                        <partial name="_LoginPartial" />
                     </ul>
                 </div>
             </div>

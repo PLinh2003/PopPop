@@ -11,6 +11,9 @@ public sealed class OrderManagementRowViewModel
     public DateTime CreatedAt { get; init; }
     public OrderStatus Status { get; init; }
     public string StatusText { get; init; } = string.Empty;
+    public PaymentMethod PaymentMethod { get; init; }
+    public PaymentStatus PaymentStatus { get; init; }
+    public DateTime? PaidAt { get; init; }
     public decimal TotalAmount { get; init; }
 }
 
@@ -44,6 +47,9 @@ public sealed class OrderManagementDetailsViewModel
     public string OrderCode { get; init; } = string.Empty;
     public OrderStatus Status { get; init; }
     public string StatusText { get; init; } = string.Empty;
+    public PaymentMethod PaymentMethod { get; init; }
+    public PaymentStatus PaymentStatus { get; init; }
+    public DateTime? PaidAt { get; init; }
     public DateTime CreatedAt { get; init; }
     public string CustomerName { get; init; } = string.Empty;
     public string CustomerEmail { get; init; } = string.Empty;

@@ -6,6 +6,17 @@ public interface IProductRepository : IRepository<Product, int>
 {
     Task<IReadOnlyList<Product>> GetLatestAvailableAsync(int count, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Product>> SearchAsync(string keyword, int count = 6, CancellationToken cancellationToken = default);
+    Task<(IReadOnlyList<Product> Products, int TotalCount)> GetCatalogPageAsync(
+        int pageNumber,
+        int pageSize,
+        int? categoryId,
+        string? search,
+        decimal? minPrice,
+        decimal? maxPrice,
+        string sortBy,
+        CancellationToken cancellationToken = default);
+    Task<decimal> GetCatalogMaxPriceAsync(CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<Category>> GetActiveCategoriesAsync(CancellationToken cancellationToken = default);
     Task<Product?> GetActiveDetailsAsync(int productId, CancellationToken cancellationToken = default);
     Task<ProductVariant?> GetAvailableVariantAsync(int variantId, CancellationToken cancellationToken = default);
 }

@@ -1,4 +1,5 @@
 @model PopPop.Models.CheckoutViewModel
+@using PopPop.Data.Entities.Enums
 
 @{
     ViewData["Title"] = "Xác nhận đặt hàng";
@@ -87,11 +88,27 @@
                                 </ul>
 
                                 <div class="payment_item active">
-                                    <h4>Thanh toán qua VNPay</h4>
-                                    <p>Giao diện thanh toán VNPay sẽ được kết nối sau.</p>
+                                    <label class="d-flex align-items-center gap-2">
+                                        <input asp-for="PaymentMethod" type="radio" value="@PaymentMethod.CashOnDelivery" />
+                                        <strong>Thanh toán khi nhận hàng (COD)</strong>
+                                    </label>
+                                    <p>Bạn thanh toán trực tiếp cho nhân viên giao hàng khi nhận đủ sản phẩm.</p>
                                 </div>
-                                <button type="button" class="primary-btn mt-2 w-100">Thanh toán VNPay</button>
-                                <button type="submit" class="primary-btn mt-3 w-100">Đặt hàng</button>
+                                <div class="payment_item mt-3">
+                                    <label class="d-flex align-items-center gap-2">
+                                        <input asp-for="PaymentMethod" type="radio" value="@PaymentMethod.VnPay" disabled="@(!Model.IsVnPayConfigured)" />
+                                        <strong>Thanh toán trực tuyến qua VNPay</strong>
+                                    </label>
+                                    @if (Model.IsVnPayConfigured)
+                                    {
+                                        <p>Thanh toán an toàn qua cổng VNPay.</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted">VNPay Sandbox chưa được cấu hình; COD vẫn sử dụng bình thường.</p>
+                                    }
+                                </div>
+                                <button type="submit" class="primary-btn mt-3 w-100">Đặt hàng / thanh toán</button>
                             }
                             <a asp-controller="Cart" asp-action="Index" class="d-block mt-3">Quay lại giỏ hàng</a>
                         </div>

@@ -1,23 +1,33 @@
 @model PopPop.Models.OrderDetailsViewModel
+@using PopPop.Data.Entities.Enums
 
 @{
     ViewData["Title"] = "Chi tiết đơn hàng";
     var statusText = Model.Status switch
     {
-        PopPop.Data.Entities.Enums.OrderStatus.Pending => "Chờ xác nhận",
-        PopPop.Data.Entities.Enums.OrderStatus.Confirmed => "Đã xác nhận",
-        PopPop.Data.Entities.Enums.OrderStatus.Processing => "Đang xử lý",
-        PopPop.Data.Entities.Enums.OrderStatus.Shipping => "Đang giao hàng",
-        PopPop.Data.Entities.Enums.OrderStatus.Completed => "Hoàn thành",
-        PopPop.Data.Entities.Enums.OrderStatus.Cancelled => "Đã hủy",
+        OrderStatus.Pending => "Chờ xác nhận",
+        OrderStatus.Confirmed => "Đã xác nhận",
+        OrderStatus.Processing => "Đang xử lý",
+        OrderStatus.Shipping => "Đang giao hàng",
+        OrderStatus.Completed => "Đã giao thành công",
+        OrderStatus.Cancelled => "Đã hủy",
         _ => Model.Status.ToString()
     };
+    var trackingSteps = new[]
+    {
+        (Status: OrderStatus.Pending, Title: "Đã tiếp nhận đơn hàng"),
+        (Status: OrderStatus.Confirmed, Title: "Nhân viên đã xác nhận"),
+        (Status: OrderStatus.Processing, Title: "Đang chuẩn bị hàng"),
+        (Status: OrderStatus.Shipping, Title: "Đang giao hàng"),
+        (Status: OrderStatus.Completed, Title: "Đã giao thành công")
+    };
+    var currentStep = Array.FindIndex(trackingSteps, step => step.Status == Model.Status);
 }
 
 <section class="section_gap">
     <div class="container">
-        <div class="alert alert-success" role="status">
-            Đặt hàng thành công. Mã đơn hàng: <strong>@Model.OrderCode</strong>
+        <div class="alert @(Model.Status == OrderStatus.Cancelled ? "alert-danger" : "alert-info")" role="status">
+            Đơn hàng <strong>@Model.OrderCode</strong> — <strong>@statusText</strong>
         </div>
 
         <div class="row">
@@ -25,6 +35,19 @@
                 <h4>Thông tin đơn hàng</h4>
                 <p><strong>Trạng thái:</strong> @statusText</p>
                 <p><strong>Ngày đặt:</strong> @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</p>
+                <p><strong>Cập nhật gần nhất:</strong> @Model.UpdatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</p>
+                <p><strong>Phương thức thanh toán:</strong> @(Model.PaymentMethod == PaymentMethod.VnPay ? "VNPay" : "COD")</p>
+                <p><strong>Trạng thái thanh toán:</strong> @(Model.PaymentStatus switch
+                    {
+                        PaymentStatus.Pending => "Đang chờ thanh toán",
+                        PaymentStatus.Paid => "Đã thanh toán",
+                        PaymentStatus.Failed => "Thanh toán thất bại",
+                        _ => "Chưa thanh toán"
+                    })</p>
+                @if (Model.PaidAt.HasValue)
+                {
+                    <p><strong>Thanh toán lúc:</strong> @Model.PaidAt.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</p>
+                }
                 <p><strong>Người nhận:</strong> @Model.RecipientName</p>
                 <p><strong>Số điện thoại:</strong> @Model.RecipientPhone</p>
                 <p><strong>Địa chỉ:</strong> @Model.ShippingAddress</p>
@@ -74,6 +97,43 @@
             </div>
         </div>
 
+        @if (Model.PaymentMethod == PaymentMethod.VnPay && Model.PaymentStatus == PaymentStatus.Failed)
+        {
+            <div class="alert alert-warning mt-3">Thanh toán chưa thành công. Sản phẩm đã được trả lại giỏ hàng để bạn có thể thử đặt hàng lại.</div>
+            <a asp-controller="Orders" asp-action="Checkout" class="primary-btn">Thử thanh toán lại</a>
+        }
+
+        <div class="mt-4">
+            <h4>Tiến trình đơn hàng</h4>
+            @if (Model.Status == OrderStatus.Cancelled)
+            {
+                <div class="alert alert-danger">Đơn hàng đã bị hủy. Vui lòng liên hệ cửa hàng nếu cần hỗ trợ.</div>
+            }
+            else
+            {
+                <ol class="list-group list-group-numbered">
+                    @for (var index = 0; index < trackingSteps.Length; index++)
+                    {
+                        var step = trackingSteps[index];
+                        var isReached = index <= currentStep;
+                        <li class="list-group-item d-flex justify-content-between align-items-center @(isReached ? "list-group-item-success" : string.Empty)">
+                            <span>@step.Title</span>
+                            @if (step.Status == Model.Status)
+                            {
+                                <span class="badge bg-success rounded-pill">Hiện tại</span>
+                            }
+                            else if (isReached)
+                            {
+                                <span class="badge bg-success rounded-pill">Hoàn thành</span>
+                            }
+                        </li>
+                    }
+                </ol>
+            }
+            <p class="text-muted mt-2 mb-0">Trạng thái được cập nhật bởi nhân viên cửa hàng.</p>
+        </div>
+
+        <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-primary mt-4">Đơn hàng của tôi</a>
         <a asp-controller="Home" asp-action="Index" class="primary-btn mt-4">Tiếp tục mua sắm</a>
     </div>
 </section>

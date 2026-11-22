@@ -24,6 +24,22 @@ public class Order : IBaseEntity<int>
     /// </summary>
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
+    public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.CashOnDelivery;
+
+    public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Unpaid;
+
+    public string? VnpayTransactionNo { get; set; }
+
+    public string? VnpayBankCode { get; set; }
+
+    public string? VnpayResponseCode { get; set; }
+
+    public DateTime? PaidAt { get; set; }
+
+    public DateTime? PaymentExpiresAt { get; set; }
+
+    public DateTime? StockReleasedAt { get; set; }
+
     /// <summary>
     /// Total amount
     /// </summary>

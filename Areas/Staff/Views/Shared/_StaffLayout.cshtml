@@ -18,9 +18,10 @@
             <div class="admin-user"><i class="fa fa-user-circle"></i><div><strong>@(User.Identity?.Name ?? "Tài khoản")</strong><small>Nhân viên cửa hàng</small></div></div>
             <nav class="admin-nav" aria-label="Điều hướng nhân viên">
                 <a asp-area="Staff" asp-controller="Orders" asp-action="Index"><i class="fa fa-shopping-bag"></i>Đơn hàng cần xử lý</a>
+                <a asp-area="Staff" asp-controller="SupportChat" asp-action="Index"><i class="fa fa-comments"></i>Tin nhắn khách hàng</a>
                 <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-external-link"></i>Xem cửa hàng</a>
             </nav>
-            <form class="admin-logout" asp-area="Identity" asp-page="/Account/Logout" method="post">
+            <form class="admin-logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/admin/login" method="post">
                 <button type="submit"><i class="fa fa-sign-out"></i>Đăng xuất</button>
             </form>
         </aside>
