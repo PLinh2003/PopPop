@@ -25,12 +25,19 @@ public sealed class CheckoutViewModel
     [Display(Name = "Ghi chú")]
     public string? Note { get; set; }
 
+    [StringLength(50)]
+    [Display(Name = "Mã voucher")]
+    public string? VoucherCode { get; set; }
+
     public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.CashOnDelivery;
 
     public bool IsVnPayConfigured { get; set; }
+    public decimal EstimatedDiscountAmount { get; set; }
+    public string? VoucherMessage { get; set; }
+    public bool IsVoucherValid { get; set; }
 
     public IReadOnlyList<CartLineViewModel> Items { get; set; } = [];
     public decimal Subtotal => Items.Sum(item => item.LineTotal);
     public decimal ShippingFee { get; set; }
-    public decimal TotalAmount => Subtotal + ShippingFee;
+    public decimal TotalAmount => Math.Max(0m, Subtotal - EstimatedDiscountAmount) + ShippingFee;
 }

@@ -89,6 +89,10 @@
                     <span>Phí giao hàng</span>
                     <span>@(Model.ShippingFee == 0 ? "Miễn phí" : $"{Model.ShippingFee:N0} ₫")</span>
                 </div>
+                @if (Model.DiscountAmount > 0)
+                {
+                    <div class="d-flex justify-content-between"><span>Voucher @Model.VoucherCode</span><span class="text-success">-@Model.DiscountAmount.ToString("N0") ₫</span></div>
+                }
                 <hr />
                 <div class="d-flex justify-content-between">
                     <strong>Tổng cộng</strong>
@@ -134,6 +138,10 @@
         </div>
 
         <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-primary mt-4">Đơn hàng của tôi</a>
+        @if (Model.Status == OrderStatus.Completed)
+        {
+            <a asp-controller="AfterSales" asp-action="Create" asp-route-orderId="@Model.Id" class="btn btn-outline-warning mt-4">Yêu cầu bảo hành / đổi trả</a>
+        }
         <a asp-controller="Home" asp-action="Index" class="primary-btn mt-4">Tiếp tục mua sắm</a>
     </div>
 </section>

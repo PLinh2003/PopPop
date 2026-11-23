@@ -32,7 +32,13 @@ public sealed class OrderRepository : Repository<Order, int>, IOrderRepository
         return await DbSet
             .Include(order => order.OrderItems)
                 .ThenInclude(item => item.ProductVariant)
+            .Include(order => order.Voucher)
             .FirstOrDefaultAsync(order => order.OrderCode == orderCode, cancellationToken);
+    }
+
+    public Task<Voucher?> GetVoucherByCodeAsync(string normalizedCode, CancellationToken cancellationToken = default)
+    {
+        return Context.Vouchers.FirstOrDefaultAsync(voucher => voucher.Code == normalizedCode, cancellationToken);
     }
 
     public async Task<IReadOnlyList<Order>> GetExpiredVnPayOrdersAsync(
@@ -50,6 +56,7 @@ public sealed class OrderRepository : Repository<Order, int>, IOrderRepository
             .Take(batchSize)
             .Include(order => order.OrderItems)
                 .ThenInclude(item => item.ProductVariant)
+            .Include(order => order.Voucher)
             .ToListAsync(cancellationToken);
     }
 
@@ -108,6 +115,7 @@ public sealed class OrderRepository : Repository<Order, int>, IOrderRepository
             .Include(order => order.User)
             .Include(order => order.OrderItems)
                 .ThenInclude(item => item.ProductVariant)
+            .Include(order => order.Voucher)
             .FirstOrDefaultAsync(order => order.Id == orderId, cancellationToken);
     }
 

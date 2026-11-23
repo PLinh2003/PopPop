@@ -27,6 +27,8 @@ public class Product : IBaseEntity<int>
     /// </summary>
     public int BrandId { get; set; }
 
+    public int WarrantyMonths { get; set; }
+
     /// <summary>
     /// Is product active
     /// </summary>

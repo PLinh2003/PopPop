@@ -40,12 +40,11 @@ public sealed class VnPayClient : IVnPayClient
 
         if (!Uri.TryCreate(callbackBaseUrl, UriKind.Absolute, out var callbackUri)
             || callbackUri.Scheme != Uri.UriSchemeHttps
-            || callbackUri.IsLoopback
             || !string.IsNullOrEmpty(callbackUri.UserInfo)
             || !string.IsNullOrEmpty(callbackUri.Query)
             || !string.IsNullOrEmpty(callbackUri.Fragment))
         {
-            throw new InvalidOperationException("VNPay cần địa chỉ HTTPS công khai hợp lệ để nhận kết quả thanh toán.");
+            throw new InvalidOperationException("VNPay cần địa chỉ HTTPS hợp lệ để nhận kết quả thanh toán.");
         }
 
         callbackBaseUrl = callbackUri.GetLeftPart(UriPartial.Authority) + callbackUri.AbsolutePath.TrimEnd('/');

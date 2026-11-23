@@ -16,7 +16,6 @@ public sealed class VnPayOptions
         && (string.IsNullOrWhiteSpace(CallbackBaseUrl)
             || (Uri.TryCreate(CallbackBaseUrl, UriKind.Absolute, out var callbackUri)
                 && callbackUri.Scheme == Uri.UriSchemeHttps
-                && !callbackUri.IsLoopback
                 && string.IsNullOrEmpty(callbackUri.UserInfo)
                 && string.IsNullOrEmpty(callbackUri.Query)
                 && string.IsNullOrEmpty(callbackUri.Fragment)))

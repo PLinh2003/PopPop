@@ -1,0 +1,18 @@
+@model PopPop.Models.VoucherManagementListViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = "Quản lý voucher";
+}
+<div class="admin-page-heading"><div><h2>Voucher</h2><p>Tạo mã giảm giá, giới hạn lượt sử dụng và thời gian áp dụng.</p></div><a class="btn btn-primary" asp-area="Admin" asp-controller="Vouchers" asp-action="Create"><i class="fa fa-plus me-1"></i>Tạo voucher</a></div>
+<div class="admin-panel"><div class="admin-panel-header"><h3>@Model.Vouchers.Count mã giảm giá</h3></div>
+    @if (Model.Vouchers.Count == 0){<div class="admin-empty">Chưa có voucher.</div>}
+    else
+    {
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Mã</th><th>Mức giảm</th><th>Lượt dùng</th><th>Thời hạn</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+        @foreach (var voucher in Model.Vouchers)
+        {
+            <tr><td><strong>@voucher.Code</strong></td><td>@(voucher.DiscountType == VoucherDiscountType.Percentage ? $"{voucher.DiscountValue:0.##}%" : $"{voucher.DiscountValue:N0} ₫")</td><td>@voucher.UsedCount / @(voucher.MaximumUses?.ToString() ?? "∞")</td><td>@voucher.StartsAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm") – @voucher.ExpiresAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td><span class="admin-status @(voucher.IsActive ? "status-completed" : "status-cancelled")">@(voucher.IsActive ? "Đang bật" : "Đã tắt")</span></td><td><a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Vouchers" asp-action="Edit" asp-route-id="@voucher.Id">Sửa</a></td></tr>
+        }
+        </tbody></table></div>
+    }
+</div>

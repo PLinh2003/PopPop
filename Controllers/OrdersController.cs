@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -15,17 +16,20 @@ public class OrdersController : Controller
     private readonly IOrderService _orderService;
     private readonly IVnPayClient _vnPayClient;
     private readonly VnPayOptions _vnPayOptions;
+    private readonly IWebHostEnvironment _environment;
 
     public OrdersController(
         ICartService cartService,
         IOrderService orderService,
         IVnPayClient vnPayClient,
-        IOptions<VnPayOptions> vnPayOptions)
+        IOptions<VnPayOptions> vnPayOptions,
+        IWebHostEnvironment environment)
     {
         _cartService = cartService;
         _orderService = orderService;
         _vnPayClient = vnPayClient;
         _vnPayOptions = vnPayOptions.Value;
+        _environment = environment;
     }
 
     [HttpGet]
@@ -36,9 +40,9 @@ public class OrdersController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Checkout(CancellationToken cancellationToken)
+    public async Task<IActionResult> Checkout(string? voucherCode, CancellationToken cancellationToken)
     {
-        var model = await CreateCheckoutViewModelAsync(cancellationToken);
+        var model = await CreateCheckoutViewModelAsync(voucherCode, cancellationToken);
         if (model.Items.Count == 0 || !model.Items.All(item => item.StockQuantity >= item.Quantity))
         {
             TempData["CartError"] = model.Items.Count == 0
@@ -48,6 +52,16 @@ public class OrdersController : Controller
         }
 
         return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ApplyVoucher(CheckoutViewModel model, CancellationToken cancellationToken)
+    {
+        ModelState.Clear();
+        await LoadCartSummaryAsync(model, cancellationToken);
+        model.IsVnPayConfigured = CanUseVnPay;
+        return View("Checkout", model);
     }
 
     [HttpPost]
@@ -87,31 +101,51 @@ public class OrdersController : Controller
     [HttpGet]
     public async Task<IActionResult> VnPayIpn(CancellationToken cancellationToken)
     {
-        var response = await _orderService.ProcessVnPayIpnAsync(GetPaymentParameters(), cancellationToken);
+        var response = await _orderService.ProcessVnPayPaymentAsync(GetPaymentParameters(), cancellationToken);
         return new JsonResult(response);
     }
 
     [AllowAnonymous]
     [HttpGet]
-    public IActionResult VnPayReturn()
+    public async Task<IActionResult> VnPayReturn(CancellationToken cancellationToken)
     {
         var parameters = GetPaymentParameters();
         var signatureValid = _vnPayClient.ValidateSignature(parameters);
-        var transactionSucceeded = signatureValid
-            && parameters.TryGetValue("vnp_ResponseCode", out var responseCode)
+        var isLocalDevelopmentCallback = _environment.IsDevelopment()
+            && Request.IsHttps
+            && Request.Host.HasValue
+            && Uri.TryCreate($"{Request.Scheme}://{Request.Host}", UriKind.Absolute, out var requestUri)
+            && requestUri.IsLoopback;
+        var paymentResponse = signatureValid && isLocalDevelopmentCallback
+            ? await _orderService.ProcessVnPayPaymentAsync(parameters, cancellationToken)
+            : null;
+        var returnProcessed = paymentResponse?.ResponseCode == "00"
+            || (paymentResponse?.ResponseCode == "02" && paymentResponse.Message == "Order already confirmed");
+        var hasSuccessfulTransaction = parameters.TryGetValue("vnp_ResponseCode", out var responseCode)
             && responseCode == "00"
             && parameters.TryGetValue("vnp_TransactionStatus", out var transactionStatus)
             && transactionStatus == "00";
+        var transactionSucceeded = signatureValid
+            && (!isLocalDevelopmentCallback || returnProcessed)
+            && hasSuccessfulTransaction;
 
         var model = new VnPayReturnViewModel
         {
             OrderReference = parameters.GetValueOrDefault("vnp_TxnRef") ?? string.Empty,
             IsSignatureValid = signatureValid,
             IsTransactionSuccessful = transactionSucceeded,
+            IsLocalCallback = isLocalDevelopmentCallback,
+            IsReturnProcessed = returnProcessed,
             Message = !signatureValid
                 ? "Không thể xác thực phản hồi thanh toán. Vui lòng kiểm tra đơn hàng trong tài khoản."
+                : isLocalDevelopmentCallback && !returnProcessed
+                    ? "Không thể cập nhật đơn hàng từ kết quả VNPay. Vui lòng kiểm tra mã đơn hàng và số tiền thanh toán."
                 : transactionSucceeded
-                    ? "VNPay đã chuyển kết quả về website. Đơn hàng chỉ được xác nhận sau khi hệ thống nhận và xác thực thông báo IPN."
+                    ? isLocalDevelopmentCallback
+                        ? "Thanh toán VNPay Sandbox thành công và trạng thái đơn hàng đã được cập nhật."
+                        : "VNPay đã chuyển kết quả về website. Đơn hàng chỉ được xác nhận sau khi hệ thống nhận và xác thực thông báo IPN."
+                    : isLocalDevelopmentCallback
+                        ? "Giao dịch không thành công. Trạng thái đơn hàng đã được cập nhật và sản phẩm được hoàn lại vào giỏ hàng."
                     : "Giao dịch chưa thành công. Nếu giỏ hàng được khôi phục, bạn có thể thử đặt hàng lại."
         };
 
@@ -125,11 +159,12 @@ public class OrdersController : Controller
         return order is null ? NotFound() : View(order);
     }
 
-    private async Task<CheckoutViewModel> CreateCheckoutViewModelAsync(CancellationToken cancellationToken)
+    private async Task<CheckoutViewModel> CreateCheckoutViewModelAsync(string? voucherCode, CancellationToken cancellationToken)
     {
         var model = new CheckoutViewModel
         {
-            IsVnPayConfigured = CanUseVnPay
+            IsVnPayConfigured = CanUseVnPay,
+            VoucherCode = voucherCode
         };
         await LoadCartSummaryAsync(model, cancellationToken);
         return model;
@@ -152,7 +187,7 @@ public class OrdersController : Controller
 
         if (!Uri.TryCreate(callbackBaseUrl, UriKind.Absolute, out var callbackUri)
             || callbackUri.Scheme != Uri.UriSchemeHttps
-            || callbackUri.IsLoopback
+            || (callbackUri.IsLoopback && !_environment.IsDevelopment())
             || !string.IsNullOrEmpty(callbackUri.UserInfo)
             || !string.IsNullOrEmpty(callbackUri.Query)
             || !string.IsNullOrEmpty(callbackUri.Fragment))
@@ -176,6 +211,13 @@ public class OrdersController : Controller
         var cart = await _cartService.GetCartAsync(GetUserId(), cancellationToken);
         model.Items = cart.Items;
         model.ShippingFee = 0m;
+        if (!string.IsNullOrWhiteSpace(model.VoucherCode))
+        {
+            var preview = await _orderService.PreviewVoucherAsync(GetUserId(), model.VoucherCode, cancellationToken);
+            model.EstimatedDiscountAmount = preview.IsValid ? preview.DiscountAmount : 0m;
+            model.IsVoucherValid = preview.IsValid;
+            model.VoucherMessage = preview.Message;
+        }
     }
 
     private string GetUserId()

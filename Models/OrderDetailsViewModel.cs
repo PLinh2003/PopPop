@@ -4,6 +4,7 @@ namespace PopPop.Models;
 
 public sealed class OrderDetailsViewModel
 {
+    public int Id { get; init; }
     public required string OrderCode { get; init; }
     public OrderStatus Status { get; init; }
     public PaymentMethod PaymentMethod { get; init; }
@@ -17,5 +18,7 @@ public sealed class OrderDetailsViewModel
     public string? Note { get; init; }
     public IReadOnlyList<OrderLineViewModel> Items { get; init; } = [];
     public decimal ShippingFee { get; init; }
+    public decimal DiscountAmount { get; init; }
+    public string? VoucherCode { get; init; }
     public decimal TotalAmount { get; init; }
 }

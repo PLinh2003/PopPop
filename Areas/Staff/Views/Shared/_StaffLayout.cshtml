@@ -18,6 +18,8 @@
             <div class="admin-user"><i class="fa fa-user-circle"></i><div><strong>@(User.Identity?.Name ?? "Tài khoản")</strong><small>Nhân viên cửa hàng</small></div></div>
             <nav class="admin-nav" aria-label="Điều hướng nhân viên">
                 <a asp-area="Staff" asp-controller="Orders" asp-action="Index"><i class="fa fa-shopping-bag"></i>Đơn hàng cần xử lý</a>
+                <a asp-area="Staff" asp-controller="Inventory" asp-action="Index"><i class="fa fa-archive"></i>Quản lý kho</a>
+                <a asp-area="Staff" asp-controller="AfterSales" asp-action="Index"><i class="fa fa-refresh"></i>Bảo hành / đổi trả</a>
                 <a asp-area="Staff" asp-controller="SupportChat" asp-action="Index"><i class="fa fa-comments"></i>Tin nhắn khách hàng</a>
                 <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-external-link"></i>Xem cửa hàng</a>
             </nav>

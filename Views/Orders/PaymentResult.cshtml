@@ -14,7 +14,18 @@
         {
             <p>Mã giao dịch: <strong>@Model.OrderReference</strong></p>
         }
-        <p class="text-muted">Trạng thái thanh toán cuối cùng được cập nhật từ thông báo IPN đã xác thực, không chỉ từ trang chuyển hướng này.</p>
+        @if (Model.IsLocalCallback)
+        {
+            <p class="text-muted">
+                @(Model.IsReturnProcessed
+                    ? "Kết quả trả về đã được xác thực và đối chiếu với đơn hàng trên môi trường Development."
+                    : "Kết quả chưa được ghi nhận vào đơn hàng. Vui lòng kiểm tra lại trong danh sách đơn hàng.")
+            </p>
+        }
+        else
+        {
+            <p class="text-muted">Trạng thái thanh toán cuối cùng được cập nhật từ thông báo IPN đã xác thực, không chỉ từ trang chuyển hướng này.</p>
+        }
         <a asp-controller="Orders" asp-action="Index" class="primary-btn">Đơn hàng của tôi</a>
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary ms-2">Tiếp tục mua sắm</a>
     </div>

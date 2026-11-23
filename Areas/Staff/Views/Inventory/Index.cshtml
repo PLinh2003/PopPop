@@ -1,0 +1,39 @@
+@model PopPop.Models.InventoryManagementViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = "Quản lý kho hàng";
+    string TransactionText(InventoryTransactionType type) => type switch
+    {
+        InventoryTransactionType.Import => "Nhập kho",
+        InventoryTransactionType.Sale => "Bán hàng",
+        InventoryTransactionType.AdjustmentIncrease => "Tăng tồn",
+        InventoryTransactionType.AdjustmentDecrease => "Giảm tồn",
+        _ => "Khác"
+    };
+}
+<div class="admin-page-heading"><div><h2>Kho hàng</h2><p>Điều chỉnh tồn có kiểm tra và lịch sử nhập/xuất theo biến thể.</p></div></div>
+<form class="admin-toolbar" method="get"><input class="form-control" type="search" name="search" value="@Model.Search" placeholder="Tên sản phẩm hoặc SKU" /><button class="btn btn-primary" type="submit"><i class="fa fa-search me-1"></i>Tìm</button><a class="btn btn-outline-secondary" asp-area="Staff" asp-controller="Inventory" asp-action="Index">Xóa lọc</a></form>
+<div class="admin-panel mb-4"><div class="admin-panel-header"><h3>@Model.Variants.Count biến thể</h3></div>
+    @if (Model.Variants.Count == 0){<div class="admin-empty">Không có biến thể phù hợp.</div>}
+    else
+    {
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Sản phẩm</th><th>SKU</th><th>Phân loại</th><th>Tồn kho</th><th>Điều chỉnh</th></tr></thead><tbody>
+        @foreach (var variant in Model.Variants)
+        {
+            <tr><td>@variant.ProductName</td><td>@variant.SKU</td><td>@variant.Label</td><td><strong>@variant.StockQuantity</strong></td><td><form asp-area="Staff" asp-controller="Inventory" asp-action="Adjust" method="post" class="row g-2 align-items-center"><input type="hidden" name="productVariantId" value="@variant.Id" /><input type="hidden" name="search" value="@Model.Search" /><div class="col-md-3"><select class="form-select" name="type"><option value="@InventoryTransactionType.Import">Nhập kho</option><option value="@InventoryTransactionType.AdjustmentIncrease">Tăng tồn</option><option value="@InventoryTransactionType.AdjustmentDecrease">Giảm tồn</option></select></div><div class="col-md-2"><input class="form-control" name="quantity" type="number" min="1" required placeholder="Số lượng" /></div><div class="col-md-5"><input class="form-control" name="note" maxlength="500" placeholder="Ghi chú" /></div><div class="col-md-2"><button class="btn btn-sm btn-primary" type="submit">Cập nhật</button></div></form></td></tr>
+        }
+        </tbody></table></div>
+    }
+</div>
+<div class="admin-panel"><div class="admin-panel-header"><h3>Lịch sử giao dịch kho (tối đa 100)</h3></div>
+    @if (Model.Transactions.Count == 0){<div class="admin-empty">Chưa có giao dịch kho.</div>}
+    else
+    {
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Thời gian</th><th>Sản phẩm</th><th>SKU</th><th>Loại</th><th>Số lượng</th><th>Ghi chú</th></tr></thead><tbody>
+        @foreach (var item in Model.Transactions)
+        {
+            <tr><td>@item.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td>@item.ProductName</td><td>@item.SKU</td><td>@TransactionText(item.Type)</td><td class="@(item.Quantity >= 0 ? "text-success" : "text-danger")">@(item.Quantity > 0 ? "+" : "")@item.Quantity</td><td>@item.Note</td></tr>
+        }
+        </tbody></table></div>
+    }
+</div>

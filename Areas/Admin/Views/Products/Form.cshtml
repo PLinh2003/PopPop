@@ -1,0 +1,44 @@
+@model PopPop.Models.ProductManagementFormViewModel
+@{
+    var editing = Model.Id.HasValue;
+    ViewData["Title"] = editing ? "Sửa sản phẩm" : "Thêm sản phẩm";
+}
+<div class="admin-page-heading"><div><h2>@ViewData["Title"]</h2><p>Cập nhật thông tin chung và cấu hình các biến thể bán hàng.</p></div><a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Products" asp-action="Index">Quay lại</a></div>
+<div class="admin-detail-card mb-4">
+    <form asp-area="Admin" asp-controller="Products" asp-action="@(editing ? "Edit" : "Create")" asp-route-id="@Model.Id" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row g-3">
+            <div class="col-md-6"><label asp-for="Name" class="form-label">Tên sản phẩm</label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+            <div class="col-md-3"><label asp-for="CategoryId" class="form-label">Danh mục</label><select asp-for="CategoryId" class="form-select"><option value="">Chọn danh mục</option>@foreach (var item in Model.Categories){<option value="@item.Id">@item.Name</option>}</select><span asp-validation-for="CategoryId" class="text-danger"></span></div>
+            <div class="col-md-3"><label asp-for="BrandId" class="form-label">Thương hiệu</label><select asp-for="BrandId" class="form-select"><option value="">Chọn thương hiệu</option>@foreach (var item in Model.Brands){<option value="@item.Id">@item.Name</option>}</select><span asp-validation-for="BrandId" class="text-danger"></span></div>
+            <div class="col-md-3"><label asp-for="WarrantyMonths" class="form-label">Bảo hành (tháng)</label><input asp-for="WarrantyMonths" class="form-control" min="0" max="120" /><span asp-validation-for="WarrantyMonths" class="text-danger"></span></div>
+            <div class="col-md-9"><label asp-for="ImageUrl" class="form-label">Đường dẫn ảnh chính</label><input asp-for="ImageUrl" class="form-control" placeholder="/img/product/... hoặc URL ảnh" /><span asp-validation-for="ImageUrl" class="text-danger"></span></div>
+            <div class="col-12"><label asp-for="Description" class="form-label">Mô tả</label><textarea asp-for="Description" class="form-control" rows="4"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>
+            <div class="col-12 form-check ms-2"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Đang kinh doanh</label></div>
+            @if (!editing)
+            {
+                <div class="col-md-4"><label asp-for="VariantSKU" class="form-label">SKU biến thể đầu tiên</label><input asp-for="VariantSKU" class="form-control" required maxlength="100" /><span asp-validation-for="VariantSKU" class="text-danger"></span></div>
+                <div class="col-md-4"><label asp-for="VariantLabel" class="form-label">Tên biến thể</label><input asp-for="VariantLabel" class="form-control" maxlength="100" /></div>
+                <div class="col-md-4"><label asp-for="VariantPrice" class="form-label">Giá</label><input asp-for="VariantPrice" class="form-control" type="number" min="1" step="1000" required /></div>
+                <div class="col-12"><div class="form-text">Biến thể được tạo với tồn kho bằng 0; nhập số lượng tại mục Quản lý kho.</div></div>
+            }
+            <div class="col-12"><button class="btn btn-primary" type="submit">@(editing ? "Lưu thay đổi" : "Tạo sản phẩm")</button></div>
+        </div>
+    </form>
+</div>
+@if (editing)
+{
+    <div class="admin-panel mb-4"><div class="admin-panel-header"><h3>Biến thể sản phẩm</h3></div>
+        @if (Model.Variants.Count == 0){<div class="admin-empty">Sản phẩm chưa có biến thể.</div>}
+        else
+        {
+            <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>SKU</th><th>Tên biến thể</th><th>Giá</th><th>Tồn</th><th>Hoạt động</th><th></th></tr></thead><tbody>
+            @foreach (var variant in Model.Variants)
+            {
+                <tr><td colspan="6"><form asp-area="Admin" asp-controller="Products" asp-action="UpdateVariant" method="post" class="row g-2 align-items-center"><input type="hidden" name="productId" value="@Model.Id" /><input type="hidden" name="variantId" value="@variant.Id" /><div class="col-md-3"><input class="form-control" name="sku" value="@variant.SKU" maxlength="100" required /></div><div class="col-md-3"><input class="form-control" name="label" value="@variant.Label" maxlength="100" placeholder="Tên biến thể" /></div><div class="col-md-2"><input class="form-control" name="price" value="@variant.Price" type="number" min="1" step="1000" required /></div><div class="col-md-1">@variant.StockQuantity</div><div class="col-md-1"><input class="form-check-input" type="checkbox" name="isActive" value="true" checked="@variant.IsActive" /></div><div class="col-md-2"><button class="btn btn-sm btn-outline-primary" type="submit">Lưu</button></div></form></td></tr>
+            }
+            </tbody></table></div>
+        }
+    </div>
+    <section class="admin-detail-card"><h3>Thêm biến thể</h3><form asp-area="Admin" asp-controller="Products" asp-action="AddVariant" method="post" class="row g-3"><input type="hidden" name="productId" value="@Model.Id" /><div class="col-md-4"><label class="form-label">SKU</label><input class="form-control" name="sku" maxlength="100" required /></div><div class="col-md-4"><label class="form-label">Tên biến thể</label><input class="form-control" name="label" maxlength="100" /></div><div class="col-md-3"><label class="form-label">Giá</label><input class="form-control" name="price" type="number" min="1" step="1000" required /></div><div class="col-md-1 d-flex align-items-end"><button class="btn btn-primary" type="submit">Thêm</button></div></form></section>
+}

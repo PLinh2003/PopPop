@@ -139,6 +139,68 @@ namespace PopPop.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PopPop.Data.Entities.AfterSalesRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int?>("ReplacementProductVariantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReplacementSKU")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("StaffNote")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderItemId");
+
+                    b.HasIndex("ReplacementProductVariantId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("OrderId", "OrderItemId", "Status");
+
+                    b.ToTable("AfterSalesRequests");
+                });
+
             modelBuilder.Entity("PopPop.Data.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -1094,8 +1156,15 @@ namespace PopPop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("DiscountAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Note")
                         .HasMaxLength(1000)
@@ -1167,12 +1236,21 @@ namespace PopPop.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("VoucherCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("VoucherId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderCode")
                         .IsUnique();
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("VoucherId");
 
                     b.ToTable("Orders");
                 });
@@ -1253,6 +1331,11 @@ namespace PopPop.Data.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("WarrantyMonths")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
@@ -1271,7 +1354,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 1 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Yonex Astrox 99 1",
-                            UpdatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1282,7 +1366,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 2 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Yonex Nanoflare 800 2",
-                            UpdatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1293,7 +1378,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 3 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Victor Brave Sword 12 3",
-                            UpdatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1304,7 +1390,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 4 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Li-Ning Turbo 900 4",
-                            UpdatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1315,7 +1402,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 5 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày Yonex Power Cushion 5",
-                            UpdatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1326,7 +1414,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 6 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày Victor A830 6",
-                            UpdatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1337,7 +1426,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 7 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày Li-Ning Sprint 7",
-                            UpdatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1348,7 +1438,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 8 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày Mizuno Wave Rider 8",
-                            UpdatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1359,7 +1450,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 9 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo Yonex Training 9",
-                            UpdatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1370,7 +1462,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 10 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo Victor Sport 10",
-                            UpdatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1381,7 +1474,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 11 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo Li-Ning Pro 11",
-                            UpdatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1392,7 +1486,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 12 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo Mizuno Active 12",
-                            UpdatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1403,7 +1498,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 13 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Túi đựng vợt Yonex 13",
-                            UpdatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1414,7 +1510,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 14 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Túi đựng vợt Victor 14",
-                            UpdatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1425,7 +1522,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 15 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Lưới cầu lông Li-Ning 15",
-                            UpdatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1436,7 +1534,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 16 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Bóng cầu lông Yonex 16",
-                            UpdatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1447,7 +1546,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 17 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Băng quấn cổ tay 17",
-                            UpdatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1458,7 +1558,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 18 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Dây căng vợt 3U 18",
-                            UpdatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1469,7 +1570,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 19 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Dây căng vợt 4U 19",
-                            UpdatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1480,7 +1582,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 20 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Balo thể thao Pro 20",
-                            UpdatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1491,7 +1594,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 21 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Cầu lông chuyên nghiệp 21",
-                            UpdatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1502,7 +1606,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 22 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Head Graphene 360 22",
-                            UpdatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1513,7 +1618,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 23 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Babolat X100 23",
-                            UpdatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1524,7 +1630,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 24 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Apacs Z-Force 24",
-                            UpdatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1535,7 +1642,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 25 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày Head Sprint 25",
-                            UpdatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1546,7 +1654,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 26 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày Adidas Court 26",
-                            UpdatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1557,7 +1666,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 27 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày Nike Zoom 27",
-                            UpdatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1568,7 +1678,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 28 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo Nike Court 28",
-                            UpdatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1579,7 +1690,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 29 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo Puma Energy 29",
-                            UpdatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1590,7 +1702,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 30 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Túi vợt Head 30",
-                            UpdatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1601,7 +1714,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 31 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Lưới đánh bóng 31",
-                            UpdatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1612,7 +1726,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 32 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Bóng cầu lông premium 32",
-                            UpdatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1623,7 +1738,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 33 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Dụng cụ bảo vệ vợt 33",
-                            UpdatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1634,7 +1750,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 34 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Bọc cán vợt 34",
-                            UpdatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1645,7 +1762,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 35 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt đi kèm dây căng 35",
-                            UpdatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1656,7 +1774,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 36 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt cho người mới 36",
-                            UpdatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1667,7 +1786,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 37 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt cho người chuyên nghiệp 37",
-                            UpdatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1678,7 +1798,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 38 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày đệm chống chấn 38",
-                            UpdatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1689,7 +1810,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 39 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo khoác thời trang 39",
-                            UpdatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1700,7 +1822,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 40 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo chạy bộ thể thao 40",
-                            UpdatedAt = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1711,7 +1834,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 41 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt thể thao đa năng 41",
-                            UpdatedAt = new DateTime(2024, 2, 11, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1722,7 +1846,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 42 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày chạy bộ cầu lông 42",
-                            UpdatedAt = new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1733,7 +1858,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 43 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Balo di chuyển thể thao 43",
-                            UpdatedAt = new DateTime(2024, 2, 13, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 13, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1744,7 +1870,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 44 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Bọc bảo vệ vợt 44",
-                            UpdatedAt = new DateTime(2024, 2, 14, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 14, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1755,7 +1882,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 45 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Lưới thi đấu tiêu chuẩn 45",
-                            UpdatedAt = new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1766,7 +1894,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 46 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Bóng chất lượng cao 46",
-                            UpdatedAt = new DateTime(2024, 2, 16, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 16, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1777,7 +1906,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 47 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt niềm tin 47",
-                            UpdatedAt = new DateTime(2024, 2, 17, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 17, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1788,7 +1918,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 48 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt kết hợp công nghệ 48",
-                            UpdatedAt = new DateTime(2024, 2, 18, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1799,7 +1930,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 49 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày nhẹ bám sân 49",
-                            UpdatedAt = new DateTime(2024, 2, 19, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1810,7 +1942,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 50 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo chống nắng 50",
-                            UpdatedAt = new DateTime(2024, 2, 20, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 20, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1821,7 +1954,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 51 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Băng quấn cổ tay chuyên dụng 51",
-                            UpdatedAt = new DateTime(2024, 2, 21, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 21, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1832,7 +1966,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 52 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Dây căng vợt tối ưu 52",
-                            UpdatedAt = new DateTime(2024, 2, 22, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 22, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1843,7 +1978,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 53 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Túi chứa phụ kiện 53",
-                            UpdatedAt = new DateTime(2024, 2, 23, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 23, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1854,7 +1990,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 54 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt săn điểm cao 54",
-                            UpdatedAt = new DateTime(2024, 2, 24, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 24, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1865,7 +2002,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 55 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt đấm mạnh 55",
-                            UpdatedAt = new DateTime(2024, 2, 25, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 25, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1876,7 +2014,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 56 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt khóa gió 56",
-                            UpdatedAt = new DateTime(2024, 2, 26, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 26, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1887,7 +2026,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 57 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Giày cải thiện phản xạ 57",
-                            UpdatedAt = new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1898,7 +2038,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 58 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Áo thể thao mùa hè 58",
-                            UpdatedAt = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1909,7 +2050,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 59 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Balo cho vận động viên 59",
-                            UpdatedAt = new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         },
                         new
                         {
@@ -1920,7 +2062,8 @@ namespace PopPop.Data.Migrations
                             Description = "Sản phẩm 60 dành cho luyện tập và thi đấu cầu lông, chất lượng cao và bền bỉ.",
                             IsActive = true,
                             Name = "Vợt Yonex Astrox 99 60",
-                            UpdatedAt = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            UpdatedAt = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            WarrantyMonths = 0
                         });
                 });
 
@@ -4305,6 +4448,57 @@ namespace PopPop.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PopPop.Data.Entities.Voucher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("DiscountType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DiscountValue")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("MaximumDiscountAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("MaximumUses")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MinimumOrderAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("StartsAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UsedCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Vouchers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("PopPop.Data.Entities.Role", null)
@@ -4354,6 +4548,40 @@ namespace PopPop.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PopPop.Data.Entities.AfterSalesRequest", b =>
+                {
+                    b.HasOne("PopPop.Data.Entities.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PopPop.Data.Entities.OrderItem", "OrderItem")
+                        .WithMany()
+                        .HasForeignKey("OrderItemId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PopPop.Data.Entities.ProductVariant", "ReplacementProductVariant")
+                        .WithMany()
+                        .HasForeignKey("ReplacementProductVariantId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("PopPop.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("OrderItem");
+
+                    b.Navigation("ReplacementProductVariant");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PopPop.Data.Entities.Cart", b =>
@@ -4435,7 +4663,14 @@ namespace PopPop.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("PopPop.Data.Entities.Voucher", "Voucher")
+                        .WithMany("Orders")
+                        .HasForeignKey("VoucherId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.Navigation("User");
+
+                    b.Navigation("Voucher");
                 });
 
             modelBuilder.Entity("PopPop.Data.Entities.OrderItem", b =>
@@ -4537,6 +4772,11 @@ namespace PopPop.Data.Migrations
                     b.Navigation("InventoryTransactions");
 
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("PopPop.Data.Entities.Voucher", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

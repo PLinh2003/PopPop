@@ -28,6 +28,8 @@ namespace PopPop.Data
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<OrderItem> OrderItems { get; set; } = null!;
         public DbSet<InventoryTransaction> InventoryTransactions { get; set; } = null!;
+        public DbSet<Voucher> Vouchers { get; set; } = null!;
+        public DbSet<AfterSalesRequest> AfterSalesRequests { get; set; } = null!;
         public DbSet<ChatConversation> ChatConversations { get; set; } = null!;
         public DbSet<ChatMessage> ChatMessages { get; set; } = null!;
 
@@ -79,6 +81,8 @@ namespace PopPop.Data
                     .HasMaxLength(256);
                 entity.Property(e => e.Description)
                     .HasMaxLength(2000);
+                entity.Property(e => e.WarrantyMonths)
+                    .HasDefaultValue(0);
 
                 entity.HasOne(e => e.Category)
                     .WithMany(e => e.Products)
@@ -208,6 +212,10 @@ namespace PopPop.Data
                     .HasPrecision(18, 2);
                 entity.Property(e => e.ShippingFee)
                     .HasPrecision(18, 2);
+                entity.Property(e => e.DiscountAmount)
+                    .HasPrecision(18, 2);
+                entity.Property(e => e.VoucherCode)
+                    .HasMaxLength(50);
                 entity.Property(e => e.RecipientName)
                     .HasMaxLength(256);
                 entity.Property(e => e.RecipientPhone)
@@ -221,9 +229,50 @@ namespace PopPop.Data
                     .WithMany()
                     .HasForeignKey(e => e.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.Voucher)
+                    .WithMany(e => e.Orders)
+                    .HasForeignKey(e => e.VoucherId)
+                    .OnDelete(DeleteBehavior.SetNull);
             });
 
             #endregion
+
+            modelBuilder.Entity<Voucher>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
+                entity.HasIndex(e => e.Code).IsUnique();
+                entity.Property(e => e.DiscountValue).HasPrecision(18, 2);
+                entity.Property(e => e.MinimumOrderAmount).HasPrecision(18, 2);
+                entity.Property(e => e.MaximumDiscountAmount).HasPrecision(18, 2);
+            });
+
+            modelBuilder.Entity<AfterSalesRequest>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.UserId).IsRequired();
+                entity.Property(e => e.Reason).IsRequired().HasMaxLength(1000);
+                entity.Property(e => e.StaffNote).HasMaxLength(1000);
+                entity.Property(e => e.ReplacementSKU).HasMaxLength(100);
+                entity.HasIndex(e => new { e.OrderId, e.OrderItemId, e.Status });
+                entity.HasOne(e => e.Order)
+                    .WithMany()
+                    .HasForeignKey(e => e.OrderId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.OrderItem)
+                    .WithMany()
+                    .HasForeignKey(e => e.OrderItemId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.ReplacementProductVariant)
+                    .WithMany()
+                    .HasForeignKey(e => e.ReplacementProductVariantId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
             #region OrderItem Configuration
 
