@@ -50,6 +50,14 @@ public class Order : IBaseEntity<int>
     /// </summary>
     public decimal ShippingFee { get; set; }
 
+    public decimal DiscountAmount { get; set; }
+
+    public int? VoucherId { get; set; }
+
+    public string? VoucherCode { get; set; }
+
+    public DateTime? CompletedAt { get; set; }
+
     /// <summary>
     /// Order notes
     /// </summary>
@@ -82,5 +90,6 @@ public class Order : IBaseEntity<int>
 
     // Navigation properties
     public virtual User? User { get; set; }
+    public virtual Voucher? Voucher { get; set; }
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

@@ -81,9 +81,21 @@
                                         </li>
                                     }
                                 </ul>
+                                <div class="border rounded p-3 mb-3">
+                                    <label asp-for="VoucherCode" class="form-label">Mã voucher</label>
+                                    <div class="input-group"><input asp-for="VoucherCode" class="form-control" placeholder="Nhập mã giảm giá" /><button class="btn btn-outline-primary" type="submit" formaction="@Url.Action("ApplyVoucher", "Orders")" formnovalidate>Áp dụng</button></div>
+                                    @if (!string.IsNullOrWhiteSpace(Model.VoucherMessage))
+                                    {
+                                        <small class="d-block mt-2 @(Model.IsVoucherValid ? "text-success" : "text-danger")">@Model.VoucherMessage</small>
+                                    }
+                                </div>
                                 <ul class="list list_2">
                                     <li><div class="d-flex justify-content-between py-2"><span>Tạm tính</span><span>@Model.Subtotal.ToString("N0") ₫</span></div></li>
                                     <li><div class="d-flex justify-content-between py-2"><span>Phí giao hàng</span><span>@(Model.ShippingFee == 0 ? "Miễn phí" : $"{Model.ShippingFee:N0} ₫")</span></div></li>
+                                    @if (Model.EstimatedDiscountAmount > 0)
+                                    {
+                                        <li><div class="d-flex justify-content-between py-2"><span>Giảm giá (@Model.VoucherCode)</span><span class="text-success">-@Model.EstimatedDiscountAmount.ToString("N0") ₫</span></div></li>
+                                    }
                                     <li><div class="d-flex justify-content-between py-2"><strong>Tổng cộng</strong><strong>@Model.TotalAmount.ToString("N0") ₫</strong></div></li>
                                 </ul>
 

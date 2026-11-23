@@ -40,9 +40,9 @@ public class OrdersController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Checkout(CancellationToken cancellationToken)
+    public async Task<IActionResult> Checkout(string? voucherCode, CancellationToken cancellationToken)
     {
-        var model = await CreateCheckoutViewModelAsync(cancellationToken);
+        var model = await CreateCheckoutViewModelAsync(voucherCode, cancellationToken);
         if (model.Items.Count == 0 || !model.Items.All(item => item.StockQuantity >= item.Quantity))
         {
             TempData["CartError"] = model.Items.Count == 0
@@ -52,6 +52,16 @@ public class OrdersController : Controller
         }
 
         return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ApplyVoucher(CheckoutViewModel model, CancellationToken cancellationToken)
+    {
+        ModelState.Clear();
+        await LoadCartSummaryAsync(model, cancellationToken);
+        model.IsVnPayConfigured = CanUseVnPay;
+        return View("Checkout", model);
     }
 
     [HttpPost]
@@ -149,11 +159,12 @@ public class OrdersController : Controller
         return order is null ? NotFound() : View(order);
     }
 
-    private async Task<CheckoutViewModel> CreateCheckoutViewModelAsync(CancellationToken cancellationToken)
+    private async Task<CheckoutViewModel> CreateCheckoutViewModelAsync(string? voucherCode, CancellationToken cancellationToken)
     {
         var model = new CheckoutViewModel
         {
-            IsVnPayConfigured = CanUseVnPay
+            IsVnPayConfigured = CanUseVnPay,
+            VoucherCode = voucherCode
         };
         await LoadCartSummaryAsync(model, cancellationToken);
         return model;
@@ -200,6 +211,13 @@ public class OrdersController : Controller
         var cart = await _cartService.GetCartAsync(GetUserId(), cancellationToken);
         model.Items = cart.Items;
         model.ShippingFee = 0m;
+        if (!string.IsNullOrWhiteSpace(model.VoucherCode))
+        {
+            var preview = await _orderService.PreviewVoucherAsync(GetUserId(), model.VoucherCode, cancellationToken);
+            model.EstimatedDiscountAmount = preview.IsValid ? preview.DiscountAmount : 0m;
+            model.IsVoucherValid = preview.IsValid;
+            model.VoucherMessage = preview.Message;
+        }
     }
 
     private string GetUserId()

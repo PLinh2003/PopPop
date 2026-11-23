@@ -1,0 +1,33 @@
+@model PopPop.Models.AfterSalesManagementDetailsViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = "Xử lý yêu cầu hậu mãi";
+    string RequestTypeText(AfterSalesRequestType type) => type switch
+    {
+        AfterSalesRequestType.Return => "Trả hàng",
+        AfterSalesRequestType.Exchange => "Đổi hàng",
+        _ => "Bảo hành"
+    };
+    string StatusText(AfterSalesRequestStatus status) => status switch
+    {
+        AfterSalesRequestStatus.Pending => "Chờ xử lý",
+        AfterSalesRequestStatus.Approved => "Đã tiếp nhận",
+        AfterSalesRequestStatus.Rejected => "Từ chối",
+        AfterSalesRequestStatus.Completed => "Hoàn tất",
+        _ => "Không xác định"
+    };
+}
+<div class="admin-page-heading"><div><h2>Yêu cầu #@Model.Id</h2><p>Đơn @Model.OrderCode — gửi lúc @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</p></div><a class="btn btn-outline-secondary" asp-area="Staff" asp-controller="AfterSales" asp-action="Index">Quay lại</a></div>
+<div class="admin-order-grid mb-4"><section class="admin-detail-card"><h3>Khách hàng và sản phẩm</h3><div class="admin-detail-row"><span>Khách hàng</span><strong>@Model.CustomerName</strong></div><div class="admin-detail-row"><span>Email</span><span>@Model.CustomerEmail</span></div><div class="admin-detail-row"><span>Sản phẩm</span><strong>@Model.ProductName (@Model.SKU)</strong></div><div class="admin-detail-row"><span>Loại yêu cầu</span><strong>@RequestTypeText(Model.Type)</strong></div><div class="admin-detail-row"><span>Số lượng</span><strong>@Model.Quantity</strong></div><div class="admin-detail-row"><span>Trạng thái</span><strong>@StatusText(Model.Status)</strong></div>@if (Model.ReplacementSKU is not null){<div class="admin-detail-row"><span>SKU thay thế</span><strong>@Model.ReplacementSKU</strong></div>}</section><section class="admin-detail-card"><h3>Nội dung yêu cầu</h3><p>@Model.Reason</p><hr /><strong>Ghi chú xử lý</strong><p>@(string.IsNullOrWhiteSpace(Model.StaffNote) ? "Chưa có phản hồi." : Model.StaffNote)</p></section></div>
+@if (Model.AvailableStatuses.Count > 0)
+{
+    <section class="admin-detail-card"><h3>Cập nhật xử lý</h3>
+        @if (Model.PaymentMethod == PaymentMethod.VnPay && Model.Type is AfterSalesRequestType.Return or AfterSalesRequestType.Exchange){<div class="alert alert-warning">Hoàn tiền VNPay cần thao tác trên cổng thanh toán; hệ thống không tự đánh dấu đã hoàn tiền.</div>}
+        <form asp-area="Staff" asp-controller="AfterSales" asp-action="UpdateStatus" method="post" class="row g-3"><input type="hidden" name="id" value="@Model.Id" /><div class="col-md-4"><label class="form-label">Trạng thái tiếp theo</label><select class="form-select" name="nextStatus" required><option value="">Chọn trạng thái</option>@foreach (var status in Model.AvailableStatuses){<option value="@status">@StatusText(status)</option>}</select></div><div class="col-md-8"><label class="form-label">Phản hồi cho khách hàng</label><input class="form-control" name="staffNote" maxlength="1000" value="@Model.StaffNote" /></div>
+            @if (Model.Status == AfterSalesRequestStatus.Pending && Model.Type is AfterSalesRequestType.Return or AfterSalesRequestType.Exchange){<div class="col-12 form-check ms-2"><input class="form-check-input" type="checkbox" name="restockReturnedItem" value="true" id="restockReturnedItem" /><label class="form-check-label" for="restockReturnedItem">Đã nhận và kiểm tra hàng; sản phẩm đủ điều kiện nhập lại kho (+@Model.Quantity)</label></div>}
+            @if (Model.Status == AfterSalesRequestStatus.Approved && Model.Type == AfterSalesRequestType.Exchange){<div class="col-md-8"><label class="form-label" for="replacementProductVariantId">Biến thể thay thế (xuất @Model.Quantity)</label><select class="form-select" name="replacementProductVariantId" id="replacementProductVariantId" required><option value="">Chọn sản phẩm còn đủ tồn</option>@foreach (var variant in Model.ReplacementVariants){<option value="@variant.Id">@variant.Label — còn @variant.StockQuantity</option>}</select></div>}
+            <div class="col-12"><button class="btn btn-primary" type="submit">Lưu xử lý</button></div>
+        </form>
+        <p class="admin-stat-note mt-3 mb-0">Duyệt yêu cầu là xác nhận tiếp nhận xử lý. Hoàn tiền/đổi sản phẩm được thực hiện ngoài hệ thống; tồn kho chỉ tăng khi xác nhận hàng hoàn còn đủ điều kiện kinh doanh.</p>
+    </section>
+}

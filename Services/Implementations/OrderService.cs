@@ -33,6 +33,36 @@ public sealed class OrderService : IOrderService
 
     public bool IsVnPayConfigured => _vnPayClient.IsConfigured;
 
+    public async Task<VoucherPreviewResult> PreviewVoucherAsync(
+        string userId,
+        string? code,
+        CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(code))
+        {
+            return new VoucherPreviewResult(false, 0m, "Vui lòng nhập mã voucher.");
+        }
+
+        var cart = await _cartRepository.GetByUserIdAsync(userId, cancellationToken);
+        if (cart is null || cart.CartItems.Count == 0)
+        {
+            return new VoucherPreviewResult(false, 0m, "Giỏ hàng đang trống.");
+        }
+
+        var subtotal = cart.CartItems.Sum(item => (item.ProductVariant?.Price ?? 0m) * item.Quantity);
+        var voucher = await _orderRepository.GetVoucherByCodeAsync(code.Trim().ToUpperInvariant(), cancellationToken);
+        if (voucher is null)
+        {
+            return new VoucherPreviewResult(false, 0m, "Mã voucher không tồn tại.");
+        }
+        if (!TryCalculateVoucherDiscount(voucher, subtotal, DateTime.UtcNow, out var discount, out var message))
+        {
+            return new VoucherPreviewResult(false, 0m, message);
+        }
+
+        return new VoucherPreviewResult(true, discount, $"Áp dụng thành công, giảm {discount:N0} ₫.");
+    }
+
     public async Task<CheckoutOrderResult> PlaceOrderAsync(
         string userId,
         CheckoutViewModel checkout,
@@ -78,6 +108,25 @@ public sealed class OrderService : IOrderService
                 }
             }
 
+            var subtotal = cart.CartItems.Sum(item => item.ProductVariant!.Price * item.Quantity);
+            Voucher? voucher = null;
+            var discountAmount = 0m;
+            if (!string.IsNullOrWhiteSpace(checkout.VoucherCode))
+            {
+                voucher = await _orderRepository.GetVoucherByCodeAsync(
+                    checkout.VoucherCode.Trim().ToUpperInvariant(), token);
+                if (voucher is null)
+                {
+                    throw new InvalidOperationException("Mã voucher không tồn tại.");
+                }
+                if (!TryCalculateVoucherDiscount(voucher, subtotal, DateTime.UtcNow, out discountAmount, out var voucherError))
+                {
+                    throw new InvalidOperationException(voucherError);
+                }
+
+                voucher.UsedCount++;
+            }
+
             var now = DateTime.UtcNow;
             var orderCode = $"PP-{now:yyyyMMddHHmmss}-{Guid.NewGuid():N}".ToUpperInvariant();
             var paymentExpiresAt = paymentMethod == PaymentMethod.VnPay
@@ -96,6 +145,9 @@ public sealed class OrderService : IOrderService
                 ShippingAddress = checkout.ShippingAddress.Trim(),
                 Note = string.IsNullOrWhiteSpace(checkout.Note) ? null : checkout.Note.Trim(),
                 ShippingFee = ShippingFee,
+                DiscountAmount = discountAmount,
+                VoucherId = voucher?.Id,
+                VoucherCode = voucher?.Code,
                 CreatedAt = now,
                 UpdatedAt = now
             };
@@ -127,7 +179,7 @@ public sealed class OrderService : IOrderService
                 }, token);
             }
 
-            newOrder.TotalAmount = newOrder.OrderItems.Sum(item => item.TotalPrice) + newOrder.ShippingFee;
+            newOrder.TotalAmount = newOrder.OrderItems.Sum(item => item.TotalPrice) - discountAmount + newOrder.ShippingFee;
             var paymentUrl = paymentMethod == PaymentMethod.VnPay
                 ? _vnPayClient.CreatePaymentUrl(orderCode, newOrder.TotalAmount, clientIpAddress, callbackBaseUrl ?? string.Empty, now, paymentExpiresAt!.Value)
                 : null;
@@ -242,6 +294,7 @@ public sealed class OrderService : IOrderService
 
         return new OrderDetailsViewModel
         {
+            Id = order.Id,
             OrderCode = order.OrderCode,
             Status = order.Status,
             PaymentMethod = order.PaymentMethod,
@@ -262,6 +315,8 @@ public sealed class OrderService : IOrderService
                 LineTotal = item.TotalPrice
             }).ToList(),
             ShippingFee = order.ShippingFee,
+            DiscountAmount = order.DiscountAmount,
+            VoucherCode = order.VoucherCode,
             TotalAmount = order.TotalAmount
         };
     }
@@ -370,6 +425,8 @@ public sealed class OrderService : IOrderService
             ShippingAddress = order.ShippingAddress ?? string.Empty,
             Note = order.Note,
             ShippingFee = order.ShippingFee,
+            DiscountAmount = order.DiscountAmount,
+            VoucherCode = order.VoucherCode,
             TotalAmount = order.TotalAmount,
             Items = order.OrderItems.Select(item => new OrderLineViewModel
             {
@@ -438,8 +495,10 @@ public sealed class OrderService : IOrderService
                 }
             }
 
+            var statusUpdatedAt = DateTime.UtcNow;
             order.Status = nextStatus;
-            order.UpdatedAt = DateTime.UtcNow;
+            order.CompletedAt = nextStatus == OrderStatus.Completed ? statusUpdatedAt : order.CompletedAt;
+            order.UpdatedAt = statusUpdatedAt;
             return true;
         }, cancellationToken);
 
@@ -554,6 +613,11 @@ public sealed class OrderService : IOrderService
             }, cancellationToken);
         }
 
+        if (order.Voucher is not null && order.Voucher.UsedCount > 0)
+        {
+            order.Voucher.UsedCount--;
+        }
+
         order.StockReleasedAt = now;
     }
 
@@ -587,6 +651,57 @@ public sealed class OrderService : IOrderService
         }
 
         cart.UpdatedAt = now;
+    }
+
+    private static bool TryCalculateVoucherDiscount(
+        Voucher voucher,
+        decimal subtotal,
+        DateTime now,
+        out decimal discountAmount,
+        out string errorMessage)
+    {
+        discountAmount = 0m;
+        if (!voucher.IsActive)
+        {
+            errorMessage = "Voucher hiện không hoạt động.";
+            return false;
+        }
+        if (now < voucher.StartsAt || now >= voucher.ExpiresAt)
+        {
+            errorMessage = "Voucher chưa bắt đầu hoặc đã hết hạn.";
+            return false;
+        }
+        if (voucher.MaximumUses.HasValue && voucher.UsedCount >= voucher.MaximumUses.Value)
+        {
+            errorMessage = "Voucher đã hết lượt sử dụng.";
+            return false;
+        }
+        if (subtotal < voucher.MinimumOrderAmount)
+        {
+            errorMessage = $"Đơn hàng cần đạt tối thiểu {voucher.MinimumOrderAmount:N0} ₫ để sử dụng voucher.";
+            return false;
+        }
+
+        var discount = voucher.DiscountType switch
+        {
+            VoucherDiscountType.Percentage => subtotal * voucher.DiscountValue / 100m,
+            VoucherDiscountType.FixedAmount => voucher.DiscountValue,
+            _ => 0m
+        };
+        if (voucher.MaximumDiscountAmount.HasValue)
+        {
+            discount = Math.Min(discount, voucher.MaximumDiscountAmount.Value);
+        }
+
+        discountAmount = Math.Min(Math.Round(discount, 2, MidpointRounding.AwayFromZero), subtotal);
+        if (discountAmount <= 0m)
+        {
+            errorMessage = "Voucher không tạo ra mức giảm hợp lệ.";
+            return false;
+        }
+
+        errorMessage = string.Empty;
+        return true;
     }
 
     private static bool TryGetParameter(

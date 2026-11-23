@@ -32,7 +32,7 @@
 {
     <tr><td>@item.ProductName</td><td>@item.SKU</td><td>@item.UnitPrice.ToString("N0") ₫</td><td>@item.Quantity</td><td>@item.LineTotal.ToString("N0") ₫</td></tr>
 }
-</tbody><tfoot><tr><td colspan="4" class="text-end">Phí vận chuyển</td><td>@Model.ShippingFee.ToString("N0") ₫</td></tr><tr><th colspan="4" class="text-end">Tổng cộng</th><th>@Model.TotalAmount.ToString("N0") ₫</th></tr></tfoot></table></div></div>
+</tbody><tfoot><tr><td colspan="4" class="text-end">Phí vận chuyển</td><td>@Model.ShippingFee.ToString("N0") ₫</td></tr>@if (Model.DiscountAmount > 0){<tr><td colspan="4" class="text-end">Voucher @Model.VoucherCode</td><td>-@Model.DiscountAmount.ToString("N0") ₫</td></tr>}<tr><th colspan="4" class="text-end">Tổng cộng</th><th>@Model.TotalAmount.ToString("N0") ₫</th></tr></tfoot></table></div></div>
 @if (Model.AvailableStatuses.Count > 0)
 {
     <section class="admin-detail-card"><h3>Cập nhật trạng thái</h3><p class="admin-stat-note">Chuyển đơn theo đúng quy trình vận hành. Hủy đơn sẽ tự động hoàn lại tồn kho.</p><form asp-area="Admin" asp-controller="Orders" asp-action="UpdateStatus" method="post" class="admin-actions"><input type="hidden" name="id" value="@Model.Id" /><select class="form-select" name="nextStatus" required style="max-width:260px"><option value="">Chọn trạng thái tiếp theo</option>@foreach (var status in Model.AvailableStatuses){<option value="@status">@StatusText(status)</option>}</select><button class="btn btn-primary" type="submit">Lưu trạng thái</button></form></section>

@@ -58,6 +58,8 @@ public sealed class OrderManagementDetailsViewModel
     public string ShippingAddress { get; init; } = string.Empty;
     public string? Note { get; init; }
     public decimal ShippingFee { get; init; }
+    public decimal DiscountAmount { get; init; }
+    public string? VoucherCode { get; init; }
     public decimal TotalAmount { get; init; }
     public IReadOnlyList<OrderLineViewModel> Items { get; init; } = [];
     public IReadOnlyList<OrderStatus> AvailableStatuses { get; init; } = [];

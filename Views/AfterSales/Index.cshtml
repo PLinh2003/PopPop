@@ -1,0 +1,35 @@
+@model PopPop.Models.AfterSalesListViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = "Bảo hành và đổi trả";
+    string RequestTypeText(AfterSalesRequestType type) => type switch
+    {
+        AfterSalesRequestType.Return => "Trả hàng",
+        AfterSalesRequestType.Exchange => "Đổi hàng",
+        _ => "Bảo hành"
+    };
+    string StatusText(AfterSalesRequestStatus status) => status switch
+    {
+        AfterSalesRequestStatus.Pending => "Đang chờ xử lý",
+        AfterSalesRequestStatus.Approved => "Đã tiếp nhận",
+        AfterSalesRequestStatus.Rejected => "Từ chối",
+        AfterSalesRequestStatus.Completed => "Đã hoàn tất",
+        _ => "Không xác định"
+    };
+}
+<section class="section_gap"><div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4"><div><h2>Bảo hành và đổi trả</h2><p>Theo dõi các yêu cầu hậu mãi đã gửi.</p></div><a asp-controller="Orders" asp-action="Index" class="btn btn-outline-primary">Đơn hàng của tôi</a></div>
+    @if (Model.Requests.Count == 0)
+    {
+        <div class="alert alert-info">Bạn chưa gửi yêu cầu bảo hành hoặc đổi/trả nào.</div>
+    }
+    else
+    {
+        <div class="table-responsive"><table class="table table-striped align-middle"><thead><tr><th>Đơn hàng</th><th>Sản phẩm</th><th>Loại</th><th>Số lượng</th><th>Lý do</th><th>Trạng thái</th><th>Phản hồi</th><th>Ngày gửi</th></tr></thead><tbody>
+        @foreach (var item in Model.Requests)
+        {
+            <tr><td>@item.OrderCode</td><td>@item.ProductName<br /><small>@item.SKU</small></td><td>@RequestTypeText(item.Type)</td><td>@item.Quantity</td><td>@item.Reason</td><td>@StatusText(item.Status)</td><td>@(item.ReplacementSKU is null ? (string.IsNullOrWhiteSpace(item.StaffNote) ? "Chưa có" : item.StaffNote) : $"Đổi sang {item.ReplacementSKU}")</td><td>@item.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")</td></tr>
+        }
+        </tbody></table></div>
+    }
+</div></section>

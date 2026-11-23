@@ -1,0 +1,28 @@
+@model PopPop.Models.ProductManagementListViewModel
+@{
+    ViewData["Title"] = "Quản lý sản phẩm";
+}
+<div class="admin-page-heading">
+    <div><h2>Sản phẩm</h2><p>Quản lý thông tin, biến thể, giá bán và thời hạn bảo hành.</p></div>
+    <a class="btn btn-primary" asp-area="Admin" asp-controller="Products" asp-action="Create"><i class="fa fa-plus me-1"></i>Thêm sản phẩm</a>
+</div>
+<form class="admin-toolbar" method="get">
+    <input class="form-control" type="search" name="search" value="@Model.Search" placeholder="Tên sản phẩm hoặc SKU" />
+    <button class="btn btn-primary" type="submit"><i class="fa fa-search me-1"></i>Tìm kiếm</button>
+</form>
+<div class="admin-panel">
+    <div class="admin-panel-header"><h3>@Model.Products.Count sản phẩm</h3></div>
+    @if (Model.Products.Count == 0)
+    {
+        <div class="admin-empty">Chưa có sản phẩm phù hợp.</div>
+    }
+    else
+    {
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Sản phẩm</th><th>Danh mục</th><th>Thương hiệu</th><th>Biến thể</th><th>Tồn kho</th><th>Bảo hành</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr><td>@product.Name</td><td>@product.CategoryName</td><td>@product.BrandName</td><td>@product.VariantCount</td><td>@product.StockQuantity</td><td>@(product.WarrantyMonths == 0 ? "Không áp dụng" : $"{product.WarrantyMonths} tháng")</td><td><span class="admin-status @(product.IsActive ? "status-completed" : "status-cancelled")">@(product.IsActive ? "Đang bán" : "Ngừng bán")</span></td><td><a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id">Sửa</a></td></tr>
+        }
+        </tbody></table></div>
+    }
+</div>

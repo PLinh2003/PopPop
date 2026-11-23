@@ -1,0 +1,33 @@
+@model PopPop.Models.AfterSalesManagementListViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = "Yêu cầu hậu mãi";
+    string RequestTypeText(AfterSalesRequestType type) => type switch
+    {
+        AfterSalesRequestType.Return => "Trả hàng",
+        AfterSalesRequestType.Exchange => "Đổi hàng",
+        _ => "Bảo hành"
+    };
+    string StatusText(AfterSalesRequestStatus status) => status switch
+    {
+        AfterSalesRequestStatus.Pending => "Chờ xử lý",
+        AfterSalesRequestStatus.Approved => "Đã tiếp nhận",
+        AfterSalesRequestStatus.Rejected => "Từ chối",
+        AfterSalesRequestStatus.Completed => "Hoàn tất",
+        _ => "Không xác định"
+    };
+}
+<div class="admin-page-heading"><div><h2>Yêu cầu bảo hành / đổi trả</h2><p>Tiếp nhận và cập nhật trạng thái yêu cầu hậu mãi.</p></div></div>
+<form class="admin-toolbar" method="get"><select class="form-select" name="status"><option value="">Tất cả trạng thái</option>@foreach (var status in Enum.GetValues<AfterSalesRequestStatus>()){<option value="@status" selected="@(Model.Status == status)">@StatusText(status)</option>}</select><button class="btn btn-primary" type="submit">Lọc</button></form>
+<div class="admin-panel"><div class="admin-panel-header"><h3>@Model.Requests.Count yêu cầu</h3></div>
+    @if (Model.Requests.Count == 0){<div class="admin-empty">Không có yêu cầu phù hợp.</div>}
+    else
+    {
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Đơn</th><th>Khách hàng</th><th>Sản phẩm</th><th>Loại</th><th>Số lượng</th><th>Trạng thái</th><th>Ngày gửi</th><th></th></tr></thead><tbody>
+        @foreach (var item in Model.Requests)
+        {
+            <tr><td>@item.OrderCode</td><td>@item.CustomerName</td><td>@item.ProductName</td><td>@RequestTypeText(item.Type)</td><td>@item.Quantity</td><td>@StatusText(item.Status)</td><td>@item.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")</td><td><a class="btn btn-sm btn-outline-primary" asp-area="Staff" asp-controller="AfterSales" asp-action="Details" asp-route-id="@item.Id">Xử lý</a></td></tr>
+        }
+        </tbody></table></div>
+    }
+</div>

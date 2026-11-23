@@ -6,6 +6,7 @@ namespace PopPop.Services.Interfaces;
 public interface IOrderService
 {
     bool IsVnPayConfigured { get; }
+    Task<VoucherPreviewResult> PreviewVoucherAsync(string userId, string? code, CancellationToken cancellationToken = default);
     Task<CheckoutOrderResult> PlaceOrderAsync(string userId, CheckoutViewModel checkout, PaymentMethod paymentMethod, string clientIpAddress, string? callbackBaseUrl, CancellationToken cancellationToken = default);
     Task<VnPayIpnResponse> ProcessVnPayPaymentAsync(IReadOnlyDictionary<string, string> parameters, CancellationToken cancellationToken = default);
     Task ExpirePendingVnPayOrdersAsync(CancellationToken cancellationToken = default);

@@ -1,0 +1,16 @@
+@model PopPop.Models.AfterSalesCreateViewModel
+@using PopPop.Data.Entities.Enums
+@{
+    ViewData["Title"] = "Tạo yêu cầu hậu mãi";
+}
+<section class="section_gap"><div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4"><div><h2>Yêu cầu bảo hành / đổi trả</h2><p>Đơn hàng @Model.OrderCode</p></div><a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId" class="btn btn-outline-secondary">Quay lại đơn hàng</a></div>
+    <div class="alert alert-info">Đổi hàng/trả hàng trong 7 ngày kể từ khi đơn hoàn tất. Bảo hành theo thời hạn của từng sản phẩm.</div>
+    <div class="card p-4"><form asp-action="Create" method="post"><input asp-for="OrderId" type="hidden" /><div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3"><label asp-for="OrderItemId" class="form-label">Sản phẩm trong đơn</label><select asp-for="OrderItemId" class="form-select"><option value="">Chọn sản phẩm</option>@foreach (var item in Model.Items){<option value="@item.OrderItemId">@item.ProductName — @item.SKU (@item.OrderedQuantity sản phẩm, bảo hành @item.WarrantyMonths tháng)</option>}</select><span asp-validation-for="OrderItemId" class="text-danger"></span></div>
+        <div class="mb-3"><label asp-for="Type" class="form-label">Loại yêu cầu</label><select asp-for="Type" class="form-select"><option value="@AfterSalesRequestType.Return">Trả hàng</option><option value="@AfterSalesRequestType.Exchange">Đổi sang sản phẩm khác</option><option value="@AfterSalesRequestType.Warranty">Bảo hành</option></select><span asp-validation-for="Type" class="text-danger"></span></div>
+        <div class="mb-3"><label asp-for="Quantity" class="form-label">Số lượng</label><input asp-for="Quantity" class="form-control" type="number" min="1" max="1000" /><span asp-validation-for="Quantity" class="text-danger"></span></div>
+        <div class="mb-3"><label asp-for="Reason" class="form-label">Mô tả tình trạng / lý do</label><textarea asp-for="Reason" class="form-control" rows="4" maxlength="1000"></textarea><span asp-validation-for="Reason" class="text-danger"></span></div>
+        <button type="submit" class="primary-btn">Gửi yêu cầu</button>
+    </form></div>
+</div></section>
